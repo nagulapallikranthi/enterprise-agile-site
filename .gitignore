@@ -12,13 +12,59 @@ yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
 
-
 # environment variables
 .env
 .env.production
+.env.*
+!.env.example
 
 # macOS-specific files
 .DS_Store
 
-# jetbrains setting folder
+# editor settings
 .idea/
+.vscode/
+
+# test and coverage artifacts
+coverage/
+*.lcov
+.nyc_output/
+
+# Node / package manager caches
+.npm/
+.eslintcache
+.stylelintcache
+.pnpm-store/
+.pnp.*
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/sdks
+!.yarn/versions
+
+# build caches
+.cache/
+.parcel-cache/
+.next/
+out/
+.nuxt/
+.output/
+.vuepress/dist/
+.temp/
+.svelte-kit/
+**/.vitepress/dist/
+**/.vitepress/cache/
+.docusaurus/
+.serverless/
+.fusebox/
+.dynamodb/
+.firebase/
+.tern-port
+.vscode-test
+
+# Vite files
+vite.config.js.timestamp-*
+vite.config.ts.timestamp-*
+.vite/
+
