@@ -1,0 +1,347 @@
+---
+---
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Transform with Kranthi</title>
+
+  <style>
+
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+    }
+
+    body{
+      font-family:Segoe UI,Arial,sans-serif;
+      background:#0f172a;
+      color:white;
+    }
+
+    nav{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      padding:24px 8%;
+      border-bottom:1px solid rgba(255,255,255,.08);
+    }
+
+    nav h2{
+      font-size:24px;
+      font-weight:700;
+    }
+
+    nav ul{
+      display:flex;
+      gap:30px;
+      list-style:none;
+    }
+
+    nav a{
+      color:white;
+      text-decoration:none;
+      opacity:.85;
+      transition:.3s;
+    }
+
+    nav a:hover{
+      opacity:1;
+      color:#60a5fa;
+    }
+
+    .hero{
+
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      flex-direction:column;
+
+      min-height:80vh;
+
+      text-align:center;
+
+      padding:40px;
+
+    }
+
+    .hero h1{
+
+      font-size:68px;
+      line-height:1.1;
+      margin-bottom:20px;
+
+    }
+
+    .hero p{
+
+      max-width:850px;
+
+      font-size:22px;
+
+      color:#cbd5e1;
+
+      line-height:1.7;
+
+      margin-bottom:40px;
+
+    }
+
+    .buttons{
+
+      display:flex;
+
+      gap:20px;
+
+      flex-wrap:wrap;
+
+      justify-content:center;
+
+    }
+
+    .primary{
+
+      background:#2563eb;
+
+      color:white;
+
+      text-decoration:none;
+
+      padding:18px 36px;
+
+      border-radius:10px;
+
+      font-weight:600;
+
+      transition:.3s;
+
+    }
+
+    .primary:hover{
+
+      background:#1d4ed8;
+
+    }
+
+    .secondary{
+
+      border:1px solid white;
+
+      color:white;
+
+      text-decoration:none;
+
+      padding:18px 36px;
+
+      border-radius:10px;
+
+      font-weight:600;
+
+      transition:.3s;
+
+    }
+
+    .secondary:hover{
+
+      background:white;
+
+      color:#0f172a;
+
+    }
+
+    /* Executive Metrics */
+
+    .metrics{
+
+      display:grid;
+
+      grid-template-columns:repeat(4,1fr);
+
+      gap:24px;
+
+      padding:80px 8%;
+
+      background:#111827;
+
+    }
+
+    .metric-card{
+
+      background:#1f2937;
+
+      border:1px solid rgba(255,255,255,.08);
+
+      border-radius:18px;
+
+      padding:36px;
+
+      text-align:center;
+
+      transition:.3s;
+
+    }
+
+    .metric-card:hover{
+
+      transform:translateY(-6px);
+
+      border-color:#2563eb;
+
+    }
+
+    .metric-card h2{
+
+      font-size:42px;
+
+      color:#3b82f6;
+
+      margin-bottom:12px;
+
+    }
+
+    .metric-card p{
+
+      font-size:18px;
+
+      color:#cbd5e1;
+
+    }
+
+    @media(max-width:900px){
+
+      nav{
+
+        flex-direction:column;
+
+        gap:20px;
+
+      }
+
+      nav ul{
+
+        flex-wrap:wrap;
+
+        justify-content:center;
+
+      }
+
+      .hero h1{
+
+        font-size:42px;
+
+      }
+
+      .hero p{
+
+        font-size:18px;
+
+      }
+
+      .metrics{
+
+        grid-template-columns:1fr;
+
+      }
+
+    }
+
+  </style>
+
+</head>
+
+<body>
+
+<nav>
+
+<h2>Transform</h2>
+
+<ul>
+
+<li><a href="#">Home</a></li>
+<li><a href="#">About</a></li>
+<li><a href="#">Success Stories</a></li>
+<li><a href="#">Frameworks</a></li>
+<li><a href="#">Articles</a></li>
+<li><a href="#">Contact</a></li>
+
+</ul>
+
+</nav>
+
+<section class="hero">
+
+<h1>
+
+Transform Enterprise Delivery
+
+</h1>
+
+<p>
+
+Helping organizations improve Cloud Operations, Executive Reporting, Jira Governance, AI Adoption and Enterprise Program Management.
+
+</p>
+
+<div class="buttons">
+
+<a class="primary" href="#">
+
+Explore
+
+</a>
+
+<a class="secondary" href="#">
+
+Download Resume
+
+</a>
+
+</div>
+
+</section>
+
+<section class="metrics">
+
+<div class="metric-card">
+
+<h2>17+</h2>
+
+<p>Years Experience</p>
+
+</div>
+
+<div class="metric-card">
+
+<h2>Staff</h2>
+
+<p>Program Manager</p>
+
+</div>
+
+<div class="metric-card">
+
+<h2>CloudOps</h2>
+
+<p>DevOps • AI</p>
+
+</div>
+
+<div class="metric-card">
+
+<h2>Enterprise</h2>
+
+<p>Transformation</p>
+
+</div>
+
+</section>
+
+</body>
+
+</html>
