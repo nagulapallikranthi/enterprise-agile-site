@@ -83,12 +83,11 @@ nav a:hover {
 
 .hero {
 
-  max-width: 1400px;
-  margin: auto;
-  padding: 70px 7%;
+  width: 100%;
+  padding: 70px 0 70px max(7vw, calc((100vw - 1400px) / 2 + 48px));
 
   display: grid;
-  grid-template-columns: 52% 48%;
+  grid-template-columns: minmax(520px, 1fr) minmax(480px, 48vw);
 
   align-items: center;
 
@@ -181,9 +180,11 @@ nav a:hover {
 .hero-image {
 
   display: flex;
-  justify-content: center;
+  justify-content: flex-end;
   align-items: center;
   position: relative;
+  align-self: stretch;
+  overflow: hidden;
 
 }
 
@@ -215,7 +216,8 @@ nav a:hover {
 
 .hero-image img {
 
-  width: 600px;
+  width: min(600px, 46vw);
+  max-width: none;
 
   position: relative;
 
@@ -224,6 +226,7 @@ nav a:hover {
   filter: drop-shadow(0 35px 70px rgba(0,0,0,.45));
 
   transition: .35s;
+  margin-left: auto;
 
 }
 
@@ -319,7 +322,7 @@ nav a:hover {
     grid-template-columns:1fr;
     text-align:center;
 
-    padding-top:50px;
+    padding:50px 7% 70px;
 
   }
 
