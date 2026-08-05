@@ -9,9 +9,15 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
+    "deploy:dev": "npm run build && wrangler deploy --env dev",
+    "deploy:staging": "npm run build && wrangler deploy --env staging",
+    "deploy:production": "npm run build && wrangler deploy --env production",
     "astro": "astro"
   },
   "dependencies": {
     "astro": "^7.1.6"
+  },
+  "devDependencies": {
+    "wrangler": "^4.119.0"
   }
 }
