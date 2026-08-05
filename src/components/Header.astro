@@ -1,18 +1,38 @@
-<nav aria-label="Primary navigation">
+<nav class="site-nav" aria-label="Primary navigation">
+  <a class="logo" href="#top" aria-label="Enterprise Agile home">Enterprise Agile</a>
 
-    <div class="logo">
-        Enterprise Agile
-    </div>
+  <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="primary-menu">
+    <span class="sr-only">Open navigation menu</span>
+    <span aria-hidden="true"></span>
+    <span aria-hidden="true"></span>
+    <span aria-hidden="true"></span>
+  </button>
 
-    <ul>
-
-        <li><a class="active" href="#top" aria-current="page">Home</a></li>
-        <li><a href="#about">About</a></li>
-        <li><a href="#success-stories">Success Stories</a></li>
-        <li><a href="#impact">Frameworks</a></li>
-        <li><a href="#impact">Articles</a></li>
-        <li><a href="#impact">Contact</a></li>
-
-    </ul>
-
+  <ul id="primary-menu">
+    <li><a class="active" href="#top" aria-current="page">Home</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#success-stories">Success Stories</a></li>
+    <li><a href="#frameworks">Frameworks</a></li>
+    <li><a href="#articles">Articles</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
 </nav>
+
+<script>
+  const nav = document.querySelector('.site-nav');
+  const toggle = document.querySelector('.menu-toggle');
+  const menu = document.querySelector('#primary-menu');
+
+  const closeMenu = () => {
+    nav?.classList.remove('menu-open');
+    toggle?.setAttribute('aria-expanded', 'false');
+  };
+
+  toggle?.addEventListener('click', () => {
+    const isOpen = nav?.classList.toggle('menu-open') ?? false;
+    toggle.setAttribute('aria-expanded', String(isOpen));
+  });
+
+  menu?.querySelectorAll('a').forEach((link) => link.addEventListener('click', closeMenu));
+  document.addEventListener('keydown', (event) => event.key === 'Escape' && closeMenu());
+</script>
