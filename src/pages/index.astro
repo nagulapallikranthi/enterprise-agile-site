@@ -6,11 +6,21 @@ import Hero from "../components/Hero.astro";
 
 <MainLayout title="Enterprise Agile">
 
+<div id="top"></div>
+
 <Header />
 
 <Hero />
 
-<section class="metrics">
+<section class="impact" id="impact" aria-labelledby="impact-title">
+
+<div class="section-heading">
+<span class="eyebrow">DELIVERY IMPACT</span>
+<h2 id="impact-title">Enterprise delivery at a glance</h2>
+<p>Experience, leadership and operating expertise focused on measurable transformation.</p>
+</div>
+
+<div class="metrics">
 
 <div class="metric-card">
 <h2>17+</h2>
@@ -30,6 +40,8 @@ import Hero from "../components/Hero.astro";
 <div class="metric-card">
 <h2>Enterprise</h2>
 <p>Transformation</p>
+</div>
+
 </div>
 
 </section>
