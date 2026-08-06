@@ -1,0 +1,147 @@
+---
+import MainLayout from "../../layouts/MainLayout.astro";
+import MetricCard from "../../components/models/MetricCard.astro";
+import PriorityCard from "../../components/models/PriorityCard.astro";
+import { portfolio } from "../../data/portfolio";
+import "../../styles/model-system.css";
+---
+
+<MainLayout
+  title="Executive Portfolio | Enterprise Agile"
+  description="An executive portfolio view of enterprise delivery priorities, health and measurable outcomes."
+  canonicalPath="/models/executive-portfolio/"
+>
+  <div class="model-page" id="overview">
+    <header class="executive-header">
+      <div class="model-container header-inner">
+        <a class="executive-brand" href="/" aria-label="Return to Enterprise Agile home">
+          <span>EA</span>
+          <strong>Enterprise Agile</strong>
+        </a>
+        <nav aria-label="Executive portfolio navigation">
+          <ul>
+            {portfolio.navigation.map((item) => <li><a href={item.href}>{item.label}</a></li>)}
+          </ul>
+        </nav>
+        <a class="back-link" href="/">Stable site <span aria-hidden="true">→</span></a>
+      </div>
+    </header>
+
+    <main id="main-content">
+      <section class="executive-hero model-container" aria-labelledby="executive-title">
+        <div>
+          <span class="model-kicker">UI Model 1 · Executive Portfolio</span>
+          <h1 id="executive-title">Turn complex delivery into <em>decision clarity.</em></h1>
+          <p>{portfolio.identity.positioning}. A concise owner view of priorities, confidence and outcomes.</p>
+          <div class="hero-actions">
+            <a class="executive-primary" href="#priorities">Review portfolio health</a>
+            <a class="executive-secondary" href="/downloads/Kranthi-Kumar-Nagulapally-Resume.pdf" download>Download profile</a>
+          </div>
+        </div>
+        <aside class="owner-card model-panel" aria-label="Portfolio owner">
+          <span>Portfolio owner</span>
+          <strong>{portfolio.identity.name}</strong>
+          <p>{portfolio.identity.role}</p>
+          <dl>
+            <div><dt>Review cycle</dt><dd>Weekly</dd></div>
+            <div><dt>Current health</dt><dd><i></i> On track</dd></div>
+            <div><dt>Release</dt><dd>0.3.0</dd></div>
+          </dl>
+        </aside>
+      </section>
+
+      <section class="metric-section model-container" aria-label="Portfolio metrics">
+        {portfolio.metrics.map((metric) => <MetricCard {...metric} />)}
+      </section>
+
+      <section class="portfolio-section model-container" id="priorities" aria-labelledby="priorities-title">
+        <div class="section-heading-row">
+          <div>
+            <span class="model-kicker">Current priorities</span>
+            <h2 class="model-section-title" id="priorities-title">Where leadership attention creates leverage</h2>
+          </div>
+          <p>Live portfolio signals designed to make progress, confidence and intervention needs clear at a glance.</p>
+        </div>
+        <div class="priority-grid">
+          {portfolio.priorities.map((priority) => <PriorityCard {...priority} />)}
+        </div>
+      </section>
+
+      <section class="outcomes model-container" id="outcomes" aria-labelledby="outcomes-title">
+        <div>
+          <span class="model-kicker">Evidence of execution</span>
+          <h2 class="model-section-title" id="outcomes-title">Governance built around outcomes</h2>
+        </div>
+        <ol>
+          {portfolio.outcomes.map((outcome, index) => <li><span>0{index + 1}</span><strong>{outcome}</strong></li>)}
+        </ol>
+      </section>
+
+      <section class="executive-contact" id="contact" aria-labelledby="contact-title">
+        <div class="model-container contact-inner">
+          <div><span class="model-kicker">Next decision</span><h2 id="contact-title">Build the operating system your portfolio needs.</h2></div>
+          <a href="mailto:nagulapalli.kranthi@gmail.com?subject=Executive%20Portfolio%20Conversation">Start a conversation <span aria-hidden="true">→</span></a>
+        </div>
+      </section>
+    </main>
+  </div>
+</MainLayout>
+
+<style>
+  .executive-header { border-bottom: 1px solid var(--model-border); background: rgba(255,255,255,.94); }
+  .header-inner { min-height: 76px; display: flex; align-items: center; justify-content: space-between; gap: 28px; }
+  .executive-brand { display: flex; align-items: center; gap: 11px; }
+  .executive-brand > span { display: grid; width: 38px; height: 38px; place-items: center; border-radius: 10px; background: var(--model-text); color: white; font-size: .75rem; font-weight: 850; }
+  .executive-brand strong { font-size: .96rem; }
+  nav ul { display: flex; gap: 26px; list-style: none; }
+  nav a { color: var(--model-text-muted); font-size: .84rem; font-weight: 650; }
+  nav a:hover { color: var(--model-blue); }
+  .back-link { font-size: .82rem; font-weight: 750; color: var(--model-blue) !important; }
+  .executive-hero { display: grid; grid-template-columns: minmax(0, 1.45fr) minmax(300px, .55fr); gap: 72px; align-items: center; padding-block: 94px 72px; }
+  h1 { max-width: 780px; margin-top: 18px; font-size: clamp(3rem, 6.5vw, 5.8rem); line-height: .98; letter-spacing: -.065em; }
+  h1 em { color: var(--model-blue); font-style: normal; }
+  .executive-hero > div > p { max-width: 680px; margin-top: 28px; color: var(--model-text-muted); font-size: 1.08rem; }
+  .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 34px; }
+  .hero-actions a { padding: 14px 19px; border-radius: var(--model-radius-sm); font-size: .83rem; font-weight: 800; }
+  .executive-primary { background: var(--model-blue); color: white !important; }
+  .executive-secondary { border: 1px solid var(--model-border); background: white; }
+  .owner-card { padding: 28px; }
+  .owner-card > span { color: var(--model-text-muted); font-size: .72rem; font-weight: 750; text-transform: uppercase; letter-spacing: .1em; }
+  .owner-card > strong { display: block; margin-top: 18px; font-size: 1.2rem; }
+  .owner-card > p { color: var(--model-text-muted); }
+  dl { margin-top: 24px; border-top: 1px solid var(--model-border); }
+  dl div { display: flex; justify-content: space-between; gap: 12px; padding-block: 13px; border-bottom: 1px solid var(--model-border); font-size: .78rem; }
+  dt { color: var(--model-text-muted); } dd { font-weight: 750; } dd i { display: inline-block; width: 7px; height: 7px; border-radius: 50%; background: var(--model-green); }
+  .metric-section { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+  .portfolio-section { padding-block: 110px; }
+  .section-heading-row { display: flex; justify-content: space-between; align-items: end; gap: 48px; }
+  .section-heading-row > p { max-width: 430px; color: var(--model-text-muted); font-size: .92rem; }
+  .priority-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 38px; }
+  .outcomes { display: grid; grid-template-columns: .8fr 1.2fr; gap: 80px; padding-bottom: 110px; }
+  .outcomes ol { list-style: none; border-top: 1px solid var(--model-border); }
+  .outcomes li { display: grid; grid-template-columns: 46px 1fr; gap: 16px; align-items: center; padding-block: 22px; border-bottom: 1px solid var(--model-border); }
+  .outcomes li span { color: var(--model-blue); font-size: .72rem; font-weight: 850; }
+  .outcomes li strong { font-size: .96rem; }
+  .executive-contact { background: var(--model-text); color: white; }
+  .contact-inner { display: flex; align-items: center; justify-content: space-between; gap: 40px; padding-block: 62px; }
+  .contact-inner h2 { max-width: 700px; margin-top: 8px; font-size: clamp(1.8rem, 4vw, 3.3rem); line-height: 1.06; letter-spacing: -.04em; }
+  .contact-inner a { flex: none; padding: 15px 18px; border-radius: var(--model-radius-sm); background: white; color: var(--model-text); font-size: .84rem; font-weight: 850; }
+  @media (max-width: 900px) {
+    nav { display: none; }
+    .executive-hero { grid-template-columns: 1fr; gap: 36px; padding-block: 70px 54px; }
+    .metric-section { grid-template-columns: repeat(2, 1fr); }
+    .priority-grid { grid-template-columns: 1fr; }
+    .section-heading-row, .contact-inner { align-items: flex-start; }
+    .outcomes { grid-template-columns: 1fr; gap: 36px; }
+  }
+  @media (max-width: 600px) {
+    .executive-brand strong { display: none; }
+    .header-inner { min-height: 66px; }
+    .executive-hero { padding-top: 54px; }
+    h1 { font-size: 3.25rem; }
+    .metric-section { grid-template-columns: 1fr; }
+    .section-heading-row, .contact-inner { display: grid; }
+    .portfolio-section { padding-block: 82px; }
+    .outcomes { padding-bottom: 82px; }
+  }
+</style>
