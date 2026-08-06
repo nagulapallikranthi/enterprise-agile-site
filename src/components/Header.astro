@@ -9,11 +9,12 @@
   </button>
 
   <ul id="primary-menu">
-    <li><a class="active" href="#top" aria-current="page">Home</a></li>
+    <li><a href="#top">Home</a></li>
     <li><a href="#about">About</a></li>
     <li><a href="#success-stories">Success Stories</a></li>
     <li><a href="#frameworks">Frameworks</a></li>
     <li><a href="#articles">Articles</a></li>
+    <li><a href="/models/executive-portfolio/">UI Models</a></li>
     <li><a href="#contact">Contact</a></li>
   </ul>
 </nav>
@@ -22,6 +23,33 @@
   const nav = document.querySelector('.site-nav');
   const toggle = document.querySelector('.menu-toggle');
   const menu = document.querySelector('#primary-menu');
+  const sectionLinks = Array.from(menu?.querySelectorAll('a[href^="#"]') ?? []);
+
+  const setActiveLink = (activeLink) => {
+    menu?.querySelectorAll('a').forEach((link) => {
+      const isActive = link === activeLink;
+      link.classList.toggle('active', isActive);
+
+      if (isActive) {
+        link.setAttribute('aria-current', 'location');
+      } else {
+        link.removeAttribute('aria-current');
+      }
+    });
+  };
+
+  const updateActiveSection = () => {
+    const navHeight = nav?.getBoundingClientRect().height ?? 0;
+    const marker = window.scrollY + navHeight + 24;
+    let activeLink = sectionLinks[0];
+
+    sectionLinks.forEach((link) => {
+      const target = document.querySelector(link.getAttribute('href'));
+      if (target && target.offsetTop <= marker) activeLink = link;
+    });
+
+    setActiveLink(activeLink);
+  };
 
   const closeMenu = () => {
     nav?.classList.remove('menu-open');
@@ -33,6 +61,12 @@
     toggle.setAttribute('aria-expanded', String(isOpen));
   });
 
-  menu?.querySelectorAll('a').forEach((link) => link.addEventListener('click', closeMenu));
+  menu?.querySelectorAll('a').forEach((link) => link.addEventListener('click', () => {
+    closeMenu();
+    setActiveLink(link);
+  }));
   document.addEventListener('keydown', (event) => event.key === 'Escape' && closeMenu());
+  window.addEventListener('scroll', updateActiveSection, { passive: true });
+  window.addEventListener('hashchange', updateActiveSection);
+  updateActiveSection();
 </script>
