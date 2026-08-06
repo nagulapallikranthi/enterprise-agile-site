@@ -52,15 +52,17 @@ npm run preview
 
 ## Project Status
 
-Sprint 1
+Release 0.2.0 — stable DEV candidate
 
 - ✅ Homepage Foundation
-- 🔄 Cloudflare Deployment
-- ⏳ About
-- ⏳ Success Stories
-- ⏳ Frameworks
-- ⏳ Articles
-- ⏳ Contact
+- ✅ DEV/STG/PROD deployment workflow
+- ✅ About, Success Stories, Frameworks, Articles and Contact
+- ✅ Responsive and accessible navigation
+- ✅ Resume download and contact destinations
+- ✅ Footer, SEO, social metadata, sitemap, robots and custom 404
+- ✅ Automated build, link, anchor and accessibility smoke validation
+
+Run the complete local quality gate with `npm run check`.
 
 ## Repository
 

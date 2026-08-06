@@ -4,12 +4,13 @@ import Header from "../components/Header.astro";
 import Hero from "../components/Hero.astro";
 ---
 
-<MainLayout title="Enterprise Agile">
+<MainLayout>
 
 <div id="top"></div>
 
 <Header />
 
+<main id="main-content">
 <Hero />
 
 <section class="impact" id="impact" aria-labelledby="impact-title">
@@ -150,6 +151,19 @@ import Hero from "../components/Hero.astro";
     <a class="secondary" href="https://www.linkedin.com/in/kranthi-n" target="_blank" rel="noreferrer">Connect on LinkedIn</a>
   </div>
 </section>
+</main>
 
-<!-- release: 0.1.10 -->
+<footer class="site-footer">
+  <a class="footer-brand" href="#top">Enterprise Agile</a>
+  <p>Enterprise program leadership, operational excellence and responsible AI adoption.</p>
+  <div class="footer-links" aria-label="Footer navigation">
+    <a href="#about">About</a>
+    <a href="#success-stories">Success Stories</a>
+    <a href="#contact">Contact</a>
+    <a href="/downloads/Kranthi-Kumar-Nagulapally-Resume.pdf" download>Resume</a>
+  </div>
+  <p class="footer-meta">© {new Date().getFullYear()} Kranthi Kumar Nagulapally</p>
+</footer>
+
+<!-- release: 0.2.0 -->
 </MainLayout>

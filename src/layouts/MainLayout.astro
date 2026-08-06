@@ -3,11 +3,21 @@ import "../styles/global.css";
 
 interface Props {
   title?: string;
+  description?: string;
+  canonicalPath?: string;
+  noindex?: boolean;
 }
 
 const {
-  title = "Enterprise Agile"
+  title = "Enterprise Agile | Enterprise Program Leadership",
+  description = "Enterprise program leadership across CloudOps, DevOps, agile governance, executive reporting and responsible AI adoption.",
+  canonicalPath = "/",
+  noindex = false
 } = Astro.props;
+
+const siteUrl = import.meta.env.PUBLIC_SITE_URL ?? "https://enterprise-agile-site.nagulapalli-kranthi.workers.dev";
+const canonicalUrl = new URL(canonicalPath, siteUrl);
+const socialImageUrl = new URL("/images/hero-portrait.png", siteUrl);
 ---
 
 <!DOCTYPE html>
@@ -20,13 +30,28 @@ const {
         name="viewport"
         content="width=device-width, initial-scale=1.0"
     />
-
+    <meta name="description" content={description} />
+    <meta name="theme-color" content="#0f172a" />
+    {noindex && <meta name="robots" content="noindex, follow" />}
+    <link rel="canonical" href={canonicalUrl} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="alternate icon" href="/favicon.ico" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:image" content={socialImageUrl} />
+    <meta property="og:site_name" content="Enterprise Agile" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={socialImageUrl} />
     <title>{title}</title>
 
 </head>
 
 <body>
-
+    <a class="skip-link" href="#main-content">Skip to main content</a>
     <slot />
 
 </body>
