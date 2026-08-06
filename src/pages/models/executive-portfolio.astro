@@ -88,10 +88,28 @@ import "../../styles/model-system.css";
 </MainLayout>
 
 <style>
-  .executive-header { border-bottom: 1px solid var(--model-border); background: rgba(255,255,255,.94); }
+  .model-page {
+    --model-bg: #0f1a2e;
+    --model-surface: #17243a;
+    --model-surface-muted: #22314a;
+    --model-text: #f4f7fb;
+    --model-text-muted: #aebbd0;
+    --model-border: #2d3c55;
+    --model-blue: #60a5fa;
+    --model-blue-soft: #19385f;
+    --model-green: #4fd1a5;
+    --model-green-soft: #173c38;
+    --model-amber: #f2c46d;
+    --model-amber-soft: #45381f;
+    --model-violet: #a78bfa;
+    --model-violet-soft: #302858;
+    --model-shadow: 0 18px 48px rgba(2, 8, 23, .24);
+    background: linear-gradient(180deg, #111c31 0%, #0b1526 100%);
+  }
+  .executive-header { border-bottom: 1px solid var(--model-border); background: rgba(11,21,38,.94); }
   .header-inner { min-height: 76px; display: flex; align-items: center; justify-content: space-between; gap: 28px; }
   .executive-brand { display: flex; align-items: center; gap: 11px; }
-  .executive-brand > span { display: grid; width: 38px; height: 38px; place-items: center; border-radius: 10px; background: var(--model-text); color: white; font-size: .75rem; font-weight: 850; }
+  .executive-brand > span { display: grid; width: 38px; height: 38px; place-items: center; border-radius: 10px; background: #20314d; color: white; font-size: .75rem; font-weight: 850; }
   .executive-brand strong { font-size: .96rem; }
   nav ul { display: flex; gap: 26px; list-style: none; }
   nav a { color: var(--model-text-muted); font-size: .84rem; font-weight: 650; }
@@ -104,7 +122,7 @@ import "../../styles/model-system.css";
   .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 34px; }
   .hero-actions a { padding: 14px 19px; border-radius: var(--model-radius-sm); font-size: .83rem; font-weight: 800; }
   .executive-primary { background: var(--model-blue); color: white !important; }
-  .executive-secondary { border: 1px solid var(--model-border); background: white; }
+  .executive-secondary { border: 1px solid var(--model-border); background: var(--model-surface); }
   .owner-card { padding: 28px; }
   .owner-card > span { color: var(--model-text-muted); font-size: .72rem; font-weight: 750; text-transform: uppercase; letter-spacing: .1em; }
   .owner-card > strong { display: block; margin-top: 18px; font-size: 1.2rem; }
@@ -122,10 +140,10 @@ import "../../styles/model-system.css";
   .outcomes li { display: grid; grid-template-columns: 46px 1fr; gap: 16px; align-items: center; padding-block: 22px; border-bottom: 1px solid var(--model-border); }
   .outcomes li span { color: var(--model-blue); font-size: .72rem; font-weight: 850; }
   .outcomes li strong { font-size: .96rem; }
-  .executive-contact { background: var(--model-text); color: white; }
+  .executive-contact { border-top: 1px solid var(--model-border); background: #081221; color: white; }
   .contact-inner { display: flex; align-items: center; justify-content: space-between; gap: 40px; padding-block: 62px; }
   .contact-inner h2 { max-width: 700px; margin-top: 8px; font-size: clamp(1.8rem, 4vw, 3.3rem); line-height: 1.06; letter-spacing: -.04em; }
-  .contact-inner a { flex: none; padding: 15px 18px; border-radius: var(--model-radius-sm); background: white; color: var(--model-text); font-size: .84rem; font-weight: 850; }
+  .contact-inner a { flex: none; padding: 15px 18px; border-radius: var(--model-radius-sm); background: var(--model-blue); color: #071426; font-size: .84rem; font-weight: 850; }
   @media (max-width: 900px) {
     nav { display: none; }
     .executive-hero { grid-template-columns: 1fr; gap: 36px; padding-block: 70px 54px; }
