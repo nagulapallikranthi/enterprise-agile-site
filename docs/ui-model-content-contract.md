@@ -1,0 +1,24 @@
+# UI model shared-content contract
+
+Task: EA-T004  
+Release target: 0.3.0
+
+All five UI models consume `src/data/portfolio.ts` as their authoritative content source. Models may change presentation, hierarchy and interaction, but they must not duplicate or contradict the shared identity, navigation, metrics, priorities or outcomes.
+
+## Route contract
+
+- Existing stable site: `/`
+- Model 1 — Executive Portfolio: `/models/executive-portfolio/`
+- Future models: `/models/<model-slug>/`
+- Every model includes a route back to the stable site.
+
+## Acceptance criteria
+
+1. Shared content is typed and build-time validated.
+2. Each model renders identity, at least four metrics, three priorities and three outcomes.
+3. Navigation uses valid page routes or in-page anchors.
+4. Pages provide one `main` landmark, visible keyboard focus and meaningful heading order.
+5. Layouts remain readable at 360 px, 768 px and 1440 px widths.
+6. Reduced-motion preferences are respected.
+7. `npm run check` and `npm audit --audit-level=high` pass before deployment.
+8. Each task is mapped to a distinct commit and Control Center evidence record.
