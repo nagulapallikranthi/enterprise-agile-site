@@ -2,6 +2,7 @@
 import MainLayout from "../layouts/MainLayout.astro";
 import Header from "../components/Header.astro";
 import Hero from "../components/Hero.astro";
+import SectionSwitcher from "../components/SectionSwitcher.astro";
 ---
 
 <MainLayout>
@@ -12,6 +13,16 @@ import Hero from "../components/Hero.astro";
 
 <main id="main-content">
 <Hero />
+
+<SectionSwitcher label="Homepage sections" items={[
+  { id: "home-overview", label: "Impact" },
+  { id: "home-stories", label: "Capabilities" },
+  { id: "home-frameworks", label: "Success stories" },
+  { id: "home-articles", label: "Frameworks & articles" },
+  { id: "home-contact", label: "Connect" }
+]}>
+
+<div data-section-panel="home-overview">
 
 <section class="impact" id="impact" aria-labelledby="impact-title">
 
@@ -47,6 +58,10 @@ import Hero from "../components/Hero.astro";
 
 </section>
 
+</div>
+
+<div data-section-panel="home-stories">
+
 <section class="about" id="about" aria-labelledby="about-title">
   <div class="about-intro">
     <span class="eyebrow">WHAT I DELIVER</span>
@@ -81,6 +96,10 @@ import Hero from "../components/Hero.astro";
   </div>
 </section>
 
+</div>
+
+<div data-section-panel="home-frameworks">
+
 <section class="stories" id="success-stories" aria-labelledby="stories-title">
   <div class="section-heading stories-heading">
     <span class="eyebrow">PROVEN OUTCOMES</span>
@@ -114,6 +133,10 @@ import Hero from "../components/Hero.astro";
   </div>
 </section>
 
+</div>
+
+<div data-section-panel="home-articles">
+
 <section class="frameworks" id="frameworks" aria-labelledby="frameworks-title">
   <div class="section-heading">
     <span class="eyebrow">PRACTICAL FRAMEWORKS</span>
@@ -133,12 +156,16 @@ import Hero from "../components/Hero.astro";
     <h2 id="articles-title">Ideas for better enterprise delivery</h2>
     <p>Concise perspectives drawn from operating complex programs, platforms and transformation initiatives.</p>
   </div>
-  <div class="article-list">
-    <article><span>Agile Governance</span><h3>Measure sprint confidence, not activity</h3><p>A practical shift from output reporting to commitment reliability, scope stability and decision quality.</p></article>
-    <article><span>Operations</span><h3>Make executive reporting operational</h3><p>Build reports that expose the next decision, accountable owner and delivery consequence.</p></article>
-    <article><span>AI Adoption</span><h3>Automation earns trust through evidence</h3><p>Design agentic workflows with visible controls, clear escalation and measurable human outcomes.</p></article>
+  <div class="article-list progressive-panel" aria-label="Article summaries">
+    <details open><summary><span>Agile Governance</span><h3>Measure sprint confidence, not activity</h3></summary><p>A practical shift from output reporting to commitment reliability, scope stability and decision quality.</p></details>
+    <details><summary><span>Operations</span><h3>Make executive reporting operational</h3></summary><p>Build reports that expose the next decision, accountable owner and delivery consequence.</p></details>
+    <details><summary><span>AI Adoption</span><h3>Automation earns trust through evidence</h3></summary><p>Design agentic workflows with visible controls, clear escalation and measurable human outcomes.</p></details>
   </div>
 </section>
+
+</div>
+
+<div data-section-panel="home-contact">
 
 <section class="contact" id="contact" aria-labelledby="contact-title">
   <div>
@@ -151,6 +178,8 @@ import Hero from "../components/Hero.astro";
     <a class="secondary" href="https://www.linkedin.com/in/kranthi-n" target="_blank" rel="noreferrer">Connect on LinkedIn</a>
   </div>
 </section>
+</div>
+</SectionSwitcher>
 </main>
 
 <footer class="site-footer">

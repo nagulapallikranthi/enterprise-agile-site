@@ -2,6 +2,7 @@
 import MainLayout from "../../layouts/MainLayout.astro";
 import MetricCard from "../../components/models/MetricCard.astro";
 import PriorityCard from "../../components/models/PriorityCard.astro";
+import SectionSwitcher from "../../components/SectionSwitcher.astro";
 import { portfolio } from "../../data/portfolio";
 import "../../styles/model-system.css";
 ---
@@ -50,11 +51,17 @@ import "../../styles/model-system.css";
         </aside>
       </section>
 
-      <section class="metric-section model-container" aria-label="Portfolio metrics">
+      <SectionSwitcher label="Executive portfolio sections" items={[
+        { id: "portfolio-health", label: "Portfolio health" },
+        { id: "portfolio-priorities", label: "Priorities" },
+        { id: "portfolio-outcomes", label: "Outcomes" },
+        { id: "portfolio-contact", label: "Next decision" }
+      ]}>
+      <section class="metric-section" aria-label="Portfolio metrics" data-section-panel="portfolio-health">
         {portfolio.metrics.map((metric) => <MetricCard {...metric} />)}
       </section>
 
-      <section class="portfolio-section model-container" id="priorities" aria-labelledby="priorities-title">
+      <section class="portfolio-section" id="priorities" aria-labelledby="priorities-title" data-section-panel="portfolio-priorities">
         <div class="section-heading-row">
           <div>
             <span class="model-kicker">Current priorities</span>
@@ -67,7 +74,7 @@ import "../../styles/model-system.css";
         </div>
       </section>
 
-      <section class="outcomes model-container" id="outcomes" aria-labelledby="outcomes-title">
+      <section class="outcomes" id="outcomes" aria-labelledby="outcomes-title" data-section-panel="portfolio-outcomes">
         <div>
           <span class="model-kicker">Evidence of execution</span>
           <h2 class="model-section-title" id="outcomes-title">Governance built around outcomes</h2>
@@ -77,12 +84,13 @@ import "../../styles/model-system.css";
         </ol>
       </section>
 
-      <section class="executive-contact" id="contact" aria-labelledby="contact-title">
-        <div class="model-container contact-inner">
+      <section class="executive-contact" id="contact" aria-labelledby="contact-title" data-section-panel="portfolio-contact">
+        <div class="contact-inner">
           <div><span class="model-kicker">Next decision</span><h2 id="contact-title">Build the operating system your portfolio needs.</h2></div>
           <a href="mailto:nagulapalli.kranthi@gmail.com?subject=Executive%20Portfolio%20Conversation">Start a conversation <span aria-hidden="true">→</span></a>
         </div>
       </section>
+      </SectionSwitcher>
     </main>
   </div>
 </MainLayout>

@@ -5,6 +5,17 @@ Release target: 0.3.0
 
 All five UI models consume `src/data/portfolio.ts` as their authoritative content source. Models may change presentation, hierarchy and interaction, but they must not duplicate or contradict the shared identity, navigation, metrics, priorities or outcomes.
 
+## Frozen interaction architecture
+
+- Every primary page uses a sticky section switcher to replace content in place.
+- Desktop and laptop layouts use a vertical sticky selector beside the content canvas.
+- Mobile layouts use a horizontal sticky selector above the content canvas.
+- A selected page section should remain within approximately two to three viewport heights.
+- Progressive disclosure is reserved for supporting detail, never primary navigation.
+- The complete site may contain no more than three progressive-disclosure panels.
+- Each progressive-disclosure panel may contain no more than five sections.
+- All controls support keyboard, touch, visible focus and reduced-motion preferences.
+
 ## Route contract
 
 - Existing stable site: `/`
