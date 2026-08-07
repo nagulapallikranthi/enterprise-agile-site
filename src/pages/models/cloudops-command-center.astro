@@ -49,9 +49,8 @@ const sections = [
 
 <MainLayout
   title="CloudOps Command Center | Enterprise Agile"
-  description="Compare three enterprise interaction patterns that reduce scrolling while preserving operational decision depth."
+  description="A concise CloudOps command center using responsive sticky section navigation and synthetic operational data."
   canonicalPath="/models/cloudops-command-center/"
-  noindex={true}
 >
   <div class="command-page">
     <header class="topbar">
@@ -67,62 +66,18 @@ const sections = [
         <div>
           <span class="model-kicker">UI Model 3 · CloudOps Command Center</span>
           <h1>Operational depth without the <em>scroll fatigue.</em></h1>
-          <p>Compare three enterprise interaction patterns using the same synthetic operational signals. Select a pattern, interact with it and judge which feels fastest to understand.</p>
+          <p>Review operational health, risk and action in one concise workspace. Select a domain to replace the decision canvas without adding page length.</p>
         </div>
         <aside class="decision-card">
-          <span>Decision lens</span>
+          <span>Interaction standard</span>
           <strong>Fast orientation. Clear action. Minimal movement.</strong>
-          <p>Every pattern keeps the primary experience within three desktop viewports.</p>
+          <p>The selector stays visible on laptops and becomes a horizontal sticky control on mobile.</p>
         </aside>
       </section>
 
-      <section class="pattern-picker" aria-labelledby="pattern-title">
-        <div>
-          <span class="model-kicker">Architecture test</span>
-          <h2 id="pattern-title">Choose a scrolling solution</h2>
-        </div>
-        <div class="pattern-buttons" role="tablist" aria-label="Interaction pattern">
-          <button type="button" role="tab" aria-selected="true" aria-controls="pattern-tabs" id="choose-tabs" data-pattern="tabs">
-            <b>01</b><span>Focused tabs<small>Best for dashboards</small></span>
-          </button>
-          <button type="button" role="tab" aria-selected="false" aria-controls="pattern-disclosure" id="choose-disclosure" data-pattern="disclosure" tabindex="-1">
-            <b>02</b><span>Progressive disclosure<small>Best for evidence</small></span>
-          </button>
-          <button type="button" role="tab" aria-selected="false" aria-controls="pattern-switcher" id="choose-switcher" data-pattern="switcher" tabindex="-1">
-            <b>03</b><span>Sticky section switcher<small>Best for orientation</small></span>
-          </button>
-        </div>
-      </section>
-
       <section class="workspace" aria-live="polite">
-        <div class="pattern-panel is-active" id="pattern-tabs" role="tabpanel" aria-labelledby="choose-tabs" data-panel="tabs">
-          <header class="panel-heading"><div><span>Pattern 01</span><h2>Focused tabs</h2></div><p>Five operational domains share one content canvas. Selecting a tab updates the view in place.</p></header>
-          <div class="tab-shell">
-            <div class="local-tabs" role="tablist" aria-label="CloudOps intelligence areas">
-              {sections.map((section, index) => <button type="button" role="tab" aria-selected={index === 0 ? "true" : "false"} aria-controls={`tab-${section.id}`} data-local-tab={section.id} tabindex={index === 0 ? "0" : "-1"}>{section.label}</button>)}
-            </div>
-            {sections.map((section, index) => (
-              <article class:list={["signal-view", { "is-active": index === 0 }]} id={`tab-${section.id}`} role="tabpanel" data-local-panel={section.id}>
-                <SignalContent section={section} />
-              </article>
-            ))}
-          </div>
-        </div>
-
-        <div class="pattern-panel" id="pattern-disclosure" role="tabpanel" aria-labelledby="choose-disclosure" data-panel="disclosure" hidden>
-          <header class="panel-heading"><div><span>Pattern 02</span><h2>Progressive disclosure</h2></div><p>All domains remain visible as compact summaries. Open only the evidence needed for the decision.</p></header>
-          <div class="disclosure-list">
-            {sections.map((section, index) => (
-              <details open={index === 0}>
-                <summary><span>{String(index + 1).padStart(2, "0")}</span><div><strong>{section.label}</strong><small>{section.headline}</small></div><i aria-hidden="true">+</i></summary>
-                <div class="details-content"><SignalContent section={section} compact={true} /></div>
-              </details>
-            ))}
-          </div>
-        </div>
-
-        <div class="pattern-panel" id="pattern-switcher" role="tabpanel" aria-labelledby="choose-switcher" data-panel="switcher" hidden>
-          <header class="panel-heading"><div><span>Pattern 03</span><h2>Sticky section switcher</h2></div><p>A persistent local navigator maintains orientation while replacing the decision canvas.</p></header>
+        <div class="pattern-panel is-active">
+          <header class="panel-heading"><div><span>Enterprise view</span><h2>Operational decision workspace</h2></div><p>A persistent local navigator maintains orientation while replacing the decision canvas.</p></header>
           <div class="switcher-shell">
             <nav class="section-switcher" aria-label="CloudOps sections">
               {sections.map((section, index) => <button type="button" class:list={{ active: index === 0 }} data-switch={section.id}><span>{String(index + 1).padStart(2, "0")}</span>{section.label}</button>)}
@@ -136,7 +91,7 @@ const sections = [
 
       <footer class="review-footer">
         <div><span class="sample-dot"></span><p><strong>Synthetic demonstration data.</strong> No organization, customer, incident or financial information is represented.</p></div>
-        <a href="#pattern-title">Compare another pattern ↑</a>
+        <a href="#main-content">Back to overview ↑</a>
       </footer>
     </main>
   </div>
@@ -157,17 +112,12 @@ const sections = [
     });
   };
 
-  const patternButtons = Array.from(document.querySelectorAll('[data-pattern]'));
-  const patternPanels = Array.from(document.querySelectorAll('[data-panel]'));
-  patternButtons.forEach((button) => button.addEventListener('click', () => activateSet(patternButtons, patternPanels, button.dataset.pattern, 'data-pattern', 'data-panel')));
-
-  const localTabs = Array.from(document.querySelectorAll('[data-local-tab]'));
-  const localPanels = Array.from(document.querySelectorAll('[data-local-panel]'));
-  localTabs.forEach((button) => button.addEventListener('click', () => activateSet(localTabs, localPanels, button.dataset.localTab, 'data-local-tab', 'data-local-panel')));
-
   const switchButtons = Array.from(document.querySelectorAll('[data-switch]'));
   const switchPanels = Array.from(document.querySelectorAll('[data-switch-panel]'));
-  switchButtons.forEach((button) => button.addEventListener('click', () => activateSet(switchButtons, switchPanels, button.dataset.switch, 'data-switch', 'data-switch-panel')));
+  switchButtons.forEach((button) => button.addEventListener('click', () => {
+    activateSet(switchButtons, switchPanels, button.dataset.switch, 'data-switch', 'data-switch-panel');
+    button.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+  }));
 
   document.querySelectorAll('[role="tablist"]').forEach((tablist) => tablist.addEventListener('keydown', (event) => {
     if (!['ArrowLeft', 'ArrowRight'].includes(event.key)) return;
