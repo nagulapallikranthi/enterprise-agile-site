@@ -530,7 +530,12 @@ nav a:hover {
 .articles { display: grid; grid-template-columns: .8fr 1.4fr; gap: clamp(48px,7vw,112px); background: #0b1220; }
 .articles-intro h2, .contact h2 { margin: 14px 0 18px; font-size: clamp(38px,4.5vw,60px); line-height: 1.05; letter-spacing: -2px; }
 .article-list { display: grid; gap: 16px; }
-.article-list article { padding: 28px 30px; border: 1px solid rgba(255,255,255,.1); border-radius: 18px; background: rgba(255,255,255,.035); }
+.article-list article, .article-list details { padding: 28px 30px; border: 1px solid rgba(255,255,255,.1); border-radius: 18px; background: rgba(255,255,255,.035); }
+.article-list summary { cursor: pointer; list-style: none; }
+.article-list summary::-webkit-details-marker { display: none; }
+.article-list summary::after { content: "+"; float: right; margin-top: -32px; color: #60a5fa; font-size: 24px; }
+.article-list details[open] summary::after { content: "−"; }
+.article-list details > p { margin-top: 14px; }
 .article-list span { color: #60a5fa; font-size: 13px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; }
 .article-list h3 { margin: 9px 0; font-size: 24px; }
 .contact { display: flex; justify-content: space-between; align-items: center; gap: 48px; background: linear-gradient(135deg, rgba(37,99,235,.18), rgba(2,6,23,.5)); }
