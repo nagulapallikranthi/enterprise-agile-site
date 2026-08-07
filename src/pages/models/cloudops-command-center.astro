@@ -1,6 +1,7 @@
 ---
 import MainLayout from "../../layouts/MainLayout.astro";
 import SignalContent from "../../components/models/SignalContent.astro";
+import Header from "../../components/Header.astro";
 import "../../styles/model-system.css";
 
 const sections = [
@@ -53,18 +54,12 @@ const sections = [
   canonicalPath="/models/cloudops-command-center/"
 >
   <div class="command-page">
-    <header class="topbar">
-      <div class="model-container topbar-inner">
-        <a class="brand" href="/"><span>EA</span><strong>Enterprise Agile</strong></a>
-        <span class="review-badge">DEV comparison</span>
-        <a class="model-link" href="/models/executive-portfolio/">All UI models →</a>
-      </div>
-    </header>
+    <Header />
 
     <main id="main-content" class="model-container">
       <section class="intro">
         <div>
-          <span class="model-kicker">UI Model 3 · CloudOps Command Center</span>
+          <span class="model-kicker">Leadership View 3 · CloudOps Command Center</span>
           <h1>Operational depth without the <em>scroll fatigue.</em></h1>
           <p>Review operational health, risk and action in one concise workspace. Select a domain to replace the decision canvas without adding page length.</p>
         </div>

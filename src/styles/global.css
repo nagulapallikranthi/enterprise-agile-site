@@ -67,7 +67,7 @@ a {
    Header
 =========================== */
 
-nav {
+.site-nav {
   position: sticky;
   top: 0;
   z-index: 20;
@@ -76,7 +76,8 @@ nav {
   align-items: center;
   padding: 24px 8%;
   border-bottom: 1px solid rgba(255,255,255,.08);
-  background: rgba(15, 23, 42, .82);
+  background: #0f172a;
+  box-shadow: 0 10px 28px rgba(2, 6, 23, .24);
   backdrop-filter: blur(18px);
   -webkit-backdrop-filter: blur(18px);
 }
@@ -90,20 +91,20 @@ nav {
 .menu-toggle { display: none; }
 .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
 
-nav ul {
+.site-nav ul {
   display: flex;
   list-style: none;
   gap: 30px;
 }
 
-nav a {
+.site-nav a {
   position: relative;
   color: white;
   opacity: .85;
   transition: .3s;
 }
 
-nav a::after {
+.site-nav a::after {
   content: "";
   position: absolute;
   left: 0;
@@ -116,12 +117,12 @@ nav a::after {
   transition: transform .25s ease;
 }
 
-nav a:hover::after,
-nav a.active::after {
+.site-nav a:hover::after,
+.site-nav a.active::after {
   transform: scaleX(1);
 }
 
-nav a:hover {
+.site-nav a:hover {
   color: #60a5fa;
   opacity: 1;
 }
@@ -563,17 +564,17 @@ nav a:hover {
 
 @media(max-width:900px){
 
-  nav { padding: 18px 7%; }
+  .site-nav { padding: 18px 7%; }
   .logo { font-size: 22px; }
   .menu-toggle { display: grid; gap: 5px; width: 44px; height: 44px; place-content: center; border: 1px solid rgba(255,255,255,.2); border-radius: 10px; color: white; background: rgba(255,255,255,.04); }
   .menu-toggle span:not(.sr-only) { display: block; width: 22px; height: 2px; border-radius: 2px; background: currentColor; transition: transform .2s ease, opacity .2s ease; }
   .menu-open .menu-toggle span:nth-child(2) { transform: translateY(7px) rotate(45deg); }
   .menu-open .menu-toggle span:nth-child(3) { opacity: 0; }
   .menu-open .menu-toggle span:nth-child(4) { transform: translateY(-7px) rotate(-45deg); }
-  nav ul { position: absolute; top: 100%; left: 0; right: 0; display: none; flex-direction: column; gap: 0; padding: 10px 7% 22px; border-bottom: 1px solid rgba(255,255,255,.1); background: rgba(15,23,42,.98); }
-  nav.menu-open ul { display: flex; }
-  nav li a { display: block; padding: 12px 0; }
-  nav a::after { bottom: 5px; right: auto; width: 32px; }
+  .site-nav ul { position: absolute; top: 100%; left: 0; right: 0; display: none; flex-direction: column; gap: 0; padding: 10px 7% 22px; border-bottom: 1px solid rgba(255,255,255,.1); background: #0f172a; }
+  .site-nav.menu-open ul { display: flex; }
+  .site-nav li a { display: block; padding: 12px 0; }
+  .site-nav a::after { bottom: 5px; right: auto; width: 32px; }
 
   .hero{
 
