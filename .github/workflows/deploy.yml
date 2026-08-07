@@ -45,7 +45,7 @@ jobs:
   deploy:
     name: Deploy ${{ github.ref_name }}
     needs: validate
-    if: github.event_name == 'push'
+    if: github.event_name == 'push' || (github.event_name == 'workflow_dispatch' && github.ref_name == 'develop')
     runs-on: ubuntu-latest
     timeout-minutes: 10
     environment: ${{ github.ref_name == 'develop' && 'DEV' || github.ref_name == 'staging' && 'STG' || 'PROD' }}
