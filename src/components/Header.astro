@@ -1,5 +1,5 @@
 <nav class="site-nav" aria-label="Primary navigation">
-  <a class="logo" href="#top" aria-label="Enterprise Agile home">Enterprise Agile</a>
+  <a class="logo" href="/#top" aria-label="Enterprise Agile home">Enterprise Agile</a>
 
   <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="primary-menu">
     <span class="sr-only">Open navigation menu</span>
@@ -9,13 +9,13 @@
   </button>
 
   <ul id="primary-menu">
-    <li><a href="#top">Home</a></li>
-    <li><a href="#about">About</a></li>
-    <li><a href="#success-stories">Success Stories</a></li>
-    <li><a href="#frameworks">Frameworks</a></li>
-    <li><a href="#articles">Articles</a></li>
-    <li><a href="/models/executive-portfolio/">UI Models</a></li>
-    <li><a href="#contact">Contact</a></li>
+    <li><a href="/#top">Home</a></li>
+    <li><a href="/#about">About</a></li>
+    <li><a href="/#success-stories">Success Stories</a></li>
+    <li><a href="/#frameworks">Frameworks</a></li>
+    <li><a href="/#articles">Articles</a></li>
+    <li><a href="/models/executive-portfolio/">Leadership Views</a></li>
+    <li><a href="/#contact">Contact</a></li>
   </ul>
 </nav>
 
@@ -23,7 +23,7 @@
   const nav = document.querySelector('.site-nav');
   const toggle = document.querySelector('.menu-toggle');
   const menu = document.querySelector('#primary-menu');
-  const sectionLinks = Array.from(menu?.querySelectorAll('a[href^="#"]') ?? []);
+  const sectionLinks = Array.from(menu?.querySelectorAll('a[href^="/#"]') ?? []);
 
   const setActiveLink = (activeLink) => {
     menu?.querySelectorAll('a').forEach((link) => {
@@ -44,7 +44,7 @@
     let activeLink = sectionLinks[0];
 
     sectionLinks.forEach((link) => {
-      const target = document.querySelector(link.getAttribute('href'));
+      const target = document.querySelector(new URL(link.href).hash);
       if (target && target.offsetTop <= marker) activeLink = link;
     });
 
@@ -68,5 +68,10 @@
   document.addEventListener('keydown', (event) => event.key === 'Escape' && closeMenu());
   window.addEventListener('scroll', updateActiveSection, { passive: true });
   window.addEventListener('hashchange', updateActiveSection);
-  updateActiveSection();
+  if (window.location.pathname.startsWith('/models/')) {
+    const leadershipLink = menu?.querySelector('a[href="/models/executive-portfolio/"]');
+    if (leadershipLink) setActiveLink(leadershipLink);
+  } else {
+    updateActiveSection();
+  }
 </script>

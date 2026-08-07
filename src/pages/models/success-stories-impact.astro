@@ -2,6 +2,7 @@
 import MainLayout from "../../layouts/MainLayout.astro";
 import { illustrativeSignals, successStories } from "../../data/successStories";
 import SectionSwitcher from "../../components/SectionSwitcher.astro";
+import Header from "../../components/Header.astro";
 import "../../styles/model-system.css";
 ---
 
@@ -11,20 +12,12 @@ import "../../styles/model-system.css";
   canonicalPath="/models/success-stories-impact/"
 >
   <div class="story-page">
-    <header class="story-nav">
-      <div class="model-container nav-inner">
-        <a class="brand" href="/"><span>EA</span><strong>Enterprise Agile</strong></a>
-        <nav aria-label="Success story navigation">
-          <a href="#stories">Case stories</a><a href="#signals">Sample signals</a><a href="#principles">Method</a>
-        </nav>
-        <a class="model-switch" href="/models/executive-portfolio/">Executive model →</a>
-      </div>
-    </header>
+    <Header />
 
     <main id="main-content">
       <section class="story-hero model-container">
         <div>
-          <span class="model-kicker">UI Model 2 · Success Stories & Impact</span>
+          <span class="model-kicker">Leadership View 2 · Success Stories & Impact</span>
           <h1>When delivery looks under control—<em>until it isn’t.</em></h1>
           <p>Five familiar enterprise situations. Each begins where the dashboard stops: with the hidden operating problem, the decision that changed the trajectory and the controls that sustained the result.</p>
           <a class="primary-action" href="#stories">Explore the cases <span aria-hidden="true">↓</span></a>
