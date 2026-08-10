@@ -402,13 +402,22 @@ a {
    About / Capabilities
 =========================== */
 
+.home-about {
+  background: radial-gradient(circle at 12% 55%, rgba(37,99,235,.14), transparent 32%), #0d1626;
+}
+
+.home-about .hero {
+  min-height: auto;
+  padding-bottom: 56px;
+}
+
 .about {
   display: grid;
   grid-template-columns: minmax(260px, .8fr) minmax(0, 1.4fr);
   gap: clamp(48px, 7vw, 112px);
   padding: 108px 8%;
   border-top: 1px solid rgba(255,255,255,.08);
-  background: radial-gradient(circle at 12% 38%, rgba(37,99,235,.14), transparent 34%), rgba(2,6,23,.34);
+  background: rgba(2,6,23,.22);
 }
 
 .about-intro {
