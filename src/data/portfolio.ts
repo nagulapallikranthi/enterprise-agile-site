@@ -1,7 +1,7 @@
 export const portfolio = {
   identity: {
     name: "Kranthi Kumar Nagulapally",
-    role: "Staff Program Manager",
+    role: "Senior Program Leader",
     positioning: "Enterprise delivery, operational excellence and responsible AI adoption",
   },
   navigation: [
@@ -12,7 +12,7 @@ export const portfolio = {
   ],
   metrics: [
     { value: "17+", label: "Years of experience", tone: "blue" },
-    { value: "5", label: "Teams governed", tone: "violet" },
+    { value: "Global", label: "Team leadership", tone: "violet" },
     { value: "+22%", label: "SLA adherence", tone: "green" },
     { value: "0", label: "Critical delivery risks", tone: "green" },
   ],
@@ -37,7 +37,7 @@ export const portfolio = {
     },
   ],
   outcomes: [
-    "Unified CloudOps and DevOps governance across five teams",
+    "Unified governance across globally distributed delivery teams",
     "Automated leadership reporting and SLA health signals",
     "Task-level traceability from sprint commitment to deployment",
   ],
