@@ -2,7 +2,6 @@
 import MainLayout from "../layouts/MainLayout.astro";
 import Header from "../components/Header.astro";
 import Hero from "../components/Hero.astro";
-import SectionSwitcher from "../components/SectionSwitcher.astro";
 ---
 
 <MainLayout>
@@ -13,16 +12,6 @@ import SectionSwitcher from "../components/SectionSwitcher.astro";
 
 <main id="main-content">
 <Hero />
-
-<SectionSwitcher label="Homepage sections" items={[
-  { id: "home-overview", label: "Impact" },
-  { id: "home-stories", label: "Capabilities" },
-  { id: "home-frameworks", label: "Success stories" },
-  { id: "home-articles", label: "Frameworks & articles" },
-  { id: "home-contact", label: "Connect" }
-]}>
-
-<div data-section-panel="home-overview">
 
 <section class="impact" id="impact" aria-labelledby="impact-title">
 
@@ -57,10 +46,6 @@ import SectionSwitcher from "../components/SectionSwitcher.astro";
 </div>
 
 </section>
-
-</div>
-
-<div data-section-panel="home-stories">
 
 <section class="about" id="about" aria-labelledby="about-title">
   <div class="about-intro">
@@ -111,10 +96,6 @@ import SectionSwitcher from "../components/SectionSwitcher.astro";
   </ol>
 </section>
 
-</div>
-
-<div data-section-panel="home-frameworks">
-
 <section class="stories" id="success-stories" aria-labelledby="stories-title">
   <div class="section-heading stories-heading">
     <span class="eyebrow">PROVEN OUTCOMES</span>
@@ -152,10 +133,6 @@ import SectionSwitcher from "../components/SectionSwitcher.astro";
   <p class="evidence-note"><strong>Evidence and confidentiality:</strong> the 22% improvement and five-team scope reflect professional delivery evidence. Operational examples are generalized to protect employer, customer, ticket, environment and financial information.</p>
 </section>
 
-</div>
-
-<div data-section-panel="home-articles">
-
 <section class="frameworks" id="frameworks" aria-labelledby="frameworks-title">
   <div class="section-heading">
     <span class="eyebrow">PRACTICAL FRAMEWORKS</span>
@@ -182,10 +159,6 @@ import SectionSwitcher from "../components/SectionSwitcher.astro";
   </div>
 </section>
 
-</div>
-
-<div data-section-panel="home-contact">
-
 <section class="contact" id="contact" aria-labelledby="contact-title">
   <div>
     <span class="eyebrow">LET'S CONNECT</span>
@@ -198,8 +171,6 @@ import SectionSwitcher from "../components/SectionSwitcher.astro";
     <a class="secondary" href="/downloads/Kranthi-Kumar-Nagulapally-Resume.pdf" download>Download Resume</a>
   </div>
 </section>
-</div>
-</SectionSwitcher>
 </main>
 
 <footer class="site-footer">
