@@ -313,24 +313,68 @@ a {
   font-size: 19px;
 }
 
-.impact-grid {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 14px;
-  max-width: 1400px;
+.impact-carousel {
+  max-width: 1120px;
   margin: 0 auto;
 }
 
-.impact-card {
-  min-width: 0;
-  display: grid;
-  grid-template-columns: minmax(235px, .9fr) 34px minmax(260px, 1.1fr);
+.impact-controls {
+  display: flex;
   align-items: center;
-  min-height: 86px;
-  padding: 18px 22px;
+  justify-content: space-between;
+  margin-bottom: 18px;
+}
+
+.impact-controls p {
+  color: #94a3b8;
+  font-size: 13px;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+
+.impact-controls div { display: flex; gap: 10px; }
+
+.impact-controls button {
+  width: 44px;
+  height: 44px;
+  border: 1px solid rgba(96,165,250,.38);
+  border-radius: 50%;
+  color: #f8fafc;
+  background: rgba(30,64,175,.18);
+  font-size: 22px;
+  cursor: pointer;
+  transition: border-color .2s ease, background .2s ease, transform .2s ease, opacity .2s ease;
+}
+
+.impact-controls button:hover:not(:disabled),
+.impact-controls button:focus-visible {
+  border-color: #60a5fa;
+  background: rgba(37,99,235,.34);
+  transform: translateY(-2px);
+}
+
+.impact-controls button:disabled { opacity: .28; cursor: default; }
+.impact-viewport { overflow: hidden; }
+
+.impact-track {
+  --impact-offset: 0px;
+  display: flex;
+  gap: 16px;
+  transform: translateX(calc(-1 * var(--impact-offset)));
+  transition: transform .42s cubic-bezier(.22,.8,.28,1);
+}
+
+.impact-card {
+  flex: 0 0 calc((100% - 32px) / 3);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-width: 0;
+  min-height: 188px;
+  padding: 24px;
   border: 1px solid rgba(147,197,253,.18);
-  border-radius: 16px;
-  background: linear-gradient(100deg, rgba(37,99,235,.15), rgba(255,255,255,.035));
+  border-radius: 18px;
+  background: linear-gradient(145deg, rgba(37,99,235,.17), rgba(15,23,42,.72));
   transition: transform .2s ease, border-color .2s ease, background .2s ease;
 }
 
@@ -341,16 +385,18 @@ a {
 }
 
 .impact-card strong {
-  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
   color: #f8fafc;
-  font-size: clamp(14px, 1.12vw, 17px);
-  line-height: 1.2;
+  font-size: 15px;
+  line-height: 1.25;
   white-space: nowrap;
 }
 
-.impact-card strong span { color: #60a5fa; }
-.impact-card i { color: #60a5fa; font-size: 24px; font-style: normal; text-align: center; }
-.impact-card p { min-width: 0; color: #cbd5e1; font-size: 14px; line-height: 1.35; }
+.impact-card strong span { color: #60a5fa; font-size: clamp(30px, 3vw, 42px); letter-spacing: -.04em; }
+.impact-card i { display: none; }
+.impact-card p { color: #cbd5e1; font-size: 14px; line-height: 1.5; }
 
 /* ===========================
    About / Capabilities
@@ -531,12 +577,16 @@ a {
 .framework-card dt { color: #93c5fd; font-size: 12px; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; }
 .framework-card dd { margin-top: 4px; color: #dbe4f0; font-size: 14px; }
 .framework-card p, .articles-intro p, .article-list p, .contact p { color: #cbd5e1; }
-.framework-carousel { position: relative; display: grid; grid-template-columns: 52px minmax(0,1fr) 52px; gap: 20px; align-items: center; max-width: 980px; margin: 44px auto 0; }
-.framework-track { min-width: 0; }
-.framework-carousel .framework-card { display: none; min-height: 390px; }
-.framework-carousel .framework-card.is-current { display: block; }
+.framework-carousel { max-width: 1120px; margin: 44px auto 0; }
+.carousel-controls { display: flex; align-items: center; justify-content: space-between; margin-bottom: 18px; }
+.carousel-controls > p { color: #94a3b8; font-size: 13px; letter-spacing: .08em; text-transform: uppercase; }
+.carousel-controls > div { display: flex; gap: 10px; }
+.framework-viewport { overflow: hidden; }
+.framework-track { --framework-offset: 0px; display: flex; gap: 16px; transform: translateX(calc(-1 * var(--framework-offset))); transition: transform .42s cubic-bezier(.22,.8,.28,1); }
+.framework-carousel .framework-card { flex: 0 0 calc((100% - 32px) / 3); min-width: 0; min-height: 390px; }
 .carousel-arrow { width: 52px; height: 52px; border: 1px solid rgba(147,197,253,.35); border-radius: 50%; color: white; background: rgba(30,64,175,.24); font-size: 1.35rem; cursor: pointer; }
-.carousel-arrow:hover { background: #2563eb; }
+.carousel-arrow:hover:not(:disabled) { background: #2563eb; }
+.carousel-arrow:disabled { opacity: .28; cursor: default; }
 .carousel-status { grid-column: 2; margin-top: -6px; color: #93c5fd; text-align: center; font-weight: 700; }
 .articles { display: grid; grid-template-columns: minmax(0,.8fr) minmax(0,1.4fr); gap: clamp(48px,7vw,112px); background: #0b1220; }
 .articles-intro h2, .contact h2 { margin: 14px 0 18px; font-size: clamp(38px,4.5vw,60px); line-height: 1.05; letter-spacing: -2px; }
@@ -646,8 +696,7 @@ a {
 
   }
 
-  .impact-grid { grid-template-columns: 1fr; }
-  .impact-card { grid-template-columns: minmax(220px, .9fr) 34px minmax(240px, 1.1fr); }
+  .impact-card { flex-basis: calc((100% - 16px) / 2); }
 
   .impact {
     padding: 64px 7% 72px;
@@ -691,7 +740,7 @@ a {
 
   .frameworks, .articles, .contact { padding: 72px 7%; }
   .framework-grid { grid-template-columns: 1fr; }
-  .framework-carousel { grid-template-columns: 44px minmax(0,1fr) 44px; gap: 10px; }
+  .framework-carousel .framework-card { flex-basis: calc((100% - 16px) / 2); }
   .carousel-arrow { width: 44px; height: 44px; }
   .framework-card { min-height: auto; }
   .framework-card h3 { margin-top: 28px; }
@@ -704,14 +753,10 @@ a {
 }
 
 @media(max-width:520px){
-  .impact-card { grid-template-columns: 1fr 24px; padding: 17px 18px; }
-  .impact-card strong { font-size: 14px; }
-  .impact-card i { font-size: 20px; }
-  .impact-card p { grid-column: 1 / -1; margin-top: 8px; }
+  .impact-card { flex-basis: 100%; min-height: 174px; padding: 22px; }
+  .impact-controls { margin-bottom: 14px; }
   .capability-card, .story-card, .framework-card { padding: 26px; }
-  .framework-carousel { grid-template-columns: 1fr 1fr; }
-  .framework-track { grid-column: 1 / -1; grid-row: 1; }
-  .framework-carousel .framework-card { min-height: 0; }
+  .framework-carousel .framework-card { flex-basis: 100%; min-height: 0; }
   .carousel-prev, .carousel-next { justify-self: center; }
   .carousel-status { grid-column: 1 / -1; margin-top: 0; }
   .story-meta { display: grid; grid-template-columns: minmax(0,1fr) auto; align-items: center; gap: 12px; }
