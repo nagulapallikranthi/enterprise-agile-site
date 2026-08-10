@@ -1,0 +1,29 @@
+---
+interface Props {
+  value: string;
+  label: string;
+  tone?: "blue" | "green" | "violet";
+}
+
+const { value, label, tone = "blue" } = Astro.props;
+---
+
+<article class={`model-metric model-metric--${tone}`}>
+  <strong>{value}</strong>
+  <span>{label}</span>
+</article>
+
+<style>
+  .model-metric {
+    min-height: 136px;
+    padding: 24px;
+    border: 1px solid var(--model-border);
+    border-radius: var(--model-radius-md);
+    background: var(--model-surface);
+  }
+  strong { display: block; font-size: 2rem; line-height: 1; letter-spacing: -.04em; }
+  span { display: block; margin-top: 14px; color: var(--model-text-muted); font-size: .9rem; font-weight: 650; }
+  .model-metric--blue { border-top: 4px solid var(--model-blue); }
+  .model-metric--green { border-top: 4px solid var(--model-green); }
+  .model-metric--violet { border-top: 4px solid var(--model-violet); }
+</style>

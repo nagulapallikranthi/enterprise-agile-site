@@ -1,18 +1,77 @@
-<nav>
+<nav class="site-nav" aria-label="Primary navigation">
+  <a class="logo" href="/#top" aria-label="Enterprise Agile home">Enterprise Agile</a>
 
-    <div class="logo">
-        Enterprise Agile
-    </div>
+  <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="primary-menu">
+    <span class="sr-only">Open navigation menu</span>
+    <span aria-hidden="true"></span>
+    <span aria-hidden="true"></span>
+    <span aria-hidden="true"></span>
+  </button>
 
-    <ul>
-
-        <li><a href="#">Home</a></li>
-        <li><a href="#">About</a></li>
-        <li><a href="#">Success Stories</a></li>
-        <li><a href="#">Frameworks</a></li>
-        <li><a href="#">Articles</a></li>
-        <li><a href="#">Contact</a></li>
-
-    </ul>
-
+  <ul id="primary-menu">
+    <li><a href="/#top">Home</a></li>
+    <li><a href="/#about">About</a></li>
+    <li><a href="/#success-stories">Success Stories</a></li>
+    <li><a href="/#frameworks">Frameworks</a></li>
+    <li><a href="/#articles">Articles</a></li>
+    <li><a href="/models/executive-portfolio/">Leadership Views</a></li>
+    <li><a href="/#contact">Contact</a></li>
+  </ul>
 </nav>
+
+<script>
+  const nav = document.querySelector('.site-nav');
+  const toggle = document.querySelector('.menu-toggle');
+  const menu = document.querySelector('#primary-menu');
+  const sectionLinks = Array.from(menu?.querySelectorAll('a[href^="/#"]') ?? []);
+
+  const setActiveLink = (activeLink) => {
+    menu?.querySelectorAll('a').forEach((link) => {
+      const isActive = link === activeLink;
+      link.classList.toggle('active', isActive);
+
+      if (isActive) {
+        link.setAttribute('aria-current', 'location');
+      } else {
+        link.removeAttribute('aria-current');
+      }
+    });
+  };
+
+  const updateActiveSection = () => {
+    const navHeight = nav?.getBoundingClientRect().height ?? 0;
+    const marker = window.scrollY + navHeight + 24;
+    let activeLink = sectionLinks[0];
+
+    sectionLinks.forEach((link) => {
+      const target = document.querySelector(new URL(link.href).hash);
+      if (target && target.offsetTop <= marker) activeLink = link;
+    });
+
+    setActiveLink(activeLink);
+  };
+
+  const closeMenu = () => {
+    nav?.classList.remove('menu-open');
+    toggle?.setAttribute('aria-expanded', 'false');
+  };
+
+  toggle?.addEventListener('click', () => {
+    const isOpen = nav?.classList.toggle('menu-open') ?? false;
+    toggle.setAttribute('aria-expanded', String(isOpen));
+  });
+
+  menu?.querySelectorAll('a').forEach((link) => link.addEventListener('click', () => {
+    closeMenu();
+    setActiveLink(link);
+  }));
+  document.addEventListener('keydown', (event) => event.key === 'Escape' && closeMenu());
+  window.addEventListener('scroll', updateActiveSection, { passive: true });
+  window.addEventListener('hashchange', updateActiveSection);
+  if (window.location.pathname.startsWith('/models/')) {
+    const leadershipLink = menu?.querySelector('a[href="/models/executive-portfolio/"]');
+    if (leadershipLink) setActiveLink(leadershipLink);
+  } else {
+    updateActiveSection();
+  }
+</script>

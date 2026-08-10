@@ -1,0 +1,140 @@
+---
+import MainLayout from "../../layouts/MainLayout.astro";
+import { illustrativeSignals, successStories } from "../../data/successStories";
+import SectionSwitcher from "../../components/SectionSwitcher.astro";
+import Header from "../../components/Header.astro";
+import "../../styles/model-system.css";
+---
+
+<MainLayout
+  title="Success Stories & Impact | Enterprise Agile"
+  description="Professional case narratives showing how delivery governance, monitoring and responsible AI turn complex operating challenges into decision clarity."
+  canonicalPath="/models/success-stories-impact/"
+>
+  <div class="story-page">
+    <Header />
+
+    <main id="main-content">
+      <section class="story-hero model-container">
+        <div>
+          <span class="model-kicker">Leadership View 2 · Success Stories & Impact</span>
+          <h1>When delivery looks under control—<em>until it isn’t.</em></h1>
+          <p>Three evidence-based enterprise transformations. Each begins where the dashboard stops: with the operating problem, my mandate, the decision that changed the trajectory and the controls that sustained the result.</p>
+          <a class="primary-action" href="#stories">Explore the cases <span aria-hidden="true">↓</span></a>
+        </div>
+        <aside class="disclosure model-panel">
+          <span>Data ethics</span>
+          <strong>Capability without exposure.</strong>
+          <p>All metrics and operational examples on this page are synthetic and illustrative. No customer, employer, ticket, environment or confidential financial data is displayed.</p>
+        </aside>
+      </section>
+
+      <SectionSwitcher label="Success story sections" items={[
+        { id: "story-signals", label: "Signals" },
+        { id: "story-cases", label: "Case stories" },
+        { id: "story-method", label: "Operating method" }
+      ]}>
+      <section class="signal-strip" id="signals" aria-labelledby="signal-title" data-section-panel="story-signals">
+        <div>
+          <div class="signal-heading"><div><span class="model-kicker">Illustrative monitoring pane</span><h2 id="signal-title">A quick read before the story</h2></div><span class="sample-label">Synthetic sample data</span></div>
+          <div class="signal-grid">
+            {illustrativeSignals.map((signal) => (
+              <article>
+                <div><span>{signal.label}</span><strong class:list={{ watch: signal.status === "Watch" }}>{signal.status}</strong></div>
+                <b>{signal.value}%</b>
+                <div class="track" aria-label={`${signal.label}: ${signal.value}%`}><i style={`width:${signal.value}%`}></i></div>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section class="stories" id="stories" aria-labelledby="stories-title" data-section-panel="story-cases">
+        <header class="section-intro"><span class="model-kicker">From tension to control</span><h2 id="stories-title">Problems leaders recognize. Resolutions they can reuse.</h2></header>
+        <div class="story-list progressive-panel" aria-label="Success story evidence">
+          {successStories.map((story, index) => (
+            <details class="case" id={story.id} open={index === 0}>
+              <summary><div class="case-index"><span>{story.number}</span><p>{story.theme}</p></div><h3>{story.title}</h3></summary>
+              <div class="case-body">
+                <div class="narrative">
+                  <div><span>Situation</span><p>{story.situation}</p></div>
+                  <div class="tension"><span>What was at risk</span><p>{story.tension}</p></div>
+                </div>
+                <div class="resolution-grid">
+                  <div><span class="eyebrow">The intervention</span><ul>{story.intervention.map((item) => <li>{item}</li>)}</ul></div>
+                  <div class="ai-note"><span class="eyebrow">Responsible AI</span><p>{story.ai}</p></div>
+                </div>
+                <div class="outcome"><div><span>Resolution</span><p>{story.resolution}</p></div><div class="case-score"><b>{story.value}</b><span>{story.valueLabel}<small>{story.signal}</small></span></div></div>
+                <div class="evidence"><span>Evidence boundary</span><p>{story.evidence}</p></div>
+                <blockquote>{story.lesson}</blockquote>
+              </div>
+            </details>
+          ))}
+        </div>
+      </section>
+
+      <section class="principles" id="principles" aria-labelledby="principles-title" data-section-panel="story-method">
+        <div class="principles-inner">
+          <div><span class="model-kicker">The operating method</span><h2 id="principles-title">Evidence first. Exceptions visible. Decisions human-owned.</h2></div>
+          <ol><li><span>01</span>Define the decision and accountable owner.</li><li><span>02</span>Build monitored signals from governed data.</li><li><span>03</span>Use AI to reduce noise, never accountability.</li><li><span>04</span>Track intervention through verified closure.</li></ol>
+        </div>
+      </section>
+      </SectionSwitcher>
+    </main>
+  </div>
+</MainLayout>
+
+<style>
+  .story-page{background:#f7f9fc;color:var(--model-text)}.story-nav{border-bottom:1px solid var(--model-border);background:rgba(247,249,252,.95)}.nav-inner{min-height:74px;display:flex;align-items:center;justify-content:space-between;gap:28px}.brand{display:flex;align-items:center;gap:11px}.brand span{display:grid;width:38px;height:38px;place-items:center;border-radius:10px;background:var(--model-blue);color:#fff;font-size:.74rem;font-weight:850}.brand strong{font-size:.95rem}.story-nav nav{display:flex;gap:26px}.story-nav nav a,.model-switch{font-size:.82rem;font-weight:750;color:var(--model-text-muted)}.model-switch{color:var(--model-blue)}
+  .story-hero{display:grid;grid-template-columns:minmax(0,1.45fr) minmax(290px,.55fr);gap:72px;align-items:center;padding-block:96px 82px}.story-hero h1{max-width:850px;margin-top:18px;font-size:clamp(3.2rem,7vw,6.2rem);line-height:.96;letter-spacing:-.067em}.story-hero h1 em{color:var(--model-blue);font-style:normal}.story-hero>div>p{max-width:760px;margin-top:28px;color:var(--model-text-muted);font-size:1.08rem}.primary-action{display:inline-flex;gap:40px;margin-top:34px;padding:14px 18px;border-radius:8px;background:var(--model-text);color:#fff!important;font-size:.84rem;font-weight:800}.disclosure{padding:30px;border-top:4px solid var(--model-green)}.disclosure>span,.eyebrow{font-size:.69rem;font-weight:850;text-transform:uppercase;letter-spacing:.11em;color:var(--model-text-muted)}.disclosure strong{display:block;margin-top:16px;font-size:1.35rem}.disclosure p{margin-top:10px;color:var(--model-text-muted);font-size:.88rem}
+  .signal-strip{padding-block:58px;background:#fff;border-block:1px solid var(--model-border)}.signal-heading{display:flex;justify-content:space-between;align-items:end;gap:24px}.signal-heading h2{margin-top:6px;font-size:clamp(1.8rem,3vw,2.7rem);letter-spacing:-.045em}.sample-label{padding:7px 10px;border-radius:99px;background:#edf3ff;color:var(--model-blue);font-size:.67rem;font-weight:850;text-transform:uppercase;letter-spacing:.08em}.signal-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:30px}.signal-grid article{padding:20px;border:1px solid var(--model-border);border-radius:12px}.signal-grid article>div:first-child{display:flex;justify-content:space-between;gap:10px;font-size:.71rem;color:var(--model-text-muted)}.signal-grid article strong{color:var(--model-green);font-size:.66rem}.signal-grid article strong.watch{color:#b76800}.signal-grid b{display:block;margin-top:16px;font-size:1.9rem}.track{height:6px;margin-top:12px;border-radius:9px;background:#e9edf4;overflow:hidden}.track i{display:block;height:100%;border-radius:inherit;background:linear-gradient(90deg,var(--model-blue),#5d8cff)}
+  .stories{padding-block:110px}.section-intro{max-width:790px}.section-intro h2{margin-top:10px;font-size:clamp(2.3rem,5vw,4.4rem);line-height:1;letter-spacing:-.055em}.story-list{margin-top:62px;border-top:1px solid var(--model-border)}.case{display:grid;grid-template-columns:180px 1fr;gap:48px;padding-block:74px;border-bottom:1px solid var(--model-border)}.case-index span{color:var(--model-blue);font-size:2rem;font-weight:850}.case-index p{margin-top:8px;color:var(--model-text-muted);font-size:.73rem;font-weight:750;text-transform:uppercase;letter-spacing:.08em}.case-body h3{max-width:900px;font-size:clamp(2rem,4vw,3.6rem);line-height:1.04;letter-spacing:-.05em}.narrative{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:38px}.narrative>div{padding:24px;border-radius:12px;background:#fff;border:1px solid var(--model-border)}.narrative span,.outcome>div>span{display:block;margin-bottom:10px;color:var(--model-blue);font-size:.69rem;font-weight:850;text-transform:uppercase;letter-spacing:.1em}.narrative p,.resolution-grid p,.outcome p{color:var(--model-text-muted);font-size:.9rem}.narrative .tension{border-left:4px solid #e0a241}.resolution-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:18px;margin-top:18px}.resolution-grid>div{padding:25px;border-radius:12px;background:#eef3fb}.resolution-grid ul{margin:14px 0 0 18px}.resolution-grid li{margin-top:8px;font-size:.86rem}.resolution-grid .ai-note{background:#14213d;color:#fff}.ai-note .eyebrow{color:#92b7ff}.ai-note p{margin-top:14px;color:#d9e2f2}.outcome{display:flex;justify-content:space-between;align-items:center;gap:30px;margin-top:18px;padding:26px 28px;border-radius:12px;background:#fff;border:1px solid var(--model-border)}.outcome>div:first-child{max-width:740px}.case-score{display:flex;align-items:center;gap:14px;flex:none}.case-score b{font-size:2rem;color:var(--model-green)}.case-score span{max-width:130px;font-size:.7rem;font-weight:800}.case-score small{display:block;margin-top:3px;color:var(--model-text-muted);font-size:.58rem;font-weight:650}.evidence{margin-top:18px;padding:16px 18px;border:1px dashed rgba(96,165,250,.45);border-radius:10px;background:rgba(96,165,250,.08)}.evidence span{color:#93c5fd;font-size:.68rem;font-weight:850;text-transform:uppercase;letter-spacing:.1em}.evidence p{margin-top:6px;color:#cbd5e1;font-size:.8rem}.case blockquote{margin-top:24px;padding-left:20px;border-left:3px solid var(--model-blue);font-size:1rem;font-weight:750}
+  .principles{background:var(--model-text);color:#fff}.principles-inner{display:grid;grid-template-columns:1fr 1fr;gap:90px;padding-block:90px}.principles h2{margin-top:10px;font-size:clamp(2.2rem,4vw,3.8rem);line-height:1.02;letter-spacing:-.05em}.principles ol{list-style:none;border-top:1px solid #34415d}.principles li{display:grid;grid-template-columns:42px 1fr;gap:15px;padding-block:18px;border-bottom:1px solid #34415d;font-size:.92rem;font-weight:700}.principles li span{color:#79a4ff;font-size:.68rem}
+  @media(max-width:900px){.story-nav nav{display:none}.story-hero{grid-template-columns:1fr;gap:35px;padding-block:68px}.signal-grid{grid-template-columns:repeat(2,1fr)}.case{grid-template-columns:1fr;gap:22px}.narrative,.resolution-grid,.principles-inner{grid-template-columns:1fr}.principles-inner{gap:45px}.outcome{align-items:flex-start}.case-index{display:flex;align-items:center;gap:15px}.case-index p{margin:0}}
+  @media(max-width:600px){.brand strong{display:none}.model-switch{font-size:.72rem}.story-hero h1{font-size:3.35rem}.signal-heading,.outcome{display:grid}.sample-label{width:max-content}.signal-grid{grid-template-columns:1fr}.stories{padding-block:80px}.case{padding-block:55px}.narrative{grid-template-columns:1fr}.case-score{justify-content:space-between}.principles-inner{padding-block:70px}}
+
+  /* Match the homepage palette while preserving clear content hierarchy. */
+  .story-page{
+    --story-heading:#93c5fd;
+    --story-heading-strong:#f8fafc;
+    --story-copy:#cbd5e1;
+    --story-panel:#182235;
+    --story-panel-muted:#1e2b42;
+    min-height:100vh;
+    color:var(--story-heading-strong);
+    background:
+      radial-gradient(circle at 75% 22%,rgba(37,99,235,.16),rgba(15,23,42,0) 42%),
+      linear-gradient(180deg,#1b2434 0%,#111827 45%,#0f172a 100%);
+  }
+  .story-nav{border-color:rgba(255,255,255,.09);background:rgba(15,23,42,.88)}
+  .brand strong{color:var(--story-heading-strong)}
+  .story-nav nav a{color:var(--story-copy)}
+  .model-switch,.model-kicker{color:#60a5fa}
+  .story-hero h1{color:var(--story-heading-strong)}
+  .story-hero h1 em{color:#60a5fa}
+  .story-hero>div>p,.disclosure p{color:var(--story-copy)}
+  .primary-action{background:#2563eb}
+  .disclosure{border-color:rgba(255,255,255,.12);background:rgba(24,34,53,.94);box-shadow:0 16px 48px rgba(0,0,0,.2)}
+  .disclosure>span{color:#93c5fd}
+  .signal-strip{border-color:rgba(255,255,255,.09);background:rgba(15,23,42,.38)}
+  .signal-heading h2,.section-intro h2,.case-body h3{color:var(--story-heading)}
+  .sample-label{background:rgba(37,99,235,.18);color:#93c5fd}
+  .signal-grid article,.narrative>div,.outcome{border-color:rgba(255,255,255,.1);background:var(--story-panel)}
+  .signal-grid article>div:first-child,.case-index p,.narrative p,.resolution-grid p,.outcome p,.case-score small{color:var(--story-copy)}
+  .track{background:#334155}
+  .story-list,.case{border-color:rgba(255,255,255,.12)}
+  .resolution-grid>div{background:var(--story-panel-muted)}
+  .resolution-grid .ai-note{background:#0d1a30;border:1px solid rgba(96,165,250,.24)}
+  .case blockquote{color:#e2e8f0}
+  .principles{background:rgba(8,15,28,.74)}
+  .principles h2{color:var(--story-heading)}
+  .story-list.progressive-panel{display:grid;gap:12px;border-top:0}
+  .story-list .case{display:block;padding:0;border:1px solid rgba(255,255,255,.12);border-radius:14px;background:rgba(24,34,53,.72);overflow:hidden}
+  .story-list .case summary{display:grid;grid-template-columns:150px 1fr;gap:28px;align-items:center;padding:22px;cursor:pointer;list-style:none}
+  .story-list .case summary::-webkit-details-marker{display:none}
+  .story-list .case summary::after{content:"+";grid-column:3;color:#60a5fa;font-size:1.45rem}
+  .story-list .case[open] summary::after{content:"−"}
+  .story-list .case summary h3{color:var(--story-heading);font-size:clamp(1.2rem,2.3vw,2rem);line-height:1.08;letter-spacing:-.035em}
+  .story-list .case .case-body{padding:0 22px 26px}
+  @media(max-width:600px){.story-list .case summary{grid-template-columns:1fr auto;gap:14px}.story-list .case summary .case-index{grid-column:1}.story-list .case summary h3{grid-column:1}.story-list .case summary::after{grid-column:2;grid-row:1/3}}
+</style>

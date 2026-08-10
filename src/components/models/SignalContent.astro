@@ -1,0 +1,29 @@
+---
+interface Props {
+  section: {
+    headline: string;
+    summary: string;
+    metrics: string[][];
+    action: string;
+  };
+  compact?: boolean;
+}
+
+const { section, compact = false } = Astro.props;
+---
+
+<div class="signal-copy">
+  <span>Current assessment</span>
+  <h3>{section.headline}</h3>
+  <p>{section.summary}</p>
+</div>
+<div class:list={["metric-row", { compact }]}>
+  {section.metrics.map(([label, value, status]) => (
+    <div><span>{label}</span><strong>{value}</strong><small class={status.toLowerCase()}>{status}</small></div>
+  ))}
+</div>
+<div class="action-brief">
+  <span>Required action</span>
+  <p>{section.action}</p>
+  <button type="button">Open evidence <span aria-hidden="true">→</span></button>
+</div>
