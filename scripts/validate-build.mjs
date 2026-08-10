@@ -45,7 +45,7 @@ for (const file of htmlFiles) {
   }
 }
 
-for (const required of ["404.html", "robots.txt", "sitemap.xml", "downloads/Kranthi-Kumar-Nagulapally-Resume.pdf"]) {
+for (const required of ["404.html", "robots.txt", "sitemap.xml", "downloads/Kranthi_Delivery_Leader.pdf"]) {
   try { await access(join(root, required)); }
   catch { failures.push(`${required}: required build artifact missing`); }
 }
