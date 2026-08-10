@@ -2,6 +2,8 @@
 import MainLayout from "../../layouts/MainLayout.astro";
 import MetricCard from "../../components/models/MetricCard.astro";
 import PriorityCard from "../../components/models/PriorityCard.astro";
+import SectionSwitcher from "../../components/SectionSwitcher.astro";
+import Header from "../../components/Header.astro";
 import { portfolio } from "../../data/portfolio";
 import "../../styles/model-system.css";
 ---
@@ -12,30 +14,17 @@ import "../../styles/model-system.css";
   canonicalPath="/models/executive-portfolio/"
 >
   <div class="model-page" id="overview">
-    <header class="executive-header">
-      <div class="model-container header-inner">
-        <a class="executive-brand" href="/" aria-label="Return to Enterprise Agile home">
-          <span>EA</span>
-          <strong>Enterprise Agile</strong>
-        </a>
-        <nav aria-label="Executive portfolio navigation">
-          <ul>
-            {portfolio.navigation.map((item) => <li><a href={item.href}>{item.label}</a></li>)}
-          </ul>
-        </nav>
-        <a class="back-link" href="/models/success-stories-impact/">Success stories <span aria-hidden="true">→</span></a>
-      </div>
-    </header>
+    <Header />
 
     <main id="main-content">
       <section class="executive-hero model-container" aria-labelledby="executive-title">
         <div>
-          <span class="model-kicker">UI Model 1 · Executive Portfolio</span>
+          <span class="model-kicker">Leadership View 1 · Executive Portfolio</span>
           <h1 id="executive-title">Turn complex delivery into <em>decision clarity.</em></h1>
           <p>{portfolio.identity.positioning}. A concise owner view of priorities, confidence and outcomes.</p>
           <div class="hero-actions">
             <a class="executive-primary" href="#priorities">Review portfolio health</a>
-            <a class="executive-secondary" href="/downloads/Kranthi-Kumar-Nagulapally-Resume.pdf" download>Download profile</a>
+            <a class="executive-secondary" href="/downloads/Kranthi_Delivery_Leader.pdf" download="Kranthi_Delivery_Leader.pdf" data-track-action="resume_download">Download profile</a>
           </div>
         </div>
         <aside class="owner-card model-panel" aria-label="Portfolio owner">
@@ -50,11 +39,17 @@ import "../../styles/model-system.css";
         </aside>
       </section>
 
-      <section class="metric-section model-container" aria-label="Portfolio metrics">
+      <SectionSwitcher label="Executive portfolio sections" items={[
+        { id: "portfolio-health", label: "Portfolio health" },
+        { id: "portfolio-priorities", label: "Priorities" },
+        { id: "portfolio-outcomes", label: "Outcomes" },
+        { id: "portfolio-contact", label: "Next decision" }
+      ]}>
+      <section class="metric-section" aria-label="Portfolio metrics" data-section-panel="portfolio-health">
         {portfolio.metrics.map((metric) => <MetricCard {...metric} />)}
       </section>
 
-      <section class="portfolio-section model-container" id="priorities" aria-labelledby="priorities-title">
+      <section class="portfolio-section" id="priorities" aria-labelledby="priorities-title" data-section-panel="portfolio-priorities">
         <div class="section-heading-row">
           <div>
             <span class="model-kicker">Current priorities</span>
@@ -67,22 +62,43 @@ import "../../styles/model-system.css";
         </div>
       </section>
 
-      <section class="outcomes model-container" id="outcomes" aria-labelledby="outcomes-title">
-        <div>
+      <section class="outcomes" id="outcomes" aria-labelledby="outcomes-title" data-section-panel="portfolio-outcomes" data-outcome-workspace>
+        <div class="outcome-nav-wrap">
           <span class="model-kicker">Evidence of execution</span>
           <h2 class="model-section-title" id="outcomes-title">Governance built around outcomes</h2>
+          <div class="outcome-nav" role="tablist" aria-label="Governance outcomes">
+            {portfolio.outcomeDetails.map((outcome, index) => (
+              <button type="button" role="tab" aria-selected={index === 0 ? "true" : "false"} aria-controls={`outcome-panel-${index}`} data-outcome-target={index}>
+                <span>0{index + 1}</span><strong>{outcome.label}</strong>
+              </button>
+            ))}
+          </div>
         </div>
-        <ol>
-          {portfolio.outcomes.map((outcome, index) => <li><span>0{index + 1}</span><strong>{outcome}</strong></li>)}
-        </ol>
+        <div class="outcome-progressive progressive-panel" aria-live="polite">
+          {portfolio.outcomeDetails.map((outcome, index) => (
+            <article id={`outcome-panel-${index}`} role="tabpanel" data-outcome-panel={index} hidden={index !== 0}>
+              <span class="outcome-number">Outcome 0{index + 1}</span>
+              <h3>{outcome.title}</h3>
+              <p>{outcome.summary}</p>
+              <details>
+                <summary>View execution evidence</summary>
+                <div>
+                  <p>{outcome.evidence}</p>
+                  <strong>{outcome.result}</strong>
+                </div>
+              </details>
+            </article>
+          ))}
+        </div>
       </section>
 
-      <section class="executive-contact" id="contact" aria-labelledby="contact-title">
-        <div class="model-container contact-inner">
+      <section class="executive-contact" id="contact" aria-labelledby="contact-title" data-section-panel="portfolio-contact">
+        <div class="contact-inner">
           <div><span class="model-kicker">Next decision</span><h2 id="contact-title">Build the operating system your portfolio needs.</h2></div>
           <a href="mailto:nagulapalli.kranthi@gmail.com?subject=Executive%20Portfolio%20Conversation">Start a conversation <span aria-hidden="true">→</span></a>
         </div>
       </section>
+      </SectionSwitcher>
     </main>
   </div>
 </MainLayout>
@@ -106,15 +122,6 @@ import "../../styles/model-system.css";
     --model-shadow: 0 18px 48px rgba(2, 8, 23, .24);
     background: linear-gradient(180deg, #111c31 0%, #0b1526 100%);
   }
-  .executive-header { border-bottom: 1px solid var(--model-border); background: rgba(11,21,38,.94); }
-  .header-inner { min-height: 76px; display: flex; align-items: center; justify-content: space-between; gap: 28px; }
-  .executive-brand { display: flex; align-items: center; gap: 11px; }
-  .executive-brand > span { display: grid; width: 38px; height: 38px; place-items: center; border-radius: 10px; background: #20314d; color: white; font-size: .75rem; font-weight: 850; }
-  .executive-brand strong { font-size: .96rem; }
-  nav ul { display: flex; gap: 26px; list-style: none; }
-  nav a { color: var(--model-text-muted); font-size: .84rem; font-weight: 650; }
-  nav a:hover { color: var(--model-blue); }
-  .back-link { font-size: .82rem; font-weight: 750; color: var(--model-blue) !important; }
   .executive-hero { display: grid; grid-template-columns: minmax(0, 1.45fr) minmax(300px, .55fr); gap: 72px; align-items: center; padding-block: 94px 72px; }
   h1 { max-width: 780px; margin-top: 18px; font-size: clamp(3rem, 6.5vw, 5.8rem); line-height: .98; letter-spacing: -.065em; }
   h1 em { color: var(--model-blue); font-style: normal; }
@@ -135,11 +142,29 @@ import "../../styles/model-system.css";
   .section-heading-row { display: flex; justify-content: space-between; align-items: end; gap: 48px; }
   .section-heading-row > p { max-width: 430px; color: var(--model-text-muted); font-size: .92rem; }
   .priority-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 38px; }
-  .outcomes { display: grid; grid-template-columns: .8fr 1.2fr; gap: 80px; padding-bottom: 110px; }
-  .outcomes ol { list-style: none; border-top: 1px solid var(--model-border); }
-  .outcomes li { display: grid; grid-template-columns: 46px 1fr; gap: 16px; align-items: center; padding-block: 22px; border-bottom: 1px solid var(--model-border); }
-  .outcomes li span { color: var(--model-blue); font-size: .72rem; font-weight: 850; }
-  .outcomes li strong { font-size: .96rem; }
+  .outcomes { display: grid; grid-template-columns: minmax(280px,.8fr) minmax(0,1.2fr); gap: 28px; align-items: start; padding-bottom: 110px; }
+  .outcome-nav-wrap, .outcome-progressive { min-height: 360px; border: 1px solid var(--model-border); border-radius: 18px; background: rgba(23,36,58,.72); }
+  .outcome-nav-wrap { position: sticky; top: 104px; padding: 28px; }
+  .outcome-nav-wrap h2 { margin: 8px 0 24px; font-size: clamp(1.7rem,3vw,2.5rem); }
+  .outcome-nav { display: grid; gap: 7px; }
+  .outcome-nav button { display: grid; grid-template-columns: 34px 1fr; gap: 10px; align-items: center; width: 100%; padding: 13px 14px; border: 0; border-radius: 10px; color: var(--model-text-muted); background: transparent; text-align: left; cursor: pointer; }
+  .outcome-nav button span { color: #6f8db3; font-size: .66rem; font-weight: 850; }
+  .outcome-nav button strong { font-size: .82rem; }
+  .outcome-nav button:hover, .outcome-nav button:focus-visible { color: white; background: rgba(96,165,250,.1); }
+  .outcome-nav button[aria-selected="true"] { color: white; background: #23496f; }
+  .outcome-nav button[aria-selected="true"] span { color: #93c5fd; }
+  .outcome-progressive { padding: 32px; }
+  .outcome-progressive article[hidden] { display: none; }
+  .outcome-number { color: var(--model-blue); font-size: .7rem; font-weight: 850; letter-spacing: .1em; text-transform: uppercase; }
+  .outcome-progressive h3 { max-width: 620px; margin: 12px 0 14px; font-size: clamp(1.45rem,2.8vw,2.25rem); line-height: 1.12; }
+  .outcome-progressive article > p { max-width: 680px; color: var(--model-text-muted); }
+  .outcome-progressive details { margin-top: 28px; border-top: 1px solid var(--model-border); border-bottom: 1px solid var(--model-border); }
+  .outcome-progressive summary { display: flex; justify-content: space-between; gap: 20px; padding: 18px 0; color: white; font-size: .82rem; font-weight: 800; cursor: pointer; list-style: none; }
+  .outcome-progressive summary::-webkit-details-marker { display: none; }
+  .outcome-progressive summary::after { content: "+"; color: var(--model-blue); font-size: 1.25rem; line-height: .8; }
+  .outcome-progressive details[open] summary::after { content: "−"; }
+  .outcome-progressive details div { padding: 0 0 22px; color: var(--model-text-muted); }
+  .outcome-progressive details div strong { display: block; margin-top: 14px; color: var(--model-green); }
   .executive-contact { border-top: 1px solid var(--model-border); background: #081221; color: white; }
   .contact-inner { display: flex; align-items: center; justify-content: space-between; gap: 40px; padding-block: 62px; }
   .contact-inner h2 { max-width: 700px; margin-top: 8px; font-size: clamp(1.8rem, 4vw, 3.3rem); line-height: 1.06; letter-spacing: -.04em; }
@@ -150,11 +175,11 @@ import "../../styles/model-system.css";
     .metric-section { grid-template-columns: repeat(2, 1fr); }
     .priority-grid { grid-template-columns: 1fr; }
     .section-heading-row, .contact-inner { align-items: flex-start; }
-    .outcomes { grid-template-columns: 1fr; gap: 36px; }
+    .outcomes { grid-template-columns: 1fr; gap: 14px; }
+    .outcome-nav-wrap { position: static; min-height: 0; }
+    .outcome-progressive { min-height: 330px; }
   }
   @media (max-width: 600px) {
-    .executive-brand strong { display: none; }
-    .header-inner { min-height: 66px; }
     .executive-hero { padding-top: 54px; }
     h1 { font-size: 3.25rem; }
     .metric-section { grid-template-columns: 1fr; }
@@ -163,3 +188,33 @@ import "../../styles/model-system.css";
     .outcomes { padding-bottom: 82px; }
   }
 </style>
+
+<script>
+  document.querySelectorAll('[data-outcome-workspace]').forEach((workspace) => {
+    const tabs = Array.from(workspace.querySelectorAll('[data-outcome-target]'));
+    const panels = Array.from(workspace.querySelectorAll('[data-outcome-panel]'));
+    const activate = (index, focus = false) => {
+      tabs.forEach((tab) => {
+        const active = tab.dataset.outcomeTarget === String(index);
+        tab.setAttribute('aria-selected', String(active));
+        tab.tabIndex = active ? 0 : -1;
+        if (active && focus) tab.focus();
+      });
+      panels.forEach((panel) => {
+        const active = panel.dataset.outcomePanel === String(index);
+        panel.hidden = !active;
+        if (active) panel.querySelector('details')?.removeAttribute('open');
+      });
+    };
+    tabs.forEach((tab, index) => {
+      tab.tabIndex = index === 0 ? 0 : -1;
+      tab.addEventListener('click', () => activate(index));
+      tab.addEventListener('keydown', (event) => {
+        if (!['ArrowUp', 'ArrowDown', 'Home', 'End'].includes(event.key)) return;
+        event.preventDefault();
+        const next = event.key === 'Home' ? 0 : event.key === 'End' ? tabs.length - 1 : (index + (event.key === 'ArrowDown' ? 1 : -1) + tabs.length) % tabs.length;
+        activate(next, true);
+      });
+    });
+  });
+</script>

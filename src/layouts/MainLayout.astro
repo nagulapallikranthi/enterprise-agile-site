@@ -10,7 +10,7 @@ interface Props {
 
 const {
   title = "Enterprise Agile | Enterprise Program Leadership",
-  description = "Enterprise program leadership across CloudOps, DevOps, agile governance, executive reporting and responsible AI adoption.",
+  description = "Senior program leadership across enterprise transformation, delivery governance, operational excellence, executive reporting and responsible AI adoption.",
   canonicalPath = "/",
   noindex = false
 } = Astro.props;
@@ -18,6 +18,28 @@ const {
 const siteUrl = import.meta.env.PUBLIC_SITE_URL ?? "https://enterprise-agile-site.nagulapalli-kranthi.workers.dev";
 const canonicalUrl = new URL(canonicalPath, siteUrl);
 const socialImageUrl = new URL("/images/hero-portrait.png", siteUrl);
+const structuredData = [
+  {
+    "@context": "https://schema.org",
+    "@type": "ProfilePage",
+    name: "Kranthi Kumar Nagulapally — Enterprise Program & Operations Leader",
+    url: canonicalUrl.toString(),
+    mainEntity: {
+      "@type": "Person",
+      name: "Kranthi Kumar Nagulapally",
+      jobTitle: "Senior Program Leader",
+      url: siteUrl,
+      sameAs: ["https://www.linkedin.com/in/kranthi-n"],
+      knowsAbout: ["Enterprise Program Management", "CloudOps", "DevOps", "Agile Delivery Governance", "Jira and JSM Governance", "Executive Reporting", "Responsible AI"]
+    }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    name: "Enterprise Agile",
+    url: siteUrl
+  }
+];
 ---
 
 <!DOCTYPE html>
@@ -47,12 +69,42 @@ const socialImageUrl = new URL("/images/hero-portrait.png", siteUrl);
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={socialImageUrl} />
     <title>{title}</title>
+    <script type="application/ld+json" set:html={JSON.stringify(structuredData)}></script>
 
 </head>
 
 <body>
     <a class="skip-link" href="#main-content">Skip to main content</a>
     <slot />
+
+    <script is:inline>
+      const sessionKey = "portfolio-session-id";
+      let sessionId = sessionStorage.getItem(sessionKey);
+      if (!sessionId) {
+        sessionId = crypto.randomUUID();
+        sessionStorage.setItem(sessionKey, sessionId);
+      }
+
+      document.addEventListener("click", (event) => {
+        const link = event.target.closest("a, button");
+        if (!link) return;
+
+        const action = link.dataset.trackAction ||
+          (link.tagName === "A" ? "link_click" : "button_click");
+        const label = (link.textContent || link.getAttribute("aria-label") || "unlabelled").trim();
+        const payload = JSON.stringify({
+          action,
+          label,
+          page: location.pathname,
+          target: link.getAttribute("href") || null,
+          referrer: document.referrer || null,
+          sessionId,
+          occurredAt: new Date().toISOString()
+        });
+
+        navigator.sendBeacon("/api/events", new Blob([payload], { type: "application/json" }));
+      });
+    </script>
 
 </body>
 
