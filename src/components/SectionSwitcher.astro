@@ -22,7 +22,7 @@ const { items, label, class: className = "" } = Astro.props;
   document.querySelectorAll('[data-section-switcher]').forEach((switcher) => {
     const buttons = Array.from(switcher.querySelectorAll('[data-section-target]'));
     const panels = Array.from(switcher.querySelectorAll(':scope > .site-switcher-canvas > [data-section-panel]'));
-    const activate = (value, moveFocus = false) => {
+    const activate = (value, moveFocus = false, moveViewport = false) => {
       buttons.forEach((button) => {
         const active = button.dataset.sectionTarget === value;
         button.setAttribute('aria-selected', String(active));
@@ -36,16 +36,19 @@ const { items, label, class: className = "" } = Astro.props;
         const active = panel.dataset.sectionPanel === value;
         panel.hidden = !active;
         panel.classList.toggle('is-active', active);
+        if (active && moveViewport) {
+          requestAnimationFrame(() => panel.scrollIntoView({ behavior: 'smooth', block: 'start' }));
+        }
       });
     };
-    buttons.forEach((button) => button.addEventListener('click', () => activate(button.dataset.sectionTarget)));
+    buttons.forEach((button) => button.addEventListener('click', () => activate(button.dataset.sectionTarget, false, true)));
     switcher.querySelector('.site-switcher-nav')?.addEventListener('keydown', (event) => {
       if (!['ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown', 'Home', 'End'].includes(event.key)) return;
       event.preventDefault();
       const current = buttons.indexOf(document.activeElement);
       const delta = ['ArrowRight', 'ArrowDown'].includes(event.key) ? 1 : -1;
       const next = event.key === 'Home' ? 0 : event.key === 'End' ? buttons.length - 1 : (current + delta + buttons.length) % buttons.length;
-      activate(buttons[next].dataset.sectionTarget, true);
+      activate(buttons[next].dataset.sectionTarget, true, true);
     });
     panels.forEach((panel, index) => {
       panel.id = `panel-${panel.dataset.sectionPanel}`;
