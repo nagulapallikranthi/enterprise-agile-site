@@ -20,7 +20,10 @@ All five UI models consume `src/data/portfolio.ts` as their authoritative conten
 
 - Existing stable site: `/`
 - Model 1 — Executive Portfolio: `/models/executive-portfolio/`
-- Future models: `/models/<model-slug>/`
+- Model 2 — Success Stories & Impact: `/models/success-stories-impact/`
+- Model 3 — CloudOps Command Center: `/models/cloudops-command-center/`
+- Model 4 — Sprint Intelligence: `/models/sprint-intelligence/`
+- Future model: `/models/<model-slug>/`
 - Every model includes a route back to the stable site.
 
 ## Acceptance criteria

@@ -1,0 +1,80 @@
+---
+import MainLayout from "../../layouts/MainLayout.astro";
+import Header from "../../components/Header.astro";
+import SectionSwitcher from "../../components/SectionSwitcher.astro";
+import { sprintIntelligence } from "../../data/sprintIntelligence";
+import "../../styles/model-system.css";
+---
+
+<MainLayout
+  title="Sprint Intelligence | Enterprise Agile"
+  description="A concise leadership view of sprint predictability, scope stability, delivery flow and risk using synthetic demonstration data."
+  canonicalPath="/models/sprint-intelligence/"
+>
+  <div class="sprint-page">
+    <Header />
+    <main id="main-content">
+      <section class="sprint-hero model-container" aria-labelledby="sprint-title">
+        <div>
+          <span class="model-kicker">Leadership View 4 · Sprint Intelligence</span>
+          <h1 id="sprint-title">From sprint activity to <em>decision confidence.</em></h1>
+          <p>One leadership workspace for commitment reliability, scope change, execution flow and delivery risk. Select a signal to replace the canvas in place.</p>
+        </div>
+        <aside class="sprint-brief" aria-label="Current sprint brief">
+          <span>Current sprint</span>
+          <strong>Goal remains achievable</strong>
+          <dl>
+            <div><dt>Confidence</dt><dd>86%</dd></div>
+            <div><dt>Attention</dt><dd>2 risks</dd></div>
+            <div><dt>Scope change</dt><dd>+4 SP</dd></div>
+          </dl>
+        </aside>
+      </section>
+
+      <section class="summary-strip model-container" aria-label="Sprint summary">
+        {sprintIntelligence.summary.map((item) => (
+          <article>
+            <span>{item.label}</span>
+            <strong>{item.value}</strong>
+            <small class={item.tone}>{item.status}</small>
+          </article>
+        ))}
+      </section>
+
+      <SectionSwitcher label="Sprint intelligence sections" items={sprintIntelligence.sections.map(({ id, label }) => ({ id, label }))}>
+        {sprintIntelligence.sections.map((section) => (
+          <section class="decision-canvas" data-section-panel={section.id} aria-labelledby={`${section.id}-title`}>
+            <header>
+              <span>{section.eyebrow}</span>
+              <h2 id={`${section.id}-title`}>{section.title}</h2>
+              <p>{section.summary}</p>
+            </header>
+            <div class="signal-grid">
+              {section.metrics.map(([label, value, state]) => (
+                <article><span>{label}</span><strong>{value}</strong><small>{state}</small></article>
+              ))}
+            </div>
+            <aside class="decision-note"><span>Leadership action</span><p>{section.signal}</p></aside>
+          </section>
+        ))}
+      </SectionSwitcher>
+
+      <footer class="sprint-footer model-container">
+        <p><i></i><strong>Synthetic demonstration data.</strong> No customer, company or delivery records are represented.</p>
+        <a href="/models/executive-portfolio/">All Leadership Views <span aria-hidden="true">→</span></a>
+      </footer>
+    </main>
+  </div>
+</MainLayout>
+
+<style>
+  .sprint-page{--model-bg:#0f1a2e;--model-surface:#17243a;--model-surface-muted:#22314a;--model-text:#f4f7fb;--model-text-muted:#aebbd0;--model-border:#2d3c55;--model-blue:#60a5fa;--model-green:#4fd1a5;--model-amber:#f2c46d;min-height:100vh;background:radial-gradient(circle at 78% 9%,rgba(37,99,235,.17),transparent 32%),var(--model-bg);color:var(--model-text)}
+  .sprint-hero{display:grid;grid-template-columns:1.35fr .65fr;gap:54px;align-items:center;padding-block:64px 42px}.sprint-hero h1{max-width:820px;margin-top:12px;font-size:clamp(2.75rem,5.8vw,5.3rem);line-height:.98;letter-spacing:-.06em}.sprint-hero h1 em{color:var(--model-blue);font-style:normal}.sprint-hero>div>p{max-width:760px;margin-top:20px;color:var(--model-text-muted);font-size:1rem}
+  .sprint-brief{padding:24px;border:1px solid var(--model-border);border-radius:18px;background:rgba(23,36,58,.9);box-shadow:0 22px 55px rgba(0,0,0,.18)}.sprint-brief>span,.decision-canvas header>span,.decision-note>span{color:#8fbcf7;font-size:.68rem;font-weight:850;letter-spacing:.11em;text-transform:uppercase}.sprint-brief>strong{display:block;margin-top:10px;font-size:1.2rem}.sprint-brief dl{display:grid;gap:10px;margin-top:22px}.sprint-brief dl div{display:flex;justify-content:space-between;gap:20px;padding-top:10px;border-top:1px solid var(--model-border)}.sprint-brief dt{color:var(--model-text-muted);font-size:.75rem}.sprint-brief dd{font-size:.78rem;font-weight:850}
+  .summary-strip{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}.summary-strip article{padding:18px;border:1px solid var(--model-border);border-radius:13px;background:rgba(23,36,58,.76)}.summary-strip span,.signal-grid span{display:block;color:var(--model-text-muted);font-size:.68rem}.summary-strip strong{display:block;margin-top:8px;font-size:1.65rem}.summary-strip small,.signal-grid small{display:inline-block;margin-top:6px;font-size:.62rem;font-weight:850;text-transform:uppercase}.summary-strip .healthy{color:var(--model-green)}.summary-strip .watch{color:var(--model-amber)}.summary-strip .act{color:#fb7185}
+  .decision-canvas{min-height:390px;padding:30px;border:1px solid var(--model-border);border-radius:18px;background:rgba(23,36,58,.82);box-shadow:0 24px 60px rgba(0,0,0,.16)}.decision-canvas header h2{max-width:760px;margin-top:8px;font-size:clamp(1.8rem,3.4vw,3rem);line-height:1.05;letter-spacing:-.045em}.decision-canvas header p{max-width:780px;margin-top:14px;color:var(--model-text-muted);font-size:.9rem}.signal-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:28px}.signal-grid article{padding:18px;border:1px solid var(--model-border);border-radius:12px;background:var(--model-surface-muted)}.signal-grid strong{display:block;margin-top:8px;font-size:1.55rem}.signal-grid small{color:#9cc8ff}.decision-note{display:grid;grid-template-columns:150px 1fr;gap:18px;align-items:start;margin-top:16px;padding:17px 19px;border-left:3px solid var(--model-blue);border-radius:0 11px 11px 0;background:#0c192a}.decision-note p{color:#d7e0ec;font-size:.8rem}
+  .sprint-footer{display:flex;justify-content:space-between;gap:24px;padding-block:0 38px;color:var(--model-text-muted);font-size:.72rem}.sprint-footer p{display:flex;gap:9px}.sprint-footer i{flex:none;width:7px;height:7px;margin-top:5px;border-radius:50%;background:var(--model-green)}.sprint-footer strong{color:#dce7f5}.sprint-footer a{color:var(--model-blue);font-weight:850}
+  @media(max-width:900px){.sprint-hero{grid-template-columns:1fr;gap:24px}.summary-strip{grid-template-columns:repeat(2,1fr)}}
+  @media(max-width:600px){.sprint-hero{padding-block:48px 30px}.sprint-hero h1{font-size:3rem}.summary-strip{grid-template-columns:1fr 1fr}.summary-strip article{padding:15px}.decision-canvas{min-height:0;padding:20px}.signal-grid{grid-template-columns:1fr}.decision-note{grid-template-columns:1fr;gap:6px}.sprint-footer{display:grid}}
+</style>
+
