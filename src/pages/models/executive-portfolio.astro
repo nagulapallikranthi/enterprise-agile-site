@@ -1,218 +1,306 @@
 ---
 import MainLayout from "../../layouts/MainLayout.astro";
-import MetricCard from "../../components/models/MetricCard.astro";
-import PriorityCard from "../../components/models/PriorityCard.astro";
-import SectionSwitcher from "../../components/SectionSwitcher.astro";
 import Header from "../../components/Header.astro";
 import { portfolio } from "../../data/portfolio";
 import "../../styles/model-system.css";
+
+const signals = [
+  { value: "17+", label: "Years leading delivery", tone: "blue" },
+  { value: "10", label: "Global teams led", tone: "violet" },
+  { value: "+22%", label: "SLA adherence", tone: "green" },
+  { value: "98%", label: "On-time delivery", tone: "green" },
+];
+
+const decisions = [
+  {
+    label: "Delivery confidence",
+    status: "On track",
+    tone: "green",
+    title: "Protect the committed release path",
+    summary: "Scope, dependencies and readiness evidence are reviewed in one operating rhythm before promotion.",
+    evidence: ["Commitment-to-release traceability", "Explicit dependency ownership", "Evidence-led release gates"],
+    action: "Intervene only on exceptions that threaten the committed outcome.",
+  },
+  {
+    label: "Operational health",
+    status: "On track",
+    tone: "blue",
+    title: "Turn service signals into accountable action",
+    summary: "SLA exposure, ageing work and ownership gaps are surfaced early enough for teams to correct course.",
+    evidence: ["Automated SLA health signals", "Oldest-work visibility", "Named owner and next action"],
+    action: "Direct leadership attention to breached or ageing work without disrupting healthy delivery.",
+  },
+  {
+    label: "Responsible AI",
+    status: "Watch",
+    tone: "amber",
+    title: "Scale automation without losing human control",
+    summary: "Agentic workflows support decisions through evidence, bounded actions and clear escalation paths.",
+    evidence: ["Human-owned approvals", "Auditable action history", "Anti-spam and escalation controls"],
+    action: "Expand only when reliability, adoption and measurable value are demonstrated.",
+  },
+];
 ---
 
 <MainLayout
-  title="Executive Portfolio | Enterprise Agile"
-  description="An executive portfolio view of enterprise delivery priorities, health and measurable outcomes."
+  title="Leadership Views | Enterprise Agile"
+  description="An executive decision view of portfolio confidence, operational health and measurable delivery outcomes."
   canonicalPath="/models/executive-portfolio/"
 >
-  <div class="model-page" id="overview">
+  <div class="leadership-page" id="overview">
     <Header />
 
     <main id="main-content">
-      <section class="executive-hero model-container" aria-labelledby="executive-title">
-        <div>
-          <span class="model-kicker">Leadership View 1 · Executive Portfolio</span>
-          <h1 id="executive-title">Turn complex delivery into <em>decision clarity.</em></h1>
-          <p>{portfolio.identity.positioning}. A concise owner view of priorities, confidence and outcomes.</p>
+      <section class="leadership-hero model-container" aria-labelledby="leadership-title">
+        <div class="hero-copy">
+          <span class="eyebrow"><i aria-hidden="true"></i> Executive decision system</span>
+          <h1 id="leadership-title">See the signal.<br /><em>Make the call.</em></h1>
+          <p>One leadership view connecting delivery confidence, operational health and responsible automation—so attention goes where it creates the most leverage.</p>
           <div class="hero-actions">
-            <a class="executive-primary" href="#priorities">Review portfolio health</a>
-            <a class="executive-secondary" href="/downloads/Kranthi_Delivery_Leader.pdf" download="Kranthi_Delivery_Leader.pdf" data-track-action="resume_download">Download profile</a>
+            <a class="primary-action" href="#decision-lens">Open decision lens <span aria-hidden="true">↓</span></a>
+            <a class="text-action" href="mailto:nagulapalli.kranthi@gmail.com?subject=Leadership%20Portfolio%20Conversation">Email Me <span aria-hidden="true">↗</span></a>
           </div>
         </div>
-        <aside class="owner-card model-panel" aria-label="Portfolio owner">
-          <span>Portfolio owner</span>
-          <strong>{portfolio.identity.name}</strong>
-          <p>{portfolio.identity.role}</p>
-          <dl>
-            <div><dt>Review cycle</dt><dd>Weekly</dd></div>
-            <div><dt>Current health</dt><dd><i></i> On track</dd></div>
-            <div><dt>Release</dt><dd>0.3.0</dd></div>
-          </dl>
+
+        <aside class="briefing-card" aria-label="Leadership briefing">
+          <div class="briefing-head">
+            <span>Leadership brief</span>
+            <strong><i aria-hidden="true"></i> Decision-ready</strong>
+          </div>
+          <p class="briefing-question">What requires attention now?</p>
+          <div class="briefing-answer">
+            <span>01</span>
+            <div>
+              <strong>Protect delivery confidence</strong>
+              <p>Keep ownership, dependencies and release evidence aligned.</p>
+            </div>
+          </div>
+          <div class="briefing-meta">
+            <span>Review rhythm <strong>Weekly</strong></span>
+            <span>Critical risks <strong>0</strong></span>
+          </div>
         </aside>
       </section>
 
-      <SectionSwitcher label="Executive portfolio sections" items={[
-        { id: "portfolio-health", label: "Portfolio health" },
-        { id: "portfolio-priorities", label: "Priorities" },
-        { id: "portfolio-outcomes", label: "Outcomes" },
-        { id: "portfolio-contact", label: "Next decision" }
-      ]}>
-      <section class="metric-section" aria-label="Portfolio metrics" data-section-panel="portfolio-health">
-        {portfolio.metrics.map((metric) => <MetricCard {...metric} />)}
-      </section>
-
-      <section class="portfolio-section" id="priorities" aria-labelledby="priorities-title" data-section-panel="portfolio-priorities">
-        <div class="section-heading-row">
-          <div>
-            <span class="model-kicker">Current priorities</span>
-            <h2 class="model-section-title" id="priorities-title">Where leadership attention creates leverage</h2>
-          </div>
-          <p>Live portfolio signals designed to make progress, confidence and intervention needs clear at a glance.</p>
-        </div>
-        <div class="priority-grid">
-          {portfolio.priorities.map((priority) => <PriorityCard {...priority} />)}
-        </div>
-      </section>
-
-      <section class="outcomes" id="outcomes" aria-labelledby="outcomes-title" data-section-panel="portfolio-outcomes" data-outcome-workspace>
-        <div class="outcome-nav-wrap">
-          <span class="model-kicker">Evidence of execution</span>
-          <h2 class="model-section-title" id="outcomes-title">Governance built around outcomes</h2>
-          <div class="outcome-nav" role="tablist" aria-label="Governance outcomes">
-            {portfolio.outcomeDetails.map((outcome, index) => (
-              <button type="button" role="tab" aria-selected={index === 0 ? "true" : "false"} aria-controls={`outcome-panel-${index}`} data-outcome-target={index}>
-                <span>0{index + 1}</span><strong>{outcome.label}</strong>
-              </button>
-            ))}
-          </div>
-        </div>
-        <div class="outcome-progressive progressive-panel" aria-live="polite">
-          {portfolio.outcomeDetails.map((outcome, index) => (
-            <article id={`outcome-panel-${index}`} role="tabpanel" data-outcome-panel={index} hidden={index !== 0}>
-              <span class="outcome-number">Outcome 0{index + 1}</span>
-              <h3>{outcome.title}</h3>
-              <p>{outcome.summary}</p>
-              <details>
-                <summary>View execution evidence</summary>
-                <div>
-                  <p>{outcome.evidence}</p>
-                  <strong>{outcome.result}</strong>
-                </div>
-              </details>
+      <section class="signal-band" aria-label="Leadership impact">
+        <div class="model-container signal-grid">
+          {signals.map((signal) => (
+            <article class={`signal signal-${signal.tone}`}>
+              <strong>{signal.value}</strong>
+              <span>{signal.label}</span>
             </article>
           ))}
         </div>
       </section>
 
-      <section class="executive-contact" id="contact" aria-labelledby="contact-title" data-section-panel="portfolio-contact">
-        <div class="contact-inner">
-          <div><span class="model-kicker">Next decision</span><h2 id="contact-title">Build the operating system your portfolio needs.</h2></div>
-          <a href="mailto:nagulapalli.kranthi@gmail.com?subject=Executive%20Portfolio%20Conversation">Start a conversation <span aria-hidden="true">→</span></a>
+      <section class="decision-section model-container" id="decision-lens" aria-labelledby="decision-title" data-decision-lens>
+        <header class="section-intro">
+          <div>
+            <span class="eyebrow">Leadership attention</span>
+            <h2 id="decision-title">Three signals. One decision rhythm.</h2>
+          </div>
+          <p>Select a signal to see the evidence, leadership response and intended outcome.</p>
+        </header>
+
+        <div class="decision-workspace">
+          <div class="decision-tabs" role="tablist" aria-label="Leadership decision signals">
+            {decisions.map((decision, index) => (
+              <button
+                type="button"
+                role="tab"
+                aria-selected={index === 0 ? "true" : "false"}
+                aria-controls={`decision-panel-${index}`}
+                data-decision-target={index}
+              >
+                <span class="tab-index">0{index + 1}</span>
+                <span class="tab-copy"><strong>{decision.label}</strong><small>{decision.status}</small></span>
+                <i aria-hidden="true">→</i>
+              </button>
+            ))}
+          </div>
+
+          <div class="decision-panels" aria-live="polite">
+            {decisions.map((decision, index) => (
+              <article id={`decision-panel-${index}`} role="tabpanel" data-decision-panel={index} hidden={index !== 0}>
+                <div class="panel-status"><span class={`status-dot status-${decision.tone}`}></span>{decision.status}</div>
+                <h3>{decision.title}</h3>
+                <p>{decision.summary}</p>
+                <ul>
+                  {decision.evidence.map((item) => <li><span aria-hidden="true">✓</span>{item}</li>)}
+                </ul>
+                <div class="leadership-call">
+                  <span>Leadership call</span>
+                  <strong>{decision.action}</strong>
+                </div>
+              </article>
+            ))}
+          </div>
         </div>
       </section>
-      </SectionSwitcher>
+
+      <section class="operating-section model-container" aria-labelledby="operating-title">
+        <div class="operating-copy">
+          <span class="eyebrow">Operating model</span>
+          <h2 id="operating-title">Governance that moves work forward.</h2>
+          <p>{portfolio.identity.positioning}. The system is designed to reduce reporting effort, expose exceptions and preserve accountable human decisions.</p>
+          <a href="/models/success-stories-impact/">View delivery evidence <span aria-hidden="true">→</span></a>
+        </div>
+        <ol class="operating-flow" aria-label="Leadership operating rhythm">
+          <li><span>01</span><div><strong>Sense</strong><p>Unify delivery, service and risk signals.</p></div></li>
+          <li><span>02</span><div><strong>Decide</strong><p>Focus leaders on exceptions and trade-offs.</p></div></li>
+          <li><span>03</span><div><strong>Act</strong><p>Assign ownership, evidence and next action.</p></div></li>
+          <li><span>04</span><div><strong>Learn</strong><p>Measure outcomes and improve the system.</p></div></li>
+        </ol>
+      </section>
+
+      <section class="leadership-cta">
+        <div class="model-container cta-inner">
+          <div><span class="eyebrow">Next decision</span><h2>Make complex delivery governable.</h2></div>
+          <div class="cta-actions">
+            <a class="primary-action" href="mailto:nagulapalli.kranthi@gmail.com?subject=Leadership%20Portfolio%20Conversation">Email Me <span aria-hidden="true">↗</span></a>
+            <a class="text-action" href="/downloads/Kranthi_Delivery_Leader.pdf" download="Kranthi_Delivery_Leader.pdf" data-track-action="resume_download">Download Resume</a>
+          </div>
+        </div>
+      </section>
     </main>
   </div>
 </MainLayout>
 
 <style>
-  .model-page {
-    --model-bg: #0f1a2e;
-    --model-surface: #17243a;
-    --model-surface-muted: #22314a;
-    --model-text: #f4f7fb;
-    --model-text-muted: #aebbd0;
-    --model-border: #2d3c55;
-    --model-blue: #60a5fa;
-    --model-blue-soft: #19385f;
-    --model-green: #4fd1a5;
-    --model-green-soft: #173c38;
-    --model-amber: #f2c46d;
-    --model-amber-soft: #45381f;
-    --model-violet: #a78bfa;
-    --model-violet-soft: #302858;
-    --model-shadow: 0 18px 48px rgba(2, 8, 23, .24);
-    background: linear-gradient(180deg, #111c31 0%, #0b1526 100%);
+  .leadership-page {
+    --ink: #f8fafc;
+    --muted: #9fb0c8;
+    --line: rgba(148, 163, 184, .18);
+    --panel: rgba(18, 31, 52, .82);
+    --blue: #60a5fa;
+    --violet: #a78bfa;
+    --green: #4fd1a5;
+    min-height: 100vh;
+    color: var(--ink);
+    background: #081221;
   }
-  .executive-hero { display: grid; grid-template-columns: minmax(0, 1.45fr) minmax(300px, .55fr); gap: 72px; align-items: center; padding-block: 94px 72px; }
-  h1 { max-width: 780px; margin-top: 18px; font-size: clamp(3rem, 6.5vw, 5.8rem); line-height: .98; letter-spacing: -.065em; }
-  h1 em { color: var(--model-blue); font-style: normal; }
-  .executive-hero > div > p { max-width: 680px; margin-top: 28px; color: var(--model-text-muted); font-size: 1.08rem; }
-  .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 34px; }
-  .hero-actions a { padding: 14px 19px; border-radius: var(--model-radius-sm); font-size: .83rem; font-weight: 800; }
-  .executive-primary { background: var(--model-blue); color: white !important; }
-  .executive-secondary { border: 1px solid var(--model-border); background: var(--model-surface); }
-  .owner-card { padding: 28px; }
-  .owner-card > span { color: var(--model-text-muted); font-size: .72rem; font-weight: 750; text-transform: uppercase; letter-spacing: .1em; }
-  .owner-card > strong { display: block; margin-top: 18px; font-size: 1.2rem; }
-  .owner-card > p { color: var(--model-text-muted); }
-  dl { margin-top: 24px; border-top: 1px solid var(--model-border); }
-  dl div { display: flex; justify-content: space-between; gap: 12px; padding-block: 13px; border-bottom: 1px solid var(--model-border); font-size: .78rem; }
-  dt { color: var(--model-text-muted); } dd { font-weight: 750; } dd i { display: inline-block; width: 7px; height: 7px; border-radius: 50%; background: var(--model-green); }
-  .metric-section { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
-  .portfolio-section { padding-block: 110px; }
-  .section-heading-row { display: flex; justify-content: space-between; align-items: end; gap: 48px; }
-  .section-heading-row > p { max-width: 430px; color: var(--model-text-muted); font-size: .92rem; }
-  .priority-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 38px; }
-  .outcomes { display: grid; grid-template-columns: minmax(280px,.8fr) minmax(0,1.2fr); gap: 28px; align-items: start; padding-bottom: 110px; }
-  .outcome-nav-wrap, .outcome-progressive { min-height: 360px; border: 1px solid var(--model-border); border-radius: 18px; background: rgba(23,36,58,.72); }
-  .outcome-nav-wrap { position: sticky; top: 104px; padding: 28px; }
-  .outcome-nav-wrap h2 { margin: 8px 0 24px; font-size: clamp(1.7rem,3vw,2.5rem); }
-  .outcome-nav { display: grid; gap: 7px; }
-  .outcome-nav button { display: grid; grid-template-columns: 34px 1fr; gap: 10px; align-items: center; width: 100%; padding: 13px 14px; border: 0; border-radius: 10px; color: var(--model-text-muted); background: transparent; text-align: left; cursor: pointer; }
-  .outcome-nav button span { color: #6f8db3; font-size: .66rem; font-weight: 850; }
-  .outcome-nav button strong { font-size: .82rem; }
-  .outcome-nav button:hover, .outcome-nav button:focus-visible { color: white; background: rgba(96,165,250,.1); }
-  .outcome-nav button[aria-selected="true"] { color: white; background: #23496f; }
-  .outcome-nav button[aria-selected="true"] span { color: #93c5fd; }
-  .outcome-progressive { padding: 32px; }
-  .outcome-progressive article[hidden] { display: none; }
-  .outcome-number { color: var(--model-blue); font-size: .7rem; font-weight: 850; letter-spacing: .1em; text-transform: uppercase; }
-  .outcome-progressive h3 { max-width: 620px; margin: 12px 0 14px; font-size: clamp(1.45rem,2.8vw,2.25rem); line-height: 1.12; }
-  .outcome-progressive article > p { max-width: 680px; color: var(--model-text-muted); }
-  .outcome-progressive details { margin-top: 28px; border-top: 1px solid var(--model-border); border-bottom: 1px solid var(--model-border); }
-  .outcome-progressive summary { display: flex; justify-content: space-between; gap: 20px; padding: 18px 0; color: white; font-size: .82rem; font-weight: 800; cursor: pointer; list-style: none; }
-  .outcome-progressive summary::-webkit-details-marker { display: none; }
-  .outcome-progressive summary::after { content: "+"; color: var(--model-blue); font-size: 1.25rem; line-height: .8; }
-  .outcome-progressive details[open] summary::after { content: "−"; }
-  .outcome-progressive details div { padding: 0 0 22px; color: var(--model-text-muted); }
-  .outcome-progressive details div strong { display: block; margin-top: 14px; color: var(--model-green); }
-  .executive-contact { border-top: 1px solid var(--model-border); background: #081221; color: white; }
-  .contact-inner { display: flex; align-items: center; justify-content: space-between; gap: 40px; padding-block: 62px; }
-  .contact-inner h2 { max-width: 700px; margin-top: 8px; font-size: clamp(1.8rem, 4vw, 3.3rem); line-height: 1.06; letter-spacing: -.04em; }
-  .contact-inner a { flex: none; padding: 15px 18px; border-radius: var(--model-radius-sm); background: var(--model-blue); color: #071426; font-size: .84rem; font-weight: 850; }
-  @media (max-width: 900px) {
-    nav { display: none; }
-    .executive-hero { grid-template-columns: 1fr; gap: 36px; padding-block: 70px 54px; }
-    .metric-section { grid-template-columns: repeat(2, 1fr); }
-    .priority-grid { grid-template-columns: 1fr; }
-    .section-heading-row, .contact-inner { align-items: flex-start; }
-    .outcomes { grid-template-columns: 1fr; gap: 14px; }
-    .outcome-nav-wrap { position: static; min-height: 0; }
-    .outcome-progressive { min-height: 330px; }
+  .leadership-page :global(.site-header) { background: rgba(8, 18, 33, .92); border-color: var(--line); }
+  .leadership-hero { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(340px, .8fr); gap: clamp(48px, 8vw, 112px); align-items: center; min-height: 690px; padding-block: 92px 82px; }
+  .eyebrow { display: inline-flex; align-items: center; gap: 9px; color: #8dbdf6; font-size: .7rem; font-weight: 850; letter-spacing: .13em; text-transform: uppercase; }
+  .eyebrow i { width: 7px; height: 7px; border-radius: 999px; background: var(--green); box-shadow: 0 0 0 5px rgba(79, 209, 165, .12); }
+  h1 { margin-top: 22px; font-size: clamp(3.6rem, 7.4vw, 7rem); line-height: .88; letter-spacing: -.07em; }
+  h1 em { color: var(--blue); font-style: normal; }
+  .hero-copy > p { max-width: 700px; margin-top: 30px; color: var(--muted); font-size: clamp(1rem, 1.5vw, 1.16rem); line-height: 1.75; }
+  .hero-actions, .cta-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 20px; margin-top: 34px; }
+  .primary-action { display: inline-flex; align-items: center; gap: 22px; padding: 14px 17px; border-radius: 9px; background: #3b82f6; color: white !important; font-size: .8rem; font-weight: 850; }
+  .text-action { color: #dbeafe !important; font-size: .8rem; font-weight: 800; }
+  .briefing-card { overflow: hidden; border: 1px solid rgba(96, 165, 250, .26); border-radius: 20px; background: linear-gradient(145deg, rgba(30, 55, 88, .92), rgba(13, 27, 47, .94)); box-shadow: 0 28px 70px rgba(0, 0, 0, .28); }
+  .briefing-head { display: flex; justify-content: space-between; gap: 18px; padding: 19px 22px; border-bottom: 1px solid var(--line); color: var(--muted); font-size: .67rem; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; }
+  .briefing-head strong { color: #bff4df; white-space: nowrap; }
+  .briefing-head i { display: inline-block; width: 6px; height: 6px; margin-right: 6px; border-radius: 50%; background: var(--green); }
+  .briefing-question { padding: 24px 22px 12px; color: var(--muted); font-size: .76rem; }
+  .briefing-answer { display: grid; grid-template-columns: 42px 1fr; gap: 14px; padding: 0 22px 27px; }
+  .briefing-answer > span { display: grid; place-items: center; width: 36px; height: 36px; border-radius: 9px; background: rgba(96, 165, 250, .14); color: #93c5fd; font-size: .7rem; font-weight: 900; }
+  .briefing-answer strong { display: block; font-size: 1rem; }
+  .briefing-answer p { margin-top: 7px; color: var(--muted); font-size: .82rem; line-height: 1.55; }
+  .briefing-meta { display: grid; grid-template-columns: 1fr 1fr; border-top: 1px solid var(--line); }
+  .briefing-meta span { display: grid; gap: 4px; padding: 17px 22px; color: var(--muted); font-size: .67rem; }
+  .briefing-meta span + span { border-left: 1px solid var(--line); }
+  .briefing-meta strong { color: white; font-size: .86rem; }
+  .signal-band { border-block: 1px solid var(--line); background: rgba(15, 28, 48, .75); }
+  .signal-grid { display: grid; grid-template-columns: repeat(4, 1fr); }
+  .signal { position: relative; display: grid; gap: 6px; padding: 28px clamp(18px, 3vw, 40px); }
+  .signal + .signal { border-left: 1px solid var(--line); }
+  .signal::before { content: ""; position: absolute; inset: 0 auto 0 0; width: 2px; opacity: .8; }
+  .signal-blue::before { background: var(--blue); } .signal-violet::before { background: var(--violet); } .signal-green::before { background: var(--green); }
+  .signal strong { font-size: clamp(1.45rem, 2.6vw, 2.1rem); letter-spacing: -.04em; white-space: nowrap; }
+  .signal span { color: var(--muted); font-size: .73rem; white-space: nowrap; }
+  .decision-section { padding-block: 112px; }
+  .section-intro { display: flex; justify-content: space-between; align-items: end; gap: 50px; }
+  .section-intro h2, .operating-copy h2, .leadership-cta h2 { max-width: 760px; margin-top: 13px; font-size: clamp(2.2rem, 4.5vw, 4.4rem); line-height: .98; letter-spacing: -.055em; }
+  .section-intro > p { max-width: 400px; color: var(--muted); font-size: .88rem; line-height: 1.65; }
+  .decision-workspace { display: grid; grid-template-columns: minmax(270px, .72fr) minmax(0, 1.28fr); gap: 18px; margin-top: 46px; }
+  .decision-tabs { display: grid; align-content: start; gap: 8px; }
+  .decision-tabs button { display: grid; grid-template-columns: 34px 1fr auto; gap: 12px; align-items: center; width: 100%; min-height: 78px; padding: 14px 17px; border: 1px solid var(--line); border-radius: 13px; background: rgba(18, 31, 52, .62); color: var(--muted); text-align: left; cursor: pointer; }
+  .decision-tabs button:hover, .decision-tabs button:focus-visible { border-color: rgba(96, 165, 250, .5); }
+  .decision-tabs button[aria-selected="true"] { border-color: rgba(96, 165, 250, .55); background: linear-gradient(100deg, rgba(35, 73, 111, .9), rgba(20, 40, 67, .9)); color: white; }
+  .tab-index { color: #7190b8; font-size: .65rem; font-weight: 900; }
+  .tab-copy { display: grid; gap: 4px; min-width: 0; }
+  .tab-copy strong { font-size: .82rem; white-space: nowrap; }
+  .tab-copy small { color: #8fa6c3; font-size: .67rem; }
+  .decision-tabs button > i { font-style: normal; }
+  .decision-panels { min-height: 386px; border: 1px solid var(--line); border-radius: 18px; background: linear-gradient(145deg, rgba(23, 42, 69, .9), rgba(12, 25, 44, .95)); }
+  .decision-panels article { padding: clamp(28px, 5vw, 50px); }
+  .decision-panels article[hidden] { display: none; }
+  .panel-status { display: flex; align-items: center; gap: 8px; color: #b9c9dc; font-size: .69rem; font-weight: 800; text-transform: uppercase; letter-spacing: .09em; }
+  .status-dot { width: 7px; height: 7px; border-radius: 50%; } .status-green { background: var(--green); } .status-blue { background: var(--blue); } .status-amber { background: #f2c46d; }
+  .decision-panels h3 { max-width: 680px; margin-top: 17px; font-size: clamp(1.8rem, 3.2vw, 3rem); line-height: 1.03; letter-spacing: -.04em; }
+  .decision-panels article > p { max-width: 720px; margin-top: 17px; color: var(--muted); font-size: .92rem; line-height: 1.7; }
+  .decision-panels ul { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 24px; padding: 0; list-style: none; }
+  .decision-panels li { display: flex; align-items: center; gap: 7px; padding: 8px 10px; border: 1px solid var(--line); border-radius: 999px; color: #ced9e8; font-size: .7rem; white-space: nowrap; }
+  .decision-panels li span { color: var(--green); }
+  .leadership-call { display: grid; gap: 7px; margin-top: 28px; padding-top: 22px; border-top: 1px solid var(--line); }
+  .leadership-call span { color: #7fa8d8; font-size: .66rem; font-weight: 850; text-transform: uppercase; letter-spacing: .1em; }
+  .leadership-call strong { max-width: 700px; font-size: .9rem; line-height: 1.55; }
+  .operating-section { display: grid; grid-template-columns: minmax(0, .9fr) minmax(420px, 1.1fr); gap: 80px; align-items: center; padding-block: 20px 112px; }
+  .operating-copy > p { max-width: 600px; margin-top: 22px; color: var(--muted); font-size: .9rem; line-height: 1.7; }
+  .operating-copy > a { display: inline-flex; gap: 18px; margin-top: 28px; color: #93c5fd; font-size: .8rem; font-weight: 850; }
+  .operating-flow { display: grid; margin: 0; padding: 0; border: 1px solid var(--line); border-radius: 17px; background: rgba(18, 31, 52, .55); list-style: none; }
+  .operating-flow li { display: grid; grid-template-columns: 38px 1fr; gap: 17px; align-items: center; padding: 21px 24px; }
+  .operating-flow li + li { border-top: 1px solid var(--line); }
+  .operating-flow li > span { color: #7392b8; font-size: .66rem; font-weight: 900; }
+  .operating-flow strong { font-size: .86rem; }
+  .operating-flow p { margin-top: 3px; color: var(--muted); font-size: .76rem; }
+  .leadership-cta { border-top: 1px solid var(--line); background: linear-gradient(90deg, #0c1a2e, #102440); }
+  .cta-inner { display: flex; justify-content: space-between; align-items: center; gap: 48px; padding-block: 68px; }
+  .cta-actions { flex: none; margin: 0; }
+  @media (max-width: 920px) {
+    .leadership-hero, .operating-section { grid-template-columns: 1fr; }
+    .leadership-hero { min-height: auto; }
+    .briefing-card { max-width: 620px; }
+    .signal-grid { grid-template-columns: repeat(2, 1fr); }
+    .signal:nth-child(3) { border-left: 0; border-top: 1px solid var(--line); }
+    .signal:nth-child(4) { border-top: 1px solid var(--line); }
+    .decision-workspace { grid-template-columns: 1fr; }
+    .decision-tabs { grid-template-columns: repeat(3, 1fr); }
+    .decision-tabs button { grid-template-columns: 1fr; gap: 6px; }
+    .decision-tabs button > i { display: none; }
+    .operating-section { gap: 42px; }
   }
-  @media (max-width: 600px) {
-    .executive-hero { padding-top: 54px; }
-    h1 { font-size: 3.25rem; }
-    .metric-section { grid-template-columns: 1fr; }
-    .section-heading-row, .contact-inner { display: grid; }
-    .portfolio-section { padding-block: 82px; }
-    .outcomes { padding-bottom: 82px; }
+  @media (max-width: 680px) {
+    .leadership-hero { padding-block: 62px 58px; }
+    h1 { font-size: clamp(3.2rem, 16vw, 4.8rem); }
+    .signal-grid { grid-template-columns: 1fr 1fr; }
+    .signal { padding: 20px 16px; }
+    .signal span { font-size: .64rem; white-space: normal; }
+    .section-intro, .cta-inner { display: grid; align-items: start; }
+    .decision-section { padding-block: 82px; }
+    .decision-tabs { display: flex; overflow-x: auto; padding-bottom: 4px; scroll-snap-type: x mandatory; }
+    .decision-tabs button { flex: 0 0 78%; min-height: 86px; scroll-snap-align: start; }
+    .tab-copy strong { white-space: normal; }
+    .decision-panels { min-height: 460px; }
+    .decision-panels ul { display: grid; }
+    .decision-panels li { width: max-content; max-width: 100%; white-space: normal; }
+    .operating-section { grid-template-columns: 1fr; padding-bottom: 82px; }
+    .cta-actions { display: grid; justify-items: start; }
   }
 </style>
 
 <script>
-  document.querySelectorAll('[data-outcome-workspace]').forEach((workspace) => {
-    const tabs = Array.from(workspace.querySelectorAll('[data-outcome-target]'));
-    const panels = Array.from(workspace.querySelectorAll('[data-outcome-panel]'));
+  document.querySelectorAll('[data-decision-lens]').forEach((lens) => {
+    const tabs = Array.from(lens.querySelectorAll('[data-decision-target]'));
+    const panels = Array.from(lens.querySelectorAll('[data-decision-panel]'));
     const activate = (index, focus = false) => {
       tabs.forEach((tab) => {
-        const active = tab.dataset.outcomeTarget === String(index);
+        const active = tab.dataset.decisionTarget === String(index);
         tab.setAttribute('aria-selected', String(active));
         tab.tabIndex = active ? 0 : -1;
         if (active && focus) tab.focus();
       });
-      panels.forEach((panel) => {
-        const active = panel.dataset.outcomePanel === String(index);
-        panel.hidden = !active;
-        if (active) panel.querySelector('details')?.removeAttribute('open');
-      });
+      panels.forEach((panel) => { panel.hidden = panel.dataset.decisionPanel !== String(index); });
     };
     tabs.forEach((tab, index) => {
       tab.tabIndex = index === 0 ? 0 : -1;
       tab.addEventListener('click', () => activate(index));
       tab.addEventListener('keydown', (event) => {
-        if (!['ArrowUp', 'ArrowDown', 'Home', 'End'].includes(event.key)) return;
+        if (!['ArrowLeft', 'ArrowRight', 'Home', 'End'].includes(event.key)) return;
         event.preventDefault();
-        const next = event.key === 'Home' ? 0 : event.key === 'End' ? tabs.length - 1 : (index + (event.key === 'ArrowDown' ? 1 : -1) + tabs.length) % tabs.length;
+        const next = event.key === 'Home' ? 0 : event.key === 'End' ? tabs.length - 1 : (index + (event.key === 'ArrowRight' ? 1 : -1) + tabs.length) % tabs.length;
         activate(next, true);
       });
     });
