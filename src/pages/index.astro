@@ -21,7 +21,16 @@ import Hero from "../components/Hero.astro";
 <p>Senior program leadership grounded in operating evidence, accountable decisions and sustainable execution.</p>
 </div>
 
-<div class="impact-grid" aria-label="Delivery impact">
+<div class="impact-carousel" data-impact-carousel aria-label="Delivery impact carousel">
+  <div class="impact-controls">
+    <p><span data-impact-position>1–3</span> of 19 outcomes</p>
+    <div>
+      <button type="button" data-impact-prev aria-label="Show previous delivery outcomes">←</button>
+      <button type="button" data-impact-next aria-label="Show next delivery outcomes">→</button>
+    </div>
+  </div>
+  <div class="impact-viewport">
+  <div class="impact-track" data-impact-track aria-live="polite">
   <article class="impact-card"><strong>Global Teams <span>10</span></strong><i aria-hidden="true">→</i><p>Led 10 globally distributed delivery teams.</p></article>
   <article class="impact-card"><strong>Budget Efficiency <span>20%</span></strong><i aria-hidden="true">→</i><p>Reduced program costs by 20% through governance.</p></article>
   <article class="impact-card"><strong>Cloud Migrations <span>15</span></strong><i aria-hidden="true">→</i><p>Directed 15 enterprise-scale cloud transformations.</p></article>
@@ -41,6 +50,8 @@ import Hero from "../components/Hero.astro";
   <article class="impact-card"><strong>Portfolio Scale <span>100+</span></strong><i aria-hidden="true">→</i><p>Oversaw 100+ concurrent projects.</p></article>
   <article class="impact-card"><strong>Escalation Reduction <span>40%</span></strong><i aria-hidden="true">→</i><p>Reduced executive escalations by 40%.</p></article>
   <article class="impact-card"><strong>Digital KPIs <span>25</span></strong><i aria-hidden="true">→</i><p>Defined and tracked 25 digital success metrics.</p></article>
+  </div>
+  </div>
 </div>
 
 </section>
@@ -138,17 +149,23 @@ import Hero from "../components/Hero.astro";
     <p>Reusable operating models designed to create clarity, accountability and measurable flow.</p>
   </div>
   <div class="framework-carousel" data-framework-carousel>
-    <button class="carousel-arrow carousel-prev" type="button" aria-label="Previous governance example">←</button>
-    <div class="framework-track" aria-live="polite">
-      <article class="framework-card is-current"><span>01 · DELIVERY CONTROL SYSTEM</span><h3>Commitment → exception → decision</h3><dl><div><dt>Inputs</dt><dd>Priorities, capacity, dependencies, risks</dd></div><div><dt>Controls</dt><dd>DoR/DoD, scope baseline, readiness gates</dd></div><div><dt>Outputs</dt><dd>Confidence, recovery owner, decision</dd></div></dl><p><strong>Example:</strong> a dependency change becomes a named release decision before it becomes rollover.</p></article>
+    <div class="carousel-controls">
+      <p><span data-framework-position>1–3</span> of 6 frameworks</p>
+      <div>
+        <button class="carousel-arrow carousel-prev" type="button" aria-label="Show previous governance frameworks">←</button>
+        <button class="carousel-arrow carousel-next" type="button" aria-label="Show next governance frameworks">→</button>
+      </div>
+    </div>
+    <div class="framework-viewport">
+    <div class="framework-track" data-framework-track aria-live="polite">
+      <article class="framework-card"><span>01 · DELIVERY CONTROL SYSTEM</span><h3>Commitment → exception → decision</h3><dl><div><dt>Inputs</dt><dd>Priorities, capacity, dependencies, risks</dd></div><div><dt>Controls</dt><dd>DoR/DoD, scope baseline, readiness gates</dd></div><div><dt>Outputs</dt><dd>Confidence, recovery owner, decision</dd></div></dl><p><strong>Example:</strong> a dependency change becomes a named release decision before it becomes rollover.</p></article>
       <article class="framework-card"><span>02 · RELEASE READINESS</span><h3>Evidence → gate → promotion</h3><dl><div><dt>Inputs</dt><dd>Scope, tests, dependencies, rollback</dd></div><div><dt>Controls</dt><dd>Acceptance gates, owner sign-off, environment proof</dd></div><div><dt>Outputs</dt><dd>Go/no-go decision and recovery path</dd></div></dl><p><strong>Example:</strong> a release moves only when committed scope and live-environment evidence reconcile.</p></article>
       <article class="framework-card"><span>03 · OPERATIONAL HEALTH</span><h3>Signal → ownership → recovery</h3><dl><div><dt>Inputs</dt><dd>SLA, aging, incidents, cost signals</dd></div><div><dt>Controls</dt><dd>Amber windows, priority quality, escalation</dd></div><div><dt>Outputs</dt><dd>Recovery action, owner, closure evidence</dd></div></dl><p><strong>Example:</strong> an aging high-impact request is reviewed before the resolution SLA breaches.</p></article>
       <article class="framework-card"><span>04 · DEPENDENCY GOVERNANCE</span><h3>Dependency → exposure → owner</h3><dl><div><dt>Inputs</dt><dd>Milestones, contracts, sequencing, external needs</dd></div><div><dt>Controls</dt><dd>Critical-path review, due dates, escalation thresholds</dd></div><div><dt>Outputs</dt><dd>Protected milestone and explicit trade-off</dd></div></dl><p><strong>Example:</strong> a cross-team dependency is resolved or deliberately re-sequenced before it affects a committed date.</p></article>
       <article class="framework-card"><span>05 · EXECUTIVE DECISION RHYTHM</span><h3>Evidence → choice → accountability</h3><dl><div><dt>Inputs</dt><dd>Outcome health, exposure, options, impact</dd></div><div><dt>Controls</dt><dd>Decision log, owner, due date, closure evidence</dd></div><div><dt>Outputs</dt><dd>Faster intervention and traceable follow-through</dd></div></dl><p><strong>Example:</strong> a leadership review ends with named decisions, not another status-collection cycle.</p></article>
       <article class="framework-card"><span>06 · RESPONSIBLE AI ADOPTION</span><h3>Use case → control → measurable value</h3><dl><div><dt>Inputs</dt><dd>Decision need, source quality, human owner</dd></div><div><dt>Controls</dt><dd>Audit trail, anti-spam, pause, escalation</dd></div><div><dt>Outputs</dt><dd>Adoption, time returned, better decisions</dd></div></dl><p><strong>Example:</strong> the sprint agent nudges once, respects pause states and escalates only unresolved risk.</p></article>
     </div>
-    <button class="carousel-arrow carousel-next" type="button" aria-label="Next governance example">→</button>
-    <p class="carousel-status"><span data-framework-position>1</span> of 6</p>
+    </div>
   </div>
 </section>
 
@@ -199,16 +216,76 @@ import Hero from "../components/Hero.astro";
 </MainLayout>
 
 <script>
-  document.querySelectorAll('[data-framework-carousel]').forEach((carousel) => {
-    const cards = Array.from(carousel.querySelectorAll('.framework-card'));
-    const position = carousel.querySelector('[data-framework-position]');
-    let current = 0;
-    const show = (index) => {
-      current = (index + cards.length) % cards.length;
-      cards.forEach((card, cardIndex) => card.classList.toggle('is-current', cardIndex === current));
-      if (position) position.textContent = String(current + 1);
+  const carousel = document.querySelector<HTMLElement>("[data-impact-carousel]");
+
+  if (carousel) {
+    const track = carousel.querySelector<HTMLElement>("[data-impact-track]");
+    const cards = Array.from(carousel.querySelectorAll<HTMLElement>(".impact-card"));
+    const previous = carousel.querySelector<HTMLButtonElement>("[data-impact-prev]");
+    const next = carousel.querySelector<HTMLButtonElement>("[data-impact-next]");
+    const position = carousel.querySelector<HTMLElement>("[data-impact-position]");
+
+    const visibleCards = () => window.innerWidth <= 620 ? 1 : window.innerWidth <= 980 ? 2 : 3;
+    let start = 0;
+
+    const render = () => {
+      const visible = visibleCards();
+      const maximum = Math.max(0, cards.length - visible);
+      start = Math.min(start, maximum);
+      const cardWidth = cards[0]?.getBoundingClientRect().width ?? 0;
+      const gap = Number.parseFloat(getComputedStyle(track!).columnGap || "0");
+      track?.style.setProperty("--impact-offset", `${start * (cardWidth + gap)}px`);
+      if (position) position.textContent = visible === 1 ? `${start + 1}` : `${start + 1}–${Math.min(start + visible, cards.length)}`;
+      if (previous) previous.disabled = start === 0;
+      if (next) next.disabled = start === maximum;
     };
-    carousel.querySelector('.carousel-prev')?.addEventListener('click', () => show(current - 1));
-    carousel.querySelector('.carousel-next')?.addEventListener('click', () => show(current + 1));
+
+    previous?.addEventListener("click", () => {
+      start = Math.max(0, start - visibleCards());
+      render();
+    });
+
+    next?.addEventListener("click", () => {
+      start = Math.min(cards.length - visibleCards(), start + visibleCards());
+      render();
+    });
+
+    window.addEventListener("resize", render);
+    render();
+  }
+</script>
+
+<script>
+  document.querySelectorAll('[data-framework-carousel]').forEach((carousel) => {
+    const track = carousel.querySelector<HTMLElement>('[data-framework-track]');
+    const cards = Array.from(carousel.querySelectorAll<HTMLElement>('.framework-card'));
+    const position = carousel.querySelector<HTMLElement>('[data-framework-position]');
+    const previous = carousel.querySelector<HTMLButtonElement>('.carousel-prev');
+    const next = carousel.querySelector<HTMLButtonElement>('.carousel-next');
+    const visibleCards = () => window.innerWidth <= 620 ? 1 : window.innerWidth <= 980 ? 2 : 3;
+    let start = 0;
+
+    const render = () => {
+      const visible = visibleCards();
+      const maximum = Math.max(0, cards.length - visible);
+      start = Math.min(start, maximum);
+      const cardWidth = cards[0]?.getBoundingClientRect().width ?? 0;
+      const gap = Number.parseFloat(getComputedStyle(track!).columnGap || '0');
+      track?.style.setProperty('--framework-offset', `${start * (cardWidth + gap)}px`);
+      if (position) position.textContent = visible === 1 ? `${start + 1}` : `${start + 1}–${Math.min(start + visible, cards.length)}`;
+      if (previous) previous.disabled = start === 0;
+      if (next) next.disabled = start === maximum;
+    };
+
+    previous?.addEventListener('click', () => {
+      start = Math.max(0, start - visibleCards());
+      render();
+    });
+    next?.addEventListener('click', () => {
+      start = Math.min(cards.length - visibleCards(), start + visibleCards());
+      render();
+    });
+    window.addEventListener('resize', render);
+    render();
   });
 </script>
