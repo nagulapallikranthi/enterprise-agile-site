@@ -1,8 +1,10 @@
 {
   "$schema": "./node_modules/wrangler/config-schema.json",
   "name": "enterprise-agile-site-prod",
+  "main": "src/worker.js",
   "compatibility_date": "2026-08-05",
   "assets": {
+    "binding": "ASSETS",
     "directory": "./dist",
     "not_found_handling": "404-page"
   },
@@ -10,6 +12,7 @@
     "dev": {
       "name": "enterprise-agile-site-dev",
       "assets": {
+        "binding": "ASSETS",
         "directory": "./dist",
         "not_found_handling": "404-page"
       }
@@ -17,13 +20,15 @@
     "staging": {
       "name": "enterprise-agile-site",
       "assets": {
+        "binding": "ASSETS",
         "directory": "./dist",
         "not_found_handling": "404-page"
       }
     },
     "production": {
-      "name": "enterprise-agile-site-prod",
+      "name": "kranthi-delivery-leader",
       "assets": {
+        "binding": "ASSETS",
         "directory": "./dist",
         "not_found_handling": "404-page"
       }

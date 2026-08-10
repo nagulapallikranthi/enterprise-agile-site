@@ -77,6 +77,35 @@ const structuredData = [
     <a class="skip-link" href="#main-content">Skip to main content</a>
     <slot />
 
+    <script is:inline>
+      const sessionKey = "portfolio-session-id";
+      let sessionId = sessionStorage.getItem(sessionKey);
+      if (!sessionId) {
+        sessionId = crypto.randomUUID();
+        sessionStorage.setItem(sessionKey, sessionId);
+      }
+
+      document.addEventListener("click", (event) => {
+        const link = event.target.closest("a, button");
+        if (!link) return;
+
+        const action = link.dataset.trackAction ||
+          (link.tagName === "A" ? "link_click" : "button_click");
+        const label = (link.textContent || link.getAttribute("aria-label") || "unlabelled").trim();
+        const payload = JSON.stringify({
+          action,
+          label,
+          page: location.pathname,
+          target: link.getAttribute("href") || null,
+          referrer: document.referrer || null,
+          sessionId,
+          occurredAt: new Date().toISOString()
+        });
+
+        navigator.sendBeacon("/api/events", new Blob([payload], { type: "application/json" }));
+      });
+    </script>
+
 </body>
 
 </html>
