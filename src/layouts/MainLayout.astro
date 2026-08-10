@@ -18,6 +18,28 @@ const {
 const siteUrl = import.meta.env.PUBLIC_SITE_URL ?? "https://enterprise-agile-site.nagulapalli-kranthi.workers.dev";
 const canonicalUrl = new URL(canonicalPath, siteUrl);
 const socialImageUrl = new URL("/images/hero-portrait.png", siteUrl);
+const structuredData = [
+  {
+    "@context": "https://schema.org",
+    "@type": "ProfilePage",
+    name: "Kranthi Kumar Nagulapally — Enterprise Program & Operations Leader",
+    url: canonicalUrl.toString(),
+    mainEntity: {
+      "@type": "Person",
+      name: "Kranthi Kumar Nagulapally",
+      jobTitle: "Staff Program Manager",
+      url: siteUrl,
+      sameAs: ["https://www.linkedin.com/in/kranthi-n"],
+      knowsAbout: ["Enterprise Program Management", "CloudOps", "DevOps", "Agile Delivery Governance", "Jira and JSM Governance", "Executive Reporting", "Responsible AI"]
+    }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    name: "Enterprise Agile",
+    url: siteUrl
+  }
+];
 ---
 
 <!DOCTYPE html>
@@ -47,6 +69,7 @@ const socialImageUrl = new URL("/images/hero-portrait.png", siteUrl);
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={socialImageUrl} />
     <title>{title}</title>
+    <script type="application/ld+json" set:html={JSON.stringify(structuredData)}></script>
 
 </head>
 
