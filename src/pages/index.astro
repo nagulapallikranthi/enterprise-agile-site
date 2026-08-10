@@ -11,7 +11,27 @@ import Hero from "../components/Hero.astro";
 <Header />
 
 <main id="main-content">
+<section class="home-about" id="about" aria-labelledby="about-title">
 <Hero />
+
+<div class="about">
+  <div class="about-intro">
+    <span class="eyebrow">ABOUT &amp; LEADERSHIP APPROACH</span>
+    <h2 id="about-title">From technical operations to enterprise transformation</h2>
+    <p>
+      Across 17+ years, I have progressed from database and technical operations into senior program leadership. I solve the operating problems between strategy and execution: unclear ownership, fragmented reporting, late dependencies, inconsistent delivery controls and automation without accountability.
+    </p>
+    <p class="leadership-principle"><strong>Leadership principle:</strong> make the decision visible, name the owner, establish the evidence and design the control so teams can sustain it.</p>
+  </div>
+
+  <div class="capability-grid">
+    <article class="capability-card"><span class="capability-number">01</span><h3>Enterprise Program Leadership</h3><p>Translate executive intent into governed portfolios, dependency decisions, release confidence and measurable outcomes.</p></article>
+    <article class="capability-card"><span class="capability-number">02</span><h3>Cloud &amp; DevOps Operations</h3><p>Connect CloudOps, DevOps, platform reliability, service performance and release governance in one operating model.</p></article>
+    <article class="capability-card"><span class="capability-number">03</span><h3>Delivery &amp; Jira Governance</h3><p>Standardize commitment, scope, readiness, workflow quality and executive visibility without adding process theatre.</p></article>
+    <article class="capability-card"><span class="capability-number">04</span><h3>Responsible AI Operations</h3><p>Use automation to reduce reporting noise and prompt action while preserving human ownership, escalation and auditability.</p></article>
+  </div>
+</div>
+</section>
 
 <section class="impact" id="impact" aria-labelledby="impact-title">
 
@@ -54,40 +74,6 @@ import Hero from "../components/Hero.astro";
   </div>
 </div>
 
-</section>
-
-<section class="about" id="about" aria-labelledby="about-title">
-  <div class="about-intro">
-    <span class="eyebrow">ABOUT &amp; LEADERSHIP APPROACH</span>
-    <h2 id="about-title">From technical operations to enterprise transformation</h2>
-    <p>
-      Across 17+ years, I have progressed from database and technical operations into senior program leadership. I solve the operating problems between strategy and execution: unclear ownership, fragmented reporting, late dependencies, inconsistent delivery controls and automation without accountability.
-    </p>
-    <p class="leadership-principle"><strong>Leadership principle:</strong> make the decision visible, name the owner, establish the evidence and design the control so teams can sustain it.</p>
-  </div>
-
-  <div class="capability-grid">
-    <article class="capability-card">
-      <span class="capability-number">01</span>
-      <h3>Enterprise Program Leadership</h3>
-      <p>Translate executive intent into governed portfolios, dependency decisions, release confidence and measurable outcomes.</p>
-    </article>
-    <article class="capability-card">
-      <span class="capability-number">02</span>
-      <h3>Cloud &amp; DevOps Operations</h3>
-      <p>Connect CloudOps, DevOps, platform reliability, service performance and release governance in one operating model.</p>
-    </article>
-    <article class="capability-card">
-      <span class="capability-number">03</span>
-      <h3>Delivery &amp; Jira Governance</h3>
-      <p>Standardize commitment, scope, readiness, workflow quality and executive visibility without adding process theatre.</p>
-    </article>
-    <article class="capability-card">
-      <span class="capability-number">04</span>
-      <h3>Responsible AI Operations</h3>
-      <p>Use automation to reduce reporting noise and prompt action while preserving human ownership, escalation and auditability.</p>
-    </article>
-  </div>
 </section>
 
 <section class="career" aria-labelledby="career-title">
@@ -203,7 +189,7 @@ import Hero from "../components/Hero.astro";
   <a class="footer-brand" href="#top">Enterprise Agile</a>
   <p>Enterprise program leadership, operational excellence and responsible AI adoption.</p>
   <div class="footer-links" aria-label="Footer navigation">
-    <a href="#about">About</a>
+    <a href="#top">Home &amp; About</a>
     <a href="#success-stories">Success Stories</a>
     <a href="/models/executive-portfolio/">Leadership Views</a>
     <a href="#contact">Contact</a>
