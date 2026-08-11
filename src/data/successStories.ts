@@ -1,7 +1,6 @@
 export const successStories = [
   {
     id: "delivery-control",
-    number: "01",
     theme: "Portfolio delivery",
     title: "Five teams needed one dependable definition of delivery.",
     situation: "Five delivery teams reported progress through separate boards, cadences and status definitions. Leadership received activity updates, but not a dependable view of commitment risk or release confidence.",
@@ -17,7 +16,6 @@ export const successStories = [
   },
   {
     id: "sla-control",
-    number: "02",
     theme: "Operational excellence",
     title: "A green SLA headline was not enough to protect the oldest work.",
     situation: "Aggregate SLA attainment looked stable, while aging requests, incorrect priorities and unpaused work were creating hidden operational exposure.",
@@ -33,7 +31,6 @@ export const successStories = [
   },
   {
     id: "responsible-ai",
-    number: "03",
     theme: "Responsible AI operations",
     title: "Automation needed to reduce reporting work without taking ownership away from people.",
     situation: "Executive summaries and sprint follow-ups required repeated manual collection, while generic reminders risked creating noise and low adoption.",
