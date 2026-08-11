@@ -1,5 +1,6 @@
 import { access, readFile, readdir, stat } from "node:fs/promises";
 import { extname, join, relative, resolve } from "node:path";
+import packageMetadata from "../package.json" with { type: "json" };
 
 const root = resolve("dist");
 const failures = [];
@@ -23,6 +24,8 @@ await walk(root);
 for (const file of htmlFiles) {
   const html = await readFile(file, "utf8");
   if (!/<html\s+lang=/i.test(html)) fail(file, "missing document language");
+  if (!html.includes(`data-release="${packageMetadata.version}"`)) fail(file, "missing or mismatched release identity");
+  if (!html.includes(`name="application-version" content="${packageMetadata.version}"`)) fail(file, "missing or mismatched application version metadata");
   if (!/<title>[^<]+<\/title>/i.test(html)) fail(file, "missing page title");
   if (!/<meta\s+name="description"/i.test(html)) fail(file, "missing meta description");
   if (!/<link\s+rel="canonical"/i.test(html)) fail(file, "missing canonical URL");

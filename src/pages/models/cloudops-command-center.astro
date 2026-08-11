@@ -59,7 +59,7 @@ const sections = [
     <main id="main-content" class="model-container">
       <section class="intro">
         <div>
-          <span class="model-kicker">Leadership View 3 · CloudOps Command Center</span>
+          <span class="model-kicker">Leadership View · CloudOps Command Center</span>
           <h1>Operational depth without the <em>scroll fatigue.</em></h1>
           <p>Review operational health, risk and action in one concise workspace. Select a domain to replace the decision canvas without adding page length.</p>
         </div>
@@ -75,7 +75,7 @@ const sections = [
           <header class="panel-heading"><div><span>Enterprise view</span><h2>Operational decision workspace</h2></div><p>A persistent local navigator maintains orientation while replacing the decision canvas.</p></header>
           <div class="switcher-shell">
             <nav class="section-switcher" aria-label="CloudOps sections">
-              {sections.map((section, index) => <button type="button" class:list={{ active: index === 0 }} data-switch={section.id}><span>{String(index + 1).padStart(2, "0")}</span>{section.label}</button>)}
+              {sections.map((section, index) => <button type="button" class:list={{ active: index === 0 }} data-switch={section.id}>{section.label}</button>)}
             </nav>
             <div class="switcher-canvas">
               {sections.map((section, index) => <article class:list={["signal-view", { "is-active": index === 0 }]} data-switch-panel={section.id}><SignalContent section={section} /></article>)}

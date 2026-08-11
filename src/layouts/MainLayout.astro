@@ -1,5 +1,6 @@
 ---
 import "../styles/global.css";
+import packageMetadata from "../../package.json";
 
 interface Props {
   title?: string;
@@ -43,7 +44,7 @@ const structuredData = [
 ---
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-release={packageMetadata.version}>
 <head>
 
     <meta charset="UTF-8" />
@@ -54,6 +55,7 @@ const structuredData = [
     />
     <meta name="description" content={description} />
     <meta name="theme-color" content="#071a33" />
+    <meta name="application-version" content={packageMetadata.version} />
     {noindex && <meta name="robots" content="noindex, follow" />}
     <link rel="canonical" href={canonicalUrl} />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg?v=compass-k-1" sizes="any" />
