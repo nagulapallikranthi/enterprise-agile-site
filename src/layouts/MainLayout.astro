@@ -1,5 +1,6 @@
 ---
 import "../styles/global.css";
+import FamilyLaunch from "../components/FamilyLaunch.astro";
 import packageMetadata from "../../package.json";
 
 interface Props {
@@ -76,6 +77,7 @@ const structuredData = [
 </head>
 
 <body>
+    <FamilyLaunch />
     <a class="skip-link" href="#main-content">Skip to main content</a>
     <slot />
 
