@@ -69,7 +69,6 @@ const decisions = [
           </div>
           <p class="briefing-question">What requires attention now?</p>
           <div class="briefing-answer">
-            <span>01</span>
             <div>
               <strong>Protect delivery confidence</strong>
               <p>Keep ownership, dependencies and release evidence aligned.</p>
@@ -146,10 +145,10 @@ const decisions = [
           <a href="/models/success-stories-impact/">View delivery evidence <span aria-hidden="true">→</span></a>
         </div>
         <ol class="operating-flow" aria-label="Leadership operating rhythm">
-          <li><span>01</span><div><strong>Sense</strong><p>Unify delivery, service and risk signals.</p></div></li>
-          <li><span>02</span><div><strong>Decide</strong><p>Focus leaders on exceptions and trade-offs.</p></div></li>
-          <li><span>03</span><div><strong>Act</strong><p>Assign ownership, evidence and next action.</p></div></li>
-          <li><span>04</span><div><strong>Learn</strong><p>Measure outcomes and improve the system.</p></div></li>
+          <li><div><strong>Sense</strong><p>Unify delivery, service and risk signals.</p></div></li>
+          <li><div><strong>Decide</strong><p>Focus leaders on exceptions and trade-offs.</p></div></li>
+          <li><div><strong>Act</strong><p>Assign ownership, evidence and next action.</p></div></li>
+          <li><div><strong>Learn</strong><p>Measure outcomes and improve the system.</p></div></li>
         </ol>
       </section>
 
@@ -194,8 +193,7 @@ const decisions = [
   .briefing-head strong { color: #bff4df; white-space: nowrap; }
   .briefing-head i { display: inline-block; width: 6px; height: 6px; margin-right: 6px; border-radius: 50%; background: var(--green); }
   .briefing-question { padding: 24px 22px 12px; color: var(--muted); font-size: .76rem; }
-  .briefing-answer { display: grid; grid-template-columns: 42px 1fr; gap: 14px; padding: 0 22px 27px; }
-  .briefing-answer > span { display: grid; place-items: center; width: 36px; height: 36px; border-radius: 9px; background: rgba(96, 165, 250, .14); color: #93c5fd; font-size: .7rem; font-weight: 900; }
+  .briefing-answer { padding: 0 22px 27px; }
   .briefing-answer strong { display: block; font-size: 1rem; }
   .briefing-answer p { margin-top: 7px; color: var(--muted); font-size: .82rem; line-height: 1.55; }
   .briefing-meta { display: grid; grid-template-columns: 1fr 1fr; border-top: 1px solid var(--line); }
@@ -241,9 +239,8 @@ const decisions = [
   .operating-copy > p { max-width: 600px; margin-top: 22px; color: var(--muted); font-size: .9rem; line-height: 1.7; }
   .operating-copy > a { display: inline-flex; gap: 18px; margin-top: 28px; color: #93c5fd; font-size: .8rem; font-weight: 850; }
   .operating-flow { display: grid; margin: 0; padding: 0; border: 1px solid var(--line); border-radius: 17px; background: rgba(18, 31, 52, .55); list-style: none; }
-  .operating-flow li { display: grid; grid-template-columns: 38px 1fr; gap: 17px; align-items: center; padding: 21px 24px; }
+  .operating-flow li { padding: 21px 24px; }
   .operating-flow li + li { border-top: 1px solid var(--line); }
-  .operating-flow li > span { color: #7392b8; font-size: .66rem; font-weight: 900; }
   .operating-flow strong { font-size: .86rem; }
   .operating-flow p { margin-top: 3px; color: var(--muted); font-size: .76rem; }
   .leadership-cta { border-top: 1px solid var(--line); background: linear-gradient(90deg, #0c1a2e, #102440); }
