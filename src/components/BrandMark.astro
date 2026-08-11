@@ -1,0 +1,13 @@
+---
+interface Props { class?: string; decorative?: boolean; }
+const { class: className = "", decorative = true } = Astro.props;
+---
+<svg class:list={["brand-mark", className]} viewBox="0 0 64 64" role={decorative ? undefined : "img"} aria-hidden={decorative ? "true" : undefined} aria-label={decorative ? undefined : "Kranthi Compass Node K"}>
+  <circle class="brand-mark__orbit" cx="32" cy="32" r="22.5" />
+  <path class="brand-mark__node brand-mark__node--north" d="M32 1.5 37 13l-5 5-5-5Z" />
+  <path class="brand-mark__node brand-mark__node--east" d="m62.5 32-11.5 5-5-5 5-5Z" />
+  <path class="brand-mark__node brand-mark__node--south" d="M32 62.5 27 51l5-5 5 5Z" />
+  <path class="brand-mark__node brand-mark__node--west" d="M1.5 32 13 27l5 5-5 5Z" />
+  <path class="brand-mark__k" d="M20 14h9v14.2L42.2 14H54L38.2 30.1 55 50H43.1L29 32.9V50h-9Z" />
+  <path class="brand-mark__beam" d="m29 32.9 9.2-2.8L55 50H43.1Z" />
+</svg>

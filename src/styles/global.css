@@ -8,6 +8,16 @@
   box-sizing: border-box;
 }
 
+:root {
+  --brand-midnight: #071a33;
+  --brand-navy: #0b2d52;
+  --brand-cobalt: #2563eb;
+  --brand-azure: #60a5fa;
+  --brand-ice: #dbeafe;
+  --brand-silver: #b9c7d8;
+  --brand-glow: rgba(37, 99, 235, .22);
+}
+
 html {
   scroll-behavior: smooth;
   scroll-padding-top: 100px;
@@ -76,16 +86,49 @@ a {
   align-items: center;
   padding: 24px 8%;
   border-bottom: 1px solid rgba(255,255,255,.08);
-  background: #0f172a;
+  background:
+    radial-gradient(circle at 10% 50%, rgba(96,165,250,.13), transparent 24%),
+    linear-gradient(90deg, rgba(7,26,51,.98), rgba(15,23,42,.97) 42%);
   box-shadow: 0 10px 28px rgba(2, 6, 23, .24);
   backdrop-filter: blur(18px);
   -webkit-backdrop-filter: blur(18px);
 }
 
 .logo {
-  font-size: 28px;
-  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
   color: white;
+  opacity: 1 !important;
+}
+
+.brand-mark {
+  display: block;
+  flex: 0 0 auto;
+  width: 48px;
+  height: 48px;
+  overflow: visible;
+  filter: drop-shadow(0 0 11px rgba(37,99,235,.34));
+}
+
+.brand-mark__orbit { fill: rgba(7,26,51,.42); stroke: var(--brand-silver); stroke-width: 2.25; stroke-dasharray: 24 8; }
+.brand-mark__node { fill: var(--brand-cobalt); }
+.brand-mark__node--east, .brand-mark__node--west { fill: var(--brand-azure); }
+.brand-mark__k { fill: var(--brand-ice); }
+.brand-mark__beam { fill: var(--brand-cobalt); }
+.logo-copy { display: grid; line-height: 1; }
+.logo-copy strong { font-size: 18px; letter-spacing: .12em; text-transform: uppercase; }
+.logo-copy small { margin-top: 5px; color: var(--brand-silver); font-size: 9px; font-weight: 700; letter-spacing: .19em; text-transform: uppercase; }
+
+.logo::before {
+  content: "";
+  position: absolute;
+  left: -28px;
+  width: 130px;
+  height: 70px;
+  border-radius: 50%;
+  background: radial-gradient(circle, var(--brand-glow), transparent 68%);
+  pointer-events: none;
 }
 
 .menu-toggle { display: none; }
@@ -104,7 +147,7 @@ a {
   transition: .3s;
 }
 
-.site-nav a::after {
+.site-nav ul a::after {
   content: "";
   position: absolute;
   left: 0;
@@ -117,12 +160,12 @@ a {
   transition: transform .25s ease;
 }
 
-.site-nav a:hover::after,
-.site-nav a.active::after {
+.site-nav ul a:hover::after,
+.site-nav ul a.active::after {
   transform: scaleX(1);
 }
 
-.site-nav a:hover {
+.site-nav ul a:hover {
   color: #60a5fa;
   opacity: 1;
 }
@@ -619,8 +662,11 @@ a {
 .article-list h3, .story-meta strong { overflow-wrap: normal; word-break: normal; }
 
 /* Footer */
-.site-footer { display: grid; grid-template-columns: 1fr auto; gap: 14px 48px; padding: 42px 8%; border-top: 1px solid rgba(255,255,255,.1); background: #080d18; color: #94a3b8; }
-.footer-brand { color: white; font-size: 21px; font-weight: 700; }
+.site-footer { display: grid; grid-template-columns: 1fr auto; gap: 14px 48px; padding: 42px 8%; border-top: 1px solid rgba(147,197,253,.15); background: radial-gradient(circle at 8% 20%, rgba(37,99,235,.12), transparent 28%), #080d18; color: #94a3b8; }
+.footer-brand { display: inline-flex; align-items: center; gap: 11px; width: max-content; color: white; font-size: 18px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; }
+.footer-brand .brand-mark { width: 38px; height: 38px; }
+.footer-brand > span { display: grid; line-height: 1; }
+.footer-brand small { margin-top: 5px; color: var(--brand-silver); font-size: 8px; letter-spacing: .15em; }
 .footer-links { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 22px; grid-row: span 2; }
 .footer-links a { color: #cbd5e1; }
 .footer-links a:hover { color: #93c5fd; }
@@ -640,7 +686,8 @@ a {
 @media(max-width:900px){
 
   .site-nav { padding: 18px 7%; }
-  .logo { font-size: 22px; }
+  .brand-mark { width: 42px; height: 42px; }
+  .logo-copy strong { font-size: 16px; }
   .menu-toggle { display: grid; gap: 5px; width: 44px; height: 44px; place-content: center; border: 1px solid rgba(255,255,255,.2); border-radius: 10px; color: white; background: rgba(255,255,255,.04); }
   .menu-toggle span:not(.sr-only) { display: block; width: 22px; height: 2px; border-radius: 2px; background: currentColor; transition: transform .2s ease, opacity .2s ease; }
   .menu-open .menu-toggle span:nth-child(2) { transform: translateY(7px) rotate(45deg); }
