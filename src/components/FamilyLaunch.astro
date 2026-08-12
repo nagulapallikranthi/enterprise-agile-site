@@ -1,0 +1,41 @@
+---
+import BrandMark from "./BrandMark.astro";
+---
+
+<div class="family-launch" data-family-launch hidden role="dialog" aria-modal="true" aria-labelledby="family-launch-title">
+  <div class="family-launch__glow" aria-hidden="true"></div>
+  <div class="family-launch__content">
+    <div class="family-launch__mark" aria-hidden="true"><BrandMark /></div>
+    <p class="family-launch__eyebrow">A MOTHER'S BLESSING · A FAMILY'S FOUNDATION</p>
+    <h1 id="family-launch-title">Every journey begins with those who believed first.</h1>
+    <p class="family-launch__tribute">
+      This portfolio is dedicated with gratitude to my parents, whose strength, values and sacrifices shaped the person and leader I became—and to my family, whose love gives every achievement its meaning.
+    </p>
+    <p class="family-launch__moment">Amma, this first step is yours.</p>
+    <button class="family-launch__button" type="button" data-family-launch-button>
+      <span>Amma, Launch My Journey</span>
+      <span aria-hidden="true">→</span>
+    </button>
+    <p class="family-launch__signature">With love and gratitude — Kranthi</p>
+  </div>
+</div>
+
+<script>
+  const launch = document.querySelector('[data-family-launch]');
+  const launchButton = document.querySelector('[data-family-launch-button]');
+  const memoryKey = 'kranthi-family-launch-complete';
+
+  if (launch && window.location.pathname === '/' && !window.localStorage.getItem(memoryKey)) {
+    launch.hidden = false;
+    document.body.classList.add('family-launch-active');
+    requestAnimationFrame(() => launch.classList.add('family-launch--ready'));
+    window.setTimeout(() => launchButton?.focus(), 650);
+  }
+
+  launchButton?.addEventListener('click', () => {
+    window.localStorage.setItem(memoryKey, new Date().toISOString());
+    launch?.classList.add('family-launch--opening');
+    document.body.classList.remove('family-launch-active');
+    window.setTimeout(() => launch?.remove(), 1150);
+  });
+</script>
