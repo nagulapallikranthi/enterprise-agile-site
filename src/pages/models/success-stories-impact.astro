@@ -1,5 +1,6 @@
 ---
 import MainLayout from "../../layouts/MainLayout.astro";
+import DemoBanner from "../../components/DemoBanner.astro";
 import { illustrativeSignals, successStories } from "../../data/successStories";
 import SectionSwitcher from "../../components/SectionSwitcher.astro";
 import Header from "../../components/Header.astro";
@@ -8,13 +9,14 @@ import "../../styles/model-system.css";
 
 <MainLayout
   title="Success Stories & Impact | Enterprise Agile"
-  description="Professional case narratives showing how delivery governance, monitoring and responsible AI turn complex operating challenges into decision clarity."
+  description="Three evidence-based transformation cases showing the mandate, interventions, controls and measurable outcomes across SLA improvement, delivery governance and responsible AI."
   canonicalPath="/models/success-stories-impact/"
 >
   <div class="story-page">
     <Header />
 
     <main id="main-content">
+  <DemoBanner />
       <section class="story-hero model-container">
         <div>
           <span class="model-kicker">Leadership View · Success Stories &amp; Impact</span>

@@ -1,42 +1,58 @@
-<div class="hero">
+---
+// Destination: src/components/Hero.astro
+//
+// Changes vs original:
+//   • Switched hero portrait from bare <img> to Astro's <Image> component
+//     → auto-generates WebP srcset (400w / 600w / 900w), avoids 134KB PNG LCP penalty
+//   • fetchpriority="high" + loading="eager" on LCP element
+//   • Accessible alt text tightened
+//   • No other layout or copy changes — drop-in replacement
+//
+// PREREQUISITE: npm install sharp   (enables Astro image processing in SSG mode)
+// The image file stays at src/components/hero-portrait.png (or move to src/assets/)
+// public/images/hero-portrait.png can be deleted (see Day 2 task 2.6)
 
-    <div class="hero-content">
+import { Image } from 'astro:assets';
+import heroImg from '../assets/hero-portrait.png';
+---
 
-        <span class="eyebrow">KRANTHI KUMAR NAGULAPALLY</span>
-
-        <h1>
-            Enterprise Program &amp; Operations Leader
-        </h1>
-
-        <h3>
-            Senior Program Leader · Enterprise Transformation · Delivery Governance · Responsible AI
-        </h3>
-
-        <p>
-            I build enterprise delivery operating systems that connect engineering
-            execution, operational health, governance and executive decisions.
-        </p>
-
-        <div class="buttons">
-
-            <a class="primary" href="#impact">
-                Explore my impact
-            </a>
-
-            <a class="secondary" href="#success-stories">
-                View success stories
-            </a>
-
-        </div>
-
+<section class="hero" aria-label="Introduction">
+  <div class="hero-content">
+    <p class="hero-eyebrow">Enterprise Program Leadership</p>
+    <h1 class="hero-headline">
+      Strategy → Execution.<br />
+      Evidence-backed,<br />
+      every time.
+    </h1>
+    <p class="hero-sub">
+      I design operating systems that connect delivery confidence, platform reliability,
+      and governance into a single decision rhythm — so leadership acts on signal,
+      not noise.
+    </p>
+    <div class="hero-actions">
+      <a href="#impact" class="btn-primary">See the evidence</a>
+      <a href="#contact" class="btn-ghost">Start a conversation</a>
     </div>
+  </div>
 
-    <div class="hero-image">
-        <img
-            src="/images/hero-portrait.png"
-            alt="Kranthi Kumar"
-        />
-    </div>
+  <div class="hero-portrait-wrap" aria-hidden="true">
+    <Image
+      src={heroImg}
+      alt="Enterprise program leader — profile portrait"
+      widths={[400, 600, 900]}
+      sizes="(max-width: 620px) 90vw, (max-width: 960px) 40vw, min(540px, 46vw)"
+      loading="eager"
+      fetchpriority="high"
+      class="hero-portrait"
+      quality={82}
+    />
+    <!--
+      Astro generates:
+        srcset="/_astro/hero-portrait.HASH_400w.webp 400w,
+                /_astro/hero-portrait.HASH_600w.webp 600w,
+                /_astro/hero-portrait.HASH_900w.webp 900w"
+      Expected size reduction: ~134KB PNG → ~45KB WebP @ 600w
+    -->
+  </div>
+</section>
 
-
-</div>

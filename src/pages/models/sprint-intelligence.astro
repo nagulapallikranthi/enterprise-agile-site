@@ -1,5 +1,6 @@
 ---
 import MainLayout from "../../layouts/MainLayout.astro";
+import DemoBanner from "../../components/DemoBanner.astro";
 import Header from "../../components/Header.astro";
 import SectionSwitcher from "../../components/SectionSwitcher.astro";
 import { sprintIntelligence } from "../../data/sprintIntelligence";
@@ -8,12 +9,13 @@ import "../../styles/model-system.css";
 
 <MainLayout
   title="Sprint Intelligence | Enterprise Agile"
-  description="A concise leadership view of sprint predictability, scope stability, delivery flow and risk using synthetic demonstration data."
+  description="Sprint intelligence and delivery governance: commitment visibility, scope control, rollover management and release-readiness evidence in one view."
   canonicalPath="/models/sprint-intelligence/"
 >
   <div class="sprint-page">
     <Header />
     <main id="main-content">
+  <DemoBanner />
       <section class="sprint-hero model-container" aria-labelledby="sprint-title">
         <div>
           <span class="model-kicker">Leadership View · Sprint Intelligence</span>
