@@ -1,5 +1,6 @@
 ---
 import MainLayout from "../../layouts/MainLayout.astro";
+import DemoBanner from "../../components/DemoBanner.astro";
 import Header from "../../components/Header.astro";
 import { portfolio } from "../../data/portfolio";
 import "../../styles/model-system.css";
@@ -44,13 +45,14 @@ const decisions = [
 
 <MainLayout
   title="Leadership Views | Enterprise Agile"
-  description="An executive decision view of portfolio confidence, operational health and measurable delivery outcomes."
+  description="An evidence-based executive decision system connecting delivery confidence, operational health and responsible automation — one view, one decision rhythm."
   canonicalPath="/models/executive-portfolio/"
 >
   <div class="leadership-page" id="overview">
     <Header />
 
     <main id="main-content">
+  <DemoBanner />
       <section class="leadership-hero model-container" aria-labelledby="leadership-title">
         <div class="hero-copy">
           <span class="eyebrow"><i aria-hidden="true"></i> Executive decision system</span>

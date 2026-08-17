@@ -1,5 +1,6 @@
 ---
 import MainLayout from "../../layouts/MainLayout.astro";
+import DemoBanner from "../../components/DemoBanner.astro";
 import SignalContent from "../../components/models/SignalContent.astro";
 import Header from "../../components/Header.astro";
 import "../../styles/model-system.css";
@@ -50,13 +51,14 @@ const sections = [
 
 <MainLayout
   title="CloudOps Command Center | Enterprise Agile"
-  description="A concise CloudOps command center using responsive sticky section navigation and synthetic operational data."
+  description="CloudOps and DevOps operations governance connecting platform reliability, service performance and release readiness in one operating model."
   canonicalPath="/models/cloudops-command-center/"
 >
   <div class="command-page">
     <Header />
 
     <main id="main-content" class="model-container">
+  <DemoBanner />
       <section class="intro">
         <div>
           <span class="model-kicker">Leadership View · CloudOps Command Center</span>
