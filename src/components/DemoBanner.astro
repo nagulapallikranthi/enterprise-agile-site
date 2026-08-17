@@ -1,0 +1,64 @@
+---
+// Destination: src/components/DemoBanner.astro
+//
+// Usage: import and drop at the top of any /models/ page's <main> content.
+//
+//   import DemoBanner from "../../components/DemoBanner.astro";
+//   <DemoBanner />
+//
+// Pages that need this (identified in audit):
+//   src/pages/models/executive-portfolio.astro
+//   src/pages/models/cloudops-command-center.astro
+//   src/pages/models/sprint-intelligence.astro
+//   src/pages/models/success-stories-impact.astro
+//
+// Why: Hardcoded confidence signals and illustrative data must be
+// labelled as such. Required for honest framing (audit finding H-07)
+// and mandatory before PROD deploy of /models/ pages.
+---
+
+<div class="demo-banner" role="note" aria-label="Demonstration view notice">
+  <span class="demo-icon" aria-hidden="true">◈</span>
+  <div>
+    <strong>Demonstration view</strong> — This page illustrates the structure,
+    decision language, and signal hierarchy of a live operating model. Metrics
+    and status values shown are representative, not sourced from a live system.
+  </div>
+</div>
+
+<style>
+  .demo-banner {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 12px 20px;
+    margin: 0 0 32px;
+    background: rgba(245, 158, 11, 0.08);
+    border: 1px solid rgba(245, 158, 11, 0.30);
+    border-radius: 8px;
+    font-size: 13px;
+    line-height: 1.6;
+    color: #fcd34d;
+  }
+
+  .demo-banner strong {
+    color: #fbbf24;
+  }
+
+  .demo-icon {
+    font-size: 16px;
+    margin-top: 1px;
+    flex-shrink: 0;
+    color: #f59e0b;
+  }
+
+  /* Muted on print so it doesn't distract from the actual content */
+  @media print {
+    .demo-banner {
+      border-color: #d1d5db;
+      background: #f9fafb;
+      color: #6b7280;
+    }
+    .demo-banner strong { color: #374151; }
+  }
+</style>

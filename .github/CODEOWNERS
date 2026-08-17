@@ -1,0 +1,15 @@
+# Destination: .github/CODEOWNERS
+# Every file in this repository is owned by @nagulapallikranthi.
+# This means any PR touching any file will request a review from the owner.
+# Ref: https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners
+
+# Default owner for all files
+* @nagulapallikranthi
+
+# CI/CD workflows — require explicit owner review before merge
+.github/workflows/ @nagulapallikranthi
+
+# Security-sensitive files
+src/worker.js       @nagulapallikranthi
+SECURITY.md         @nagulapallikranthi
+wrangler.jsonc      @nagulapallikranthi

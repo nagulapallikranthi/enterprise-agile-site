@@ -26,7 +26,7 @@
       }
     },
     "production": {
-      "name": "spm",
+      "name": "enterprise-agile-site-prod",
       "assets": {
         "binding": "ASSETS",
         "directory": "./dist",
