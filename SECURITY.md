@@ -8,7 +8,7 @@ If you discover a security vulnerability in this site or its source code, please
 
 ### How to report
 
-Email: <!-- TODO: Replace with your professional email --> **kranthi@YOUR_DOMAIN.com**
+Email: **nagulapalli.kranthi@gmail.com**
 
 Include in your report:
 - A clear description of the vulnerability
