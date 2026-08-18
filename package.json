@@ -7,7 +7,7 @@
   },
   "scripts": {
     "dev": "astro dev",
-    "build": "astro build",
+    "build": "astro build && node scripts/gen-headers.mjs",
     "check": "npm run build && node scripts/validate-build.mjs",
     "preview": "astro preview",
     "deploy:dev": "npm run build && wrangler deploy --env dev",
