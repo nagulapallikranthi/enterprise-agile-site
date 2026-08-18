@@ -729,7 +729,7 @@ a {
 /* Frameworks, Articles and Contact */
 .frameworks, .articles, .contact { padding: 108px 8%; border-top: 1px solid rgba(255,255,255,.08); }
 .frameworks { background: radial-gradient(circle at 80% 20%, rgba(37,99,235,.14), transparent 32%), #0f172a; }
-.framework-grid { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 22px; max-width: 1120px; margin: 0 auto; }
+/* .framework-grid replaced by .framework-carousel + Carousel component */
 .framework-card { min-width: 0; min-height: 300px; padding: 36px; border-radius: 22px; border: 1px solid rgba(255,255,255,.1); background: rgba(255,255,255,.04); }
 .framework-card span { color: #60a5fa; font-weight: 700; letter-spacing: 2px; }
 .framework-card h3 { margin: 30px 0 20px; font-size: 26px; line-height: 1.2; }
@@ -907,7 +907,6 @@ a {
   }
 
   .frameworks, .articles, .contact { padding: 72px 7%; }
-  .framework-grid { grid-template-columns: 1fr; }
   .framework-carousel .framework-card { flex-basis: calc((100% - 16px) / 2); }
   .carousel-arrow { width: 44px; height: 44px; }
   .framework-card { min-height: auto; }
