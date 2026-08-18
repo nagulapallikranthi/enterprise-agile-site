@@ -22,7 +22,7 @@ export default defineConfig({
   // Controls canonical URLs, OG tags, and sitemap entries.
   // Must match the deployed domain per environment.
   // Falls back to STG during development if env var is not set.
-  site: process.env.PUBLIC_SITE_URL ?? "https://enterprise-agile-site.nagulapalli-kranthi.workers.dev",
+  site: process.env.PUBLIC_SITE_URL ?? "https://spm.nagulapalli-kranthi.workers.dev",
 
   // ── HTML compression ─────────────────────────────────────────────────────
   // Strips whitespace from HTML output. Safe for all content.

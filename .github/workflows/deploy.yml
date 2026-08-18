@@ -63,6 +63,8 @@ jobs:
         run: npm ci
 
       - name: Build site
+        env:
+          PUBLIC_SITE_URL: ${{ github.ref_name == 'develop' && 'https://enterprise-agile-site-dev.nagulapalli-kranthi.workers.dev' || github.ref_name == 'staging' && 'https://enterprise-agile-site.nagulapalli-kranthi.workers.dev' || 'https://spm.nagulapalli-kranthi.workers.dev' }}
         run: npm run build
 
       - name: Deploy Worker
