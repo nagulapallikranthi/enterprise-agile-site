@@ -63,8 +63,8 @@ PROD approval: push to `main` → CI queues → Kranthi approves at
 
 | ID | Area | Status | Root Cause | Approved Fix |
 |---|---|---|---|---|
-| BUG-01 | Framework carousel | **OPEN** | No `.framework-carousel` wrapper div → CSS selector `.framework-carousel .framework-card` never matches → cards have no flex-basis → all 6 shrink-to-fit the viewport. Counter and arrows show but are non-functional on desktop. | Desktop (≥1024px): remove Carousel, render as `.framework-grid` CSS grid. Mobile: keep carousel. |
-| BUG-02 | Delivery Impact cards | **OPEN** | `justify-content: space-between` + `min-height: 188px` with 3 elements pushes description to card bottom, creating artificial whitespace gap. | `justify-content: flex-start; gap: 12px; min-height: 0` |
+| BUG-01 | Framework carousel | **FIXED** | No `.framework-carousel` wrapper div → CSS selector `.framework-carousel .framework-card` never matches → cards have no flex-basis → all 6 shrink-to-fit the viewport. Counter and arrows show but are non-functional on desktop. | Desktop (≥1024px): remove Carousel, render as `.framework-grid` CSS grid. Mobile: keep carousel. |
+| BUG-02 | Delivery Impact cards | **FIXED** | `justify-content: space-between` + `min-height: 188px` with 3 elements pushes description to card bottom, creating artificial whitespace gap. | `justify-content: flex-start; gap: 12px; min-height: 0` |
 | BUG-03 | privacy.astro + terms.astro | **LOW / BACKLOG** | Email is a `<!-- TODO -->` placeholder. | Replace once professional domain is registered. |
 | BUG-04 | MainLayout.astro L24 | **LOW / BACKLOG** | Stale TODO comment about PUBLIC_SITE_URL (already handled). | Remove comment. |
 
@@ -74,13 +74,13 @@ PROD approval: push to `main` → CI queues → Kranthi approves at
 
 ### Sprint — Active
 
-- [ ] **BUG-01 — Framework section: grid on desktop, carousel on mobile**
+- [x] **BUG-01 — Framework section: grid on desktop, carousel on mobile** *(2026-08-18)*
   - `src/pages/index.astro`: on desktop render frameworks as `<div class="framework-grid">` (6 articles). On mobile use `<Carousel>`.
   - `src/styles/global.css`: add `@media (max-width: 1023px)` block with carousel for framework section; hide grid below 1024px.
   - Acceptance: Desktop — 6 cards in 3×2 grid, no arrows, no counter. Mobile — 1 card per page carousel.
   - Flow: DEV → visual QA → STG → PROD.
 
-- [ ] **BUG-02 — Delivery Impact card: remove artificial whitespace**
+- [x] **BUG-02 — Delivery Impact card: remove artificial whitespace** *(2026-08-18)*
   - `src/styles/global.css` → `.impact-card`: `justify-content: flex-start; gap: 12px; min-height: 0; padding: 20px 24px`.
   - Acceptance: Cards are compact. Metric and description visually close. No empty zones.
   - Flow: DEV → visual QA → PROD.
@@ -130,6 +130,8 @@ PROD approval: push to `main` → CI queues → Kranthi approves at
 
 | Date | What | Commit |
 |---|---|---|
+| 2026-08-18 | BUG-01: Framework carousel → CSS grid on desktop (3×2), no arrows | `defcee1` |
+| 2026-08-18 | BUG-02: Delivery Impact cards — flex-start + gap, removed min-height | `defcee1` |
 | 2026-08-18 | Carousel .carousel-track display:flex added to global.css — fixed 19-card vertical stacking | `12f7788` |
 | 2026-08-18 | Canonical/OG URLs fixed to spm across astro.config, robots.txt, deploy.yml | `a239e02` |
 | 2026-08-18 | PROD worker renamed enterprise-agile-site-prod → spm in wrangler.jsonc | `193c3a6` |
@@ -179,4 +181,4 @@ Scopes: `carousel layout seo security deploy content a11y perf`
 
 ---
 
-*Last updated: 2026-08-18 | Session: carousel-fix + MOP alignment + session-bootstrap setup*
+*Last updated: 2026-08-18 | Session: BUG-01 framework grid + BUG-02 impact card compact*
