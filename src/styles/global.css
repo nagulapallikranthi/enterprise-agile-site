@@ -743,6 +743,9 @@ a {
 .carousel-controls > p { color: #94a3b8; font-size: 13px; letter-spacing: .08em; text-transform: uppercase; }
 .carousel-controls > div { display: flex; gap: 10px; }
 .framework-viewport { overflow: hidden; }
+/* Carousel.astro component — used by both impact + framework carousels */
+.carousel-viewport { overflow: hidden; }
+.carousel-track { display: flex; gap: 16px; transition: transform .42s cubic-bezier(.22,.8,.28,1); }
 .framework-track { --framework-offset: 0px; display: flex; gap: 16px; transform: translateX(calc(-1 * var(--framework-offset))); transition: transform .42s cubic-bezier(.22,.8,.28,1); }
 .framework-carousel .framework-card { flex: 0 0 calc((100% - 32px) / 3); min-width: 0; min-height: 390px; }
 .carousel-arrow { width: 52px; height: 52px; border: 1px solid rgba(147,197,253,.35); border-radius: 50%; color: white; background: rgba(30,64,175,.24); font-size: 1.35rem; cursor: pointer; }
