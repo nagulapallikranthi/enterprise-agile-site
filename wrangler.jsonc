@@ -11,6 +11,7 @@
   "env": {
     "dev": {
       "name": "enterprise-agile-site-dev",
+      "main": "src/worker.js",
       "assets": {
         "binding": "ASSETS",
         "directory": "./dist",
@@ -19,6 +20,7 @@
     },
     "staging": {
       "name": "enterprise-agile-site",
+      "main": "src/worker.js",
       "assets": {
         "binding": "ASSETS",
         "directory": "./dist",
@@ -27,6 +29,7 @@
     },
     "production": {
       "name": "enterprise-agile-site-prod",
+      "main": "src/worker.js",
       "assets": {
         "binding": "ASSETS",
         "directory": "./dist",
