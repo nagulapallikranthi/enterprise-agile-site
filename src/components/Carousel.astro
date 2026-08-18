@@ -161,8 +161,16 @@ const posId  = `${id}-position`;
       const max = Math.max(0, cards.length - v);
       start = Math.min(start, max);
 
-      const cardWidth = cards[0]!.getBoundingClientRect().width;
-      const gap       = Number.parseFloat(getComputedStyle(track).columnGap || "0");
+      // Compute card width from track's actual rendered width so cards always fill the row.
+      const gap       = 16;
+      const trackW    = track.getBoundingClientRect().width;
+      const cardWidth = trackW > 0 ? (trackW - gap * (v - 1)) / v : 0;
+      if (cardWidth > 0) {
+        cards.forEach((c) => {
+          c.style.flex = `0 0 ${cardWidth}px`;
+        });
+      }
+
       track.style.setProperty(cssVar, `${start * (cardWidth + gap)}px`);
       track.style.transform = `translateX(calc(-1 * var(${cssVar})))`;
 
