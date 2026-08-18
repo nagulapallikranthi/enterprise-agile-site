@@ -8,37 +8,118 @@ import "../../styles/model-system.css";
 const signals = [
   { value: "17+", label: "Years leading delivery", tone: "blue" },
   { value: "10", label: "Global teams led", tone: "violet" },
-  { value: "+22%", label: "SLA adherence", tone: "green" },
-  { value: "98%", label: "On-time delivery", tone: "green" },
+  { value: "+22%", label: "SLA adherence lift", tone: "green" },
+  { value: "98%", label: "On-time delivery rate", tone: "green" },
+  { value: "$50M", label: "Cost savings driven", tone: "violet" },
+  { value: "100+", label: "Concurrent programs governed", tone: "blue" },
 ];
 
 const decisions = [
   {
-    label: "Delivery confidence",
+    label: "Portfolio outcome confidence",
     status: "On track",
     tone: "green",
-    title: "Protect the committed release path",
-    summary: "Scope, dependencies and readiness evidence are reviewed in one operating rhythm before promotion.",
+    title: "Committed outcomes remain achievable",
+    summary: "Scope, dependencies and release evidence are reviewed in one operating rhythm before promotion. Exceptions trigger named intervention before they affect the committed outcome.",
+    metrics: [
+      ["Outcome confidence", "84%", "healthy"],
+      ["Scope baseline drift", "+2 SP", "watch"],
+      ["Release gates passed", "6 / 6", "healthy"],
+    ],
     evidence: ["Commitment-to-release traceability", "Explicit dependency ownership", "Evidence-led release gates"],
-    action: "Intervene only on exceptions that threaten the committed outcome.",
+    action: "Intervene only on exceptions that threaten the committed outcome. No escalation required this cycle.",
   },
   {
-    label: "Operational health",
+    label: "Release gate integrity",
     status: "On track",
     tone: "blue",
-    title: "Turn service signals into accountable action",
-    summary: "SLA exposure, ageing work and ownership gaps are surfaced early enough for teams to correct course.",
-    evidence: ["Automated SLA health signals", "Oldest-work visibility", "Named owner and next action"],
-    action: "Direct leadership attention to breached or ageing work without disrupting healthy delivery.",
+    title: "All active releases have documented gate evidence",
+    summary: "Scope, test coverage, dependency sign-off and rollback readiness are validated before promotion. No release moves on assertion alone — one item pending rollback plan approval.",
+    metrics: [
+      ["Gates evidence-complete", "100%", "healthy"],
+      ["Rollback readiness", "5 / 6", "watch"],
+      ["Open gate risks", "1", "watch"],
+    ],
+    evidence: ["Acceptance scope vs. committed scope reconciled", "Environment readiness confirmed", "Rollback plan named and approved"],
+    action: "Promote five releases with complete gate evidence. Hold one pending rollback plan approval — owner identified, due date set.",
   },
   {
-    label: "Responsible AI",
+    label: "SLA & operational health",
     status: "Watch",
     tone: "amber",
-    title: "Scale automation without losing human control",
-    summary: "Agentic workflows support decisions through evidence, bounded actions and clear escalation paths.",
-    evidence: ["Human-owned approvals", "Auditable action history", "Anti-spam and escalation controls"],
-    action: "Expand only when reliability, adoption and measurable value are demonstrated.",
+    title: "SLA is improving — three items need active ownership",
+    summary: "Aggregate service level is within target, but three high-priority items have consumed more than 70% of their resolution window. Intervention before next checkpoint prevents breach.",
+    metrics: [
+      ["SLA attained", "93%", "watch"],
+      ["At-risk items", "3", "watch"],
+      ["Oldest open item", "18 d", "act"],
+    ],
+    evidence: ["Automated SLA health signals", "Oldest-work visibility by owner", "Named next action and closure date"],
+    action: "Service owners confirm recovery plans for the three at-risk items before the next checkpoint. Escalate if ownership is unclear.",
+  },
+  {
+    label: "Cost posture & recovery",
+    status: "Watch",
+    tone: "amber",
+    title: "Budget baseline intact — one workstream needs a decision",
+    summary: "Actuals are within 4% of planned spend. One workstream is absorbing scope expansion without a formal change request. Requires a named decision within five business days to prevent cost baseline drift.",
+    metrics: [
+      ["Forecast vs. baseline", "+4%", "watch"],
+      ["Contingency remaining", "68%", "healthy"],
+      ["Recovery actions open", "1", "watch"],
+    ],
+    evidence: ["Weekly FAC rebuild against current CPI", "Contingency draws documented with risk reference", "Recovery action with named owner and date"],
+    action: "Approve or reject the scope expansion in Workstream C by Thursday. Delay beyond this date affects the cost baseline without authorization.",
+  },
+  {
+    label: "Risk & dependency exposure",
+    status: "Watch",
+    tone: "amber",
+    title: "Four cross-team dependencies need resolution owners",
+    summary: "Risk register is current and most exposures are mitigated. Four cross-team dependencies lack a confirmed resolution owner and are within 14 days of milestone impact.",
+    metrics: [
+      ["Risks with mitigation", "12", "healthy"],
+      ["Unresolved dependencies", "4", "act"],
+      ["Days to next milestone", "11", "watch"],
+    ],
+    evidence: ["Dependency register tied to milestone dates", "Risk mitigation plans with review dates", "Escalation threshold set at 14-day horizon"],
+    action: "Assign resolution owners for all four unresolved dependencies by end of week. Delay beyond this point threatens the committed milestone.",
+  },
+];
+
+const views = [
+  {
+    label: "Commitment & Velocity",
+    title: "Sprint Intelligence",
+    description: "Sprint delivery confidence, scope change tracking, rollover ownership and release readiness evidence — one leadership workspace per sprint.",
+    href: "/models/sprint-intelligence/",
+    tone: "blue",
+    icon: "◎",
+  },
+  {
+    label: "Operational Continuity",
+    title: "CloudOps Command Center",
+    description: "Service health, SLA risk, aging work, ownership concentration and recurring pattern detection across cloud and DevOps operations.",
+    href: "/models/cloudops-command-center/",
+    tone: "violet",
+    icon: "⬡",
+  },
+  {
+    label: "Outcome Evidence",
+    title: "Success Stories & Impact",
+    description: "Three evidence-based enterprise transformations — problem mandate, intervention, operating model, and measurable outcome.",
+    href: "/models/success-stories-impact/",
+    tone: "green",
+    icon: "◈",
+  },
+  {
+    label: "Portfolio Synthesis",
+    title: "Executive Portfolio",
+    description: "The cross-program leadership view — outcome confidence, release integrity, SLA posture, cost position, and risk exposure in one decision rhythm.",
+    href: "/models/executive-portfolio/",
+    tone: "amber",
+    icon: "◇",
+    active: true,
   },
 ];
 ---
@@ -52,12 +133,14 @@ const decisions = [
     <Header />
 
     <main id="main-content">
-  <DemoBanner />
+      <DemoBanner />
+
+      <!-- HERO -->
       <section class="leadership-hero model-container" aria-labelledby="leadership-title">
         <div class="hero-copy">
           <span class="eyebrow"><i aria-hidden="true"></i> Executive decision system</span>
           <h1 id="leadership-title">See the signal.<br /><em>Make the call.</em></h1>
-          <p>One leadership view connecting delivery confidence, operational health and responsible automation—so attention goes where it creates the most leverage.</p>
+          <p>Five leadership signals — outcome confidence, release integrity, SLA health, cost posture, and risk exposure — reviewed in one weekly rhythm so attention goes where it creates the most leverage.</p>
           <div class="hero-actions">
             <a class="primary-action" href="#decision-lens">Open decision lens <span aria-hidden="true">↓</span></a>
             <a class="text-action" href="mailto:nagulapalli.kranthi@gmail.com?subject=Leadership%20Portfolio%20Conversation">Email Me <span aria-hidden="true">↗</span></a>
@@ -67,22 +150,28 @@ const decisions = [
         <aside class="briefing-card" aria-label="Leadership briefing">
           <div class="briefing-head">
             <span>Leadership brief</span>
-            <strong><i aria-hidden="true"></i> Decision-ready</strong>
+            <strong><i aria-hidden="true"></i> Decisions pending</strong>
           </div>
-          <p class="briefing-question">What requires attention now?</p>
+          <p class="briefing-question">What requires attention this week?</p>
           <div class="briefing-answer">
             <div>
-              <strong>Protect delivery confidence</strong>
-              <p>Keep ownership, dependencies and release evidence aligned.</p>
+              <strong>Resolve four cross-team dependencies</strong>
+              <p>Unresolved owners within 11 days of milestone — assign by end of week.</p>
+            </div>
+            <div class="briefing-divider"></div>
+            <div>
+              <strong>Approve Workstream C scope decision</strong>
+              <p>Cost baseline drift risk if decision is deferred past Thursday.</p>
             </div>
           </div>
           <div class="briefing-meta">
             <span>Review rhythm <strong>Weekly</strong></span>
-            <span>Critical risks <strong>0</strong></span>
+            <span>Watch signals <strong>3</strong></span>
           </div>
         </aside>
       </section>
 
+      <!-- SIGNAL BAND -->
       <section class="signal-band" aria-label="Leadership impact">
         <div class="model-container signal-grid">
           {signals.map((signal) => (
@@ -94,13 +183,14 @@ const decisions = [
         </div>
       </section>
 
+      <!-- DECISION LENS -->
       <section class="decision-section model-container" id="decision-lens" aria-labelledby="decision-title" data-decision-lens>
         <header class="section-intro">
           <div>
             <span class="eyebrow">Leadership attention</span>
-            <h2 id="decision-title">Three signals. One decision rhythm.</h2>
+            <h2 id="decision-title">Five signals. One decision rhythm.</h2>
           </div>
-          <p>Select a signal to see the evidence, leadership response and intended outcome.</p>
+          <p>Select a signal to see the evidence, metrics, leadership response and intended outcome.</p>
         </header>
 
         <div class="decision-workspace">
@@ -114,7 +204,10 @@ const decisions = [
                 data-decision-target={index}
               >
                 <span class="tab-index">0{index + 1}</span>
-                <span class="tab-copy"><strong>{decision.label}</strong><small>{decision.status}</small></span>
+                <span class="tab-copy">
+                  <strong>{decision.label}</strong>
+                  <small class={`tab-status tab-status-${decision.tone}`}>{decision.status}</small>
+                </span>
                 <i aria-hidden="true">→</i>
               </button>
             ))}
@@ -123,12 +216,27 @@ const decisions = [
           <div class="decision-panels" aria-live="polite">
             {decisions.map((decision, index) => (
               <article id={`decision-panel-${index}`} role="tabpanel" data-decision-panel={index} hidden={index !== 0}>
-                <div class="panel-status"><span class={`status-dot status-${decision.tone}`}></span>{decision.status}</div>
+                <div class="panel-status">
+                  <span class={`status-dot status-${decision.tone}`}></span>
+                  {decision.status}
+                </div>
                 <h3>{decision.title}</h3>
-                <p>{decision.summary}</p>
-                <ul>
+                <p class="panel-summary">{decision.summary}</p>
+
+                <div class="panel-metrics">
+                  {decision.metrics.map(([label, value, state]) => (
+                    <div class="metric-tile">
+                      <span>{label}</span>
+                      <strong>{value}</strong>
+                      <small class={state}>{state === "healthy" ? "Healthy" : state === "watch" ? "Watch" : "Act"}</small>
+                    </div>
+                  ))}
+                </div>
+
+                <ul class="evidence-tags">
                   {decision.evidence.map((item) => <li><span aria-hidden="true">✓</span>{item}</li>)}
                 </ul>
+
                 <div class="leadership-call">
                   <span>Leadership call</span>
                   <strong>{decision.action}</strong>
@@ -139,24 +247,91 @@ const decisions = [
         </div>
       </section>
 
+      <!-- OPERATING MODEL -->
       <section class="operating-section model-container" aria-labelledby="operating-title">
         <div class="operating-copy">
           <span class="eyebrow">Operating model</span>
           <h2 id="operating-title">Governance that moves work forward.</h2>
-          <p>{portfolio.identity.positioning}. The system is designed to reduce reporting effort, expose exceptions and preserve accountable human decisions.</p>
+          <p>{portfolio.identity.positioning}. The system is designed to reduce reporting effort, expose exceptions early, and preserve accountable human decisions at every leadership touchpoint.</p>
           <a href="/models/success-stories-impact/">View delivery evidence <span aria-hidden="true">→</span></a>
         </div>
         <ol class="operating-flow" aria-label="Leadership operating rhythm">
-          <li><div><strong>Sense</strong><p>Unify delivery, service and risk signals.</p></div></li>
-          <li><div><strong>Decide</strong><p>Focus leaders on exceptions and trade-offs.</p></div></li>
-          <li><div><strong>Act</strong><p>Assign ownership, evidence and next action.</p></div></li>
-          <li><div><strong>Learn</strong><p>Measure outcomes and improve the system.</p></div></li>
+          <li>
+            <div class="flow-step">
+              <strong>Sense</strong>
+              <p>Unify delivery, service and risk signals from all active programs into one validated portfolio view.</p>
+              <div class="flow-meta">
+                <span class="flow-output">Single trusted portfolio state</span>
+                <span class="flow-cadence">Continuous automation + weekly consolidation</span>
+              </div>
+            </div>
+          </li>
+          <li>
+            <div class="flow-step">
+              <strong>Decide</strong>
+              <p>Focus leadership attention on exceptions, trade-offs and recovery owners — not status assembly.</p>
+              <div class="flow-meta">
+                <span class="flow-output">Named decision with authority and deadline</span>
+                <span class="flow-cadence">Weekly steering review</span>
+              </div>
+            </div>
+          </li>
+          <li>
+            <div class="flow-step">
+              <strong>Act</strong>
+              <p>Assign ownership, evidence requirement and next-action date within 24 hours of each decision.</p>
+              <div class="flow-meta">
+                <span class="flow-output">Recovery commitment with closure criteria</span>
+                <span class="flow-cadence">Within 24 hours of decision</span>
+              </div>
+            </div>
+          </li>
+          <li>
+            <div class="flow-step">
+              <strong>Learn</strong>
+              <p>Measure outcomes against the stated leadership call, close the loop, and improve the system.</p>
+              <div class="flow-meta">
+                <span class="flow-output">Updated governance model and permanent guardrail</span>
+                <span class="flow-cadence">Monthly retrospective</span>
+              </div>
+            </div>
+          </li>
         </ol>
       </section>
 
+      <!-- FOUR VIEWS HUB -->
+      <section class="views-hub model-container" aria-labelledby="views-title">
+        <header class="views-hub-header">
+          <span class="eyebrow">The leadership system</span>
+          <h2 id="views-title">Four views. One operating model.</h2>
+          <p>Each view covers a distinct leadership domain. Together they form a complete picture of delivery, operations, outcomes, and portfolio health — without duplicating information or requiring separate review cycles.</p>
+        </header>
+        <div class="views-grid">
+          {views.map((view) => (
+            <a
+              href={view.href}
+              class={`view-card view-card-${view.tone}${view.active ? " view-card-active" : ""}`}
+              aria-current={view.active ? "page" : undefined}
+            >
+              <div class="view-card-head">
+                <span class="view-icon" aria-hidden="true">{view.icon}</span>
+                <span class={`view-label view-label-${view.tone}`}>{view.label}</span>
+              </div>
+              <h3>{view.title}</h3>
+              <p>{view.description}</p>
+              <span class="view-link" aria-hidden="true">{view.active ? "Current view" : "Open view →"}</span>
+            </a>
+          ))}
+        </div>
+      </section>
+
+      <!-- CTA -->
       <section class="leadership-cta">
         <div class="model-container cta-inner">
-          <div><span class="eyebrow">Next decision</span><h2>Make complex delivery governable.</h2></div>
+          <div>
+            <span class="eyebrow">Next decision</span>
+            <h2>Make complex delivery governable.</h2>
+          </div>
           <div class="cta-actions">
             <a class="primary-action" href="mailto:nagulapalli.kranthi@gmail.com?subject=Leadership%20Portfolio%20Conversation">Email Me <span aria-hidden="true">↗</span></a>
             <a class="text-action" href="/downloads/Kranthi_Delivery_Leader.pdf" download="Kranthi_Delivery_Leader.pdf" data-track-action="resume_download">Download Resume</a>
@@ -169,114 +344,168 @@ const decisions = [
 
 <style>
   .leadership-page {
-    --ink: #f8fafc;
-    --muted: #9fb0c8;
-    --line: rgba(148, 163, 184, .18);
-    --panel: rgba(18, 31, 52, .82);
-    --blue: #60a5fa;
-    --violet: #a78bfa;
-    --green: #4fd1a5;
-    min-height: 100vh;
-    color: var(--ink);
-    background: #081221;
+    --ink: #f8fafc; --muted: #9fb0c8; --line: rgba(148,163,184,.18); --panel: rgba(18,31,52,.82);
+    --blue: #60a5fa; --violet: #a78bfa; --green: #4fd1a5; --amber: #f2c46d;
+    min-height: 100vh; color: var(--ink); background: #081221;
   }
-  .leadership-page :global(.site-header) { background: rgba(8, 18, 33, .92); border-color: var(--line); }
-  .leadership-hero { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(340px, .8fr); gap: clamp(48px, 8vw, 112px); align-items: center; min-height: 690px; padding-block: 92px 82px; }
+  .leadership-page :global(.site-header) { background: rgba(8,18,33,.92); border-color: var(--line); }
+
+  /* HERO */
+  .leadership-hero { display: grid; grid-template-columns: minmax(0,1.2fr) minmax(340px,.8fr); gap: clamp(48px,8vw,112px); align-items: center; min-height: 690px; padding-block: 92px 82px; }
   .eyebrow { display: inline-flex; align-items: center; gap: 9px; color: #8dbdf6; font-size: .7rem; font-weight: 850; letter-spacing: .13em; text-transform: uppercase; }
-  .eyebrow i { width: 7px; height: 7px; border-radius: 999px; background: var(--green); box-shadow: 0 0 0 5px rgba(79, 209, 165, .12); }
-  h1 { margin-top: 22px; font-size: clamp(3.6rem, 7.4vw, 7rem); line-height: .88; letter-spacing: -.07em; }
+  .eyebrow i { width: 7px; height: 7px; border-radius: 999px; background: var(--green); box-shadow: 0 0 0 5px rgba(79,209,165,.12); }
+  h1 { margin-top: 22px; font-size: clamp(3.6rem,7.4vw,7rem); line-height: .88; letter-spacing: -.07em; }
   h1 em { color: var(--blue); font-style: normal; }
-  .hero-copy > p { max-width: 700px; margin-top: 30px; color: var(--muted); font-size: clamp(1rem, 1.5vw, 1.16rem); line-height: 1.75; }
+  .hero-copy > p { max-width: 700px; margin-top: 30px; color: var(--muted); font-size: clamp(1rem,1.5vw,1.16rem); line-height: 1.75; }
   .hero-actions, .cta-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 20px; margin-top: 34px; }
   .primary-action { display: inline-flex; align-items: center; gap: 22px; padding: 14px 17px; border-radius: 9px; background: #3b82f6; color: white !important; font-size: .8rem; font-weight: 850; }
   .text-action { color: #dbeafe !important; font-size: .8rem; font-weight: 800; }
-  .briefing-card { overflow: hidden; border: 1px solid rgba(96, 165, 250, .26); border-radius: 20px; background: linear-gradient(145deg, rgba(30, 55, 88, .92), rgba(13, 27, 47, .94)); box-shadow: 0 28px 70px rgba(0, 0, 0, .28); }
+
+  /* BRIEFING CARD */
+  .briefing-card { overflow: hidden; border: 1px solid rgba(96,165,250,.26); border-radius: 20px; background: linear-gradient(145deg,rgba(30,55,88,.92),rgba(13,27,47,.94)); box-shadow: 0 28px 70px rgba(0,0,0,.28); }
   .briefing-head { display: flex; justify-content: space-between; gap: 18px; padding: 19px 22px; border-bottom: 1px solid var(--line); color: var(--muted); font-size: .67rem; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; }
-  .briefing-head strong { color: #bff4df; white-space: nowrap; }
-  .briefing-head i { display: inline-block; width: 6px; height: 6px; margin-right: 6px; border-radius: 50%; background: var(--green); }
+  .briefing-head strong { color: #f2c46d; white-space: nowrap; }
+  .briefing-head i { display: inline-block; width: 6px; height: 6px; margin-right: 6px; border-radius: 50%; background: var(--amber); box-shadow: 0 0 0 4px rgba(242,196,109,.15); }
   .briefing-question { padding: 24px 22px 12px; color: var(--muted); font-size: .76rem; }
-  .briefing-answer { padding: 0 22px 27px; }
-  .briefing-answer strong { display: block; font-size: 1rem; }
-  .briefing-answer p { margin-top: 7px; color: var(--muted); font-size: .82rem; line-height: 1.55; }
+  .briefing-answer { padding: 0 22px 27px; display: grid; gap: 16px; }
+  .briefing-answer strong { display: block; font-size: .95rem; }
+  .briefing-answer p { margin-top: 5px; color: var(--muted); font-size: .8rem; line-height: 1.55; }
+  .briefing-divider { height: 1px; background: var(--line); }
   .briefing-meta { display: grid; grid-template-columns: 1fr 1fr; border-top: 1px solid var(--line); }
   .briefing-meta span { display: grid; gap: 4px; padding: 17px 22px; color: var(--muted); font-size: .67rem; }
   .briefing-meta span + span { border-left: 1px solid var(--line); }
   .briefing-meta strong { color: white; font-size: .86rem; }
-  .signal-band { border-block: 1px solid var(--line); background: rgba(15, 28, 48, .75); }
-  .signal-grid { display: grid; grid-template-columns: repeat(4, 1fr); }
-  .signal { position: relative; display: grid; gap: 6px; padding: 28px clamp(18px, 3vw, 40px); }
+
+  /* SIGNAL BAND */
+  .signal-band { border-block: 1px solid var(--line); background: rgba(15,28,48,.75); }
+  .signal-grid { display: grid; grid-template-columns: repeat(6,1fr); }
+  .signal { position: relative; display: grid; gap: 6px; padding: 28px clamp(14px,2.5vw,36px); }
   .signal + .signal { border-left: 1px solid var(--line); }
   .signal::before { content: ""; position: absolute; inset: 0 auto 0 0; width: 2px; opacity: .8; }
   .signal-blue::before { background: var(--blue); } .signal-violet::before { background: var(--violet); } .signal-green::before { background: var(--green); }
-  .signal strong { font-size: clamp(1.45rem, 2.6vw, 2.1rem); letter-spacing: -.04em; white-space: nowrap; }
-  .signal span { color: var(--muted); font-size: .73rem; white-space: nowrap; }
+  .signal strong { font-size: clamp(1.2rem,2vw,1.9rem); letter-spacing: -.04em; white-space: nowrap; }
+  .signal span { color: var(--muted); font-size: .68rem; line-height: 1.3; }
+
+  /* DECISION LENS */
   .decision-section { padding-block: 112px; }
   .section-intro { display: flex; justify-content: space-between; align-items: end; gap: 50px; }
-  .section-intro h2, .operating-copy h2, .leadership-cta h2 { max-width: 760px; margin-top: 13px; font-size: clamp(2.2rem, 4.5vw, 4.4rem); line-height: .98; letter-spacing: -.055em; }
+  .section-intro h2, .operating-copy h2, .leadership-cta h2, .views-hub-header h2 { max-width: 760px; margin-top: 13px; font-size: clamp(2.2rem,4.5vw,4.4rem); line-height: .98; letter-spacing: -.055em; }
   .section-intro > p { max-width: 400px; color: var(--muted); font-size: .88rem; line-height: 1.65; }
-  .decision-workspace { display: grid; grid-template-columns: minmax(270px, .72fr) minmax(0, 1.28fr); gap: 18px; margin-top: 46px; }
+  .decision-workspace { display: grid; grid-template-columns: minmax(240px,.72fr) minmax(0,1.28fr); gap: 18px; margin-top: 46px; }
   .decision-tabs { display: grid; align-content: start; gap: 8px; }
-  .decision-tabs button { display: grid; grid-template-columns: 34px 1fr auto; gap: 12px; align-items: center; width: 100%; min-height: 78px; padding: 14px 17px; border: 1px solid var(--line); border-radius: 13px; background: rgba(18, 31, 52, .62); color: var(--muted); text-align: left; cursor: pointer; }
-  .decision-tabs button:hover, .decision-tabs button:focus-visible { border-color: rgba(96, 165, 250, .5); }
-  .decision-tabs button[aria-selected="true"] { border-color: rgba(96, 165, 250, .55); background: linear-gradient(100deg, rgba(35, 73, 111, .9), rgba(20, 40, 67, .9)); color: white; }
-  .tab-index { color: #7190b8; font-size: .65rem; font-weight: 900; }
+  .decision-tabs button { display: grid; grid-template-columns: 30px 1fr auto; gap: 10px; align-items: center; width: 100%; min-height: 72px; padding: 12px 15px; border: 1px solid var(--line); border-radius: 13px; background: rgba(18,31,52,.62); color: var(--muted); text-align: left; cursor: pointer; }
+  .decision-tabs button:hover, .decision-tabs button:focus-visible { border-color: rgba(96,165,250,.5); }
+  .decision-tabs button[aria-selected="true"] { border-color: rgba(96,165,250,.55); background: linear-gradient(100deg,rgba(35,73,111,.9),rgba(20,40,67,.9)); color: white; }
+  .tab-index { color: #7190b8; font-size: .62rem; font-weight: 900; }
   .tab-copy { display: grid; gap: 4px; min-width: 0; }
-  .tab-copy strong { font-size: .82rem; white-space: nowrap; }
-  .tab-copy small { color: #8fa6c3; font-size: .67rem; }
+  .tab-copy strong { font-size: .78rem; white-space: normal; line-height: 1.3; }
+  .tab-status { font-size: .63rem; font-weight: 800; text-transform: uppercase; letter-spacing: .06em; }
+  .tab-status-green { color: var(--green); } .tab-status-blue { color: var(--blue); } .tab-status-amber { color: var(--amber); }
   .decision-tabs button > i { font-style: normal; }
-  .decision-panels { min-height: 386px; border: 1px solid var(--line); border-radius: 18px; background: linear-gradient(145deg, rgba(23, 42, 69, .9), rgba(12, 25, 44, .95)); }
-  .decision-panels article { padding: clamp(28px, 5vw, 50px); }
+
+  /* PANELS */
+  .decision-panels { min-height: 460px; border: 1px solid var(--line); border-radius: 18px; background: linear-gradient(145deg,rgba(23,42,69,.9),rgba(12,25,44,.95)); }
+  .decision-panels article { padding: clamp(24px,4vw,44px); }
   .decision-panels article[hidden] { display: none; }
   .panel-status { display: flex; align-items: center; gap: 8px; color: #b9c9dc; font-size: .69rem; font-weight: 800; text-transform: uppercase; letter-spacing: .09em; }
-  .status-dot { width: 7px; height: 7px; border-radius: 50%; } .status-green { background: var(--green); } .status-blue { background: var(--blue); } .status-amber { background: #f2c46d; }
-  .decision-panels h3 { max-width: 680px; margin-top: 17px; font-size: clamp(1.8rem, 3.2vw, 3rem); line-height: 1.03; letter-spacing: -.04em; }
-  .decision-panels article > p { max-width: 720px; margin-top: 17px; color: var(--muted); font-size: .92rem; line-height: 1.7; }
-  .decision-panels ul { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 24px; padding: 0; list-style: none; }
-  .decision-panels li { display: flex; align-items: center; gap: 7px; padding: 8px 10px; border: 1px solid var(--line); border-radius: 999px; color: #ced9e8; font-size: .7rem; white-space: nowrap; }
-  .decision-panels li span { color: var(--green); }
-  .leadership-call { display: grid; gap: 7px; margin-top: 28px; padding-top: 22px; border-top: 1px solid var(--line); }
+  .status-dot { width: 7px; height: 7px; border-radius: 50%; }
+  .status-green { background: var(--green); } .status-blue { background: var(--blue); } .status-amber { background: var(--amber); }
+  .decision-panels h3 { max-width: 680px; margin-top: 16px; font-size: clamp(1.6rem,2.8vw,2.7rem); line-height: 1.05; letter-spacing: -.04em; }
+  .panel-summary { max-width: 720px; margin-top: 14px; color: var(--muted); font-size: .9rem; line-height: 1.7; }
+
+  /* METRIC TILES */
+  .panel-metrics { display: grid; grid-template-columns: repeat(3,1fr); gap: 10px; margin-top: 22px; }
+  .metric-tile { padding: 16px; border: 1px solid var(--line); border-radius: 12px; background: rgba(255,255,255,.03); }
+  .metric-tile span { display: block; color: var(--muted); font-size: .65rem; margin-bottom: 8px; }
+  .metric-tile strong { display: block; font-size: 1.5rem; letter-spacing: -.03em; }
+  .metric-tile small { display: inline-block; margin-top: 5px; font-size: .6rem; font-weight: 850; text-transform: uppercase; letter-spacing: .06em; }
+  .metric-tile small.healthy { color: var(--green); } .metric-tile small.watch { color: var(--amber); } .metric-tile small.act { color: #fb7185; }
+
+  /* EVIDENCE + CALL */
+  .evidence-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 20px; padding: 0; list-style: none; }
+  .evidence-tags li { display: flex; align-items: center; gap: 7px; padding: 7px 10px; border: 1px solid var(--line); border-radius: 999px; color: #ced9e8; font-size: .7rem; white-space: nowrap; }
+  .evidence-tags li span { color: var(--green); }
+  .leadership-call { display: grid; gap: 7px; margin-top: 22px; padding-top: 20px; border-top: 1px solid var(--line); }
   .leadership-call span { color: #7fa8d8; font-size: .66rem; font-weight: 850; text-transform: uppercase; letter-spacing: .1em; }
-  .leadership-call strong { max-width: 700px; font-size: .9rem; line-height: 1.55; }
-  .operating-section { display: grid; grid-template-columns: minmax(0, .9fr) minmax(420px, 1.1fr); gap: 80px; align-items: center; padding-block: 20px 112px; }
+  .leadership-call strong { max-width: 700px; font-size: .88rem; line-height: 1.6; }
+
+  /* OPERATING MODEL */
+  .operating-section { display: grid; grid-template-columns: minmax(0,.9fr) minmax(420px,1.1fr); gap: 80px; align-items: start; padding-block: 20px 112px; }
   .operating-copy > p { max-width: 600px; margin-top: 22px; color: var(--muted); font-size: .9rem; line-height: 1.7; }
   .operating-copy > a { display: inline-flex; gap: 18px; margin-top: 28px; color: #93c5fd; font-size: .8rem; font-weight: 850; }
-  .operating-flow { display: grid; margin: 0; padding: 0; border: 1px solid var(--line); border-radius: 17px; background: rgba(18, 31, 52, .55); list-style: none; }
-  .operating-flow li { padding: 21px 24px; }
+  .operating-flow { display: grid; margin: 0; padding: 0; border: 1px solid var(--line); border-radius: 17px; background: rgba(18,31,52,.55); list-style: none; }
+  .operating-flow li { padding: 22px 24px; }
   .operating-flow li + li { border-top: 1px solid var(--line); }
-  .operating-flow strong { font-size: .86rem; }
-  .operating-flow p { margin-top: 3px; color: var(--muted); font-size: .76rem; }
-  .leadership-cta { border-top: 1px solid var(--line); background: linear-gradient(90deg, #0c1a2e, #102440); }
+  .flow-step { display: grid; gap: 6px; }
+  .operating-flow strong { font-size: .88rem; }
+  .operating-flow p { color: var(--muted); font-size: .78rem; line-height: 1.55; }
+  .flow-meta { display: flex; flex-direction: column; gap: 3px; margin-top: 10px; padding-top: 10px; border-top: 1px solid rgba(148,163,184,.1); }
+  .flow-output { font-size: .66rem; color: #607a96; }
+  .flow-output::before { content: "Output: "; font-weight: 800; color: #7fa8d8; }
+  .flow-cadence { font-size: .66rem; color: #607a96; }
+  .flow-cadence::before { content: "Cadence: "; font-weight: 800; color: #7fa8d8; }
+
+  /* FOUR VIEWS HUB */
+  .views-hub { padding-block: 0 112px; }
+  .views-hub-header { max-width: 900px; margin-bottom: 44px; }
+  .views-hub-header p { margin-top: 18px; color: var(--muted); font-size: .92rem; line-height: 1.7; max-width: 740px; }
+  .views-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 18px; }
+  .view-card { display: flex; flex-direction: column; gap: 12px; padding: 28px; border: 1px solid var(--line); border-radius: 18px; background: rgba(18,31,52,.55); text-decoration: none; color: var(--ink); transition: border-color .2s ease, background .2s ease; }
+  .view-card:hover { border-color: rgba(96,165,250,.4); background: rgba(23,42,69,.8); }
+  .view-card-active { border-color: rgba(242,196,109,.3) !important; background: rgba(30,22,8,.4) !important; }
+  .view-card-head { display: flex; align-items: center; gap: 12px; }
+  .view-icon { font-size: 1.2rem; opacity: .7; }
+  .view-label { font-size: .65rem; font-weight: 850; letter-spacing: .12em; text-transform: uppercase; }
+  .view-label-blue { color: var(--blue); } .view-label-violet { color: var(--violet); } .view-label-green { color: var(--green); } .view-label-amber { color: var(--amber); }
+  .view-card h3 { font-size: 1.2rem; letter-spacing: -.02em; }
+  .view-card p { color: var(--muted); font-size: .8rem; line-height: 1.6; flex: 1; }
+  .view-link { font-size: .72rem; font-weight: 800; color: #7fa8d8; margin-top: auto; }
+  .view-card-active .view-link { color: var(--amber); }
+
+  /* CTA */
+  .leadership-cta { border-top: 1px solid var(--line); background: linear-gradient(90deg,#0c1a2e,#102440); }
   .cta-inner { display: flex; justify-content: space-between; align-items: center; gap: 48px; padding-block: 68px; }
   .cta-actions { flex: none; margin: 0; }
+
+  /* RESPONSIVE */
+  @media (max-width: 1100px) {
+    .signal-grid { grid-template-columns: repeat(3,1fr); }
+    .signal:nth-child(4), .signal:nth-child(5), .signal:nth-child(6) { border-top: 1px solid var(--line); }
+    .signal:nth-child(4) { border-left: 0; }
+  }
   @media (max-width: 920px) {
     .leadership-hero, .operating-section { grid-template-columns: 1fr; }
     .leadership-hero { min-height: auto; }
     .briefing-card { max-width: 620px; }
-    .signal-grid { grid-template-columns: repeat(2, 1fr); }
-    .signal:nth-child(3) { border-left: 0; border-top: 1px solid var(--line); }
-    .signal:nth-child(4) { border-top: 1px solid var(--line); }
+    .signal-grid { grid-template-columns: repeat(2,1fr); }
+    .signal:nth-child(3), .signal:nth-child(5) { border-left: 0; border-top: 1px solid var(--line); }
+    .signal:nth-child(4), .signal:nth-child(6) { border-top: 1px solid var(--line); }
     .decision-workspace { grid-template-columns: 1fr; }
-    .decision-tabs { grid-template-columns: repeat(3, 1fr); }
-    .decision-tabs button { grid-template-columns: 1fr; gap: 6px; }
+    .decision-tabs { grid-template-columns: repeat(3,1fr); gap: 6px; }
+    .decision-tabs button { grid-template-columns: 1fr; gap: 4px; min-height: auto; padding: 12px; }
     .decision-tabs button > i { display: none; }
+    .tab-copy strong { font-size: .74rem; }
+    .views-grid { grid-template-columns: 1fr; }
     .operating-section { gap: 42px; }
   }
   @media (max-width: 680px) {
     .leadership-hero { padding-block: 62px 58px; }
-    h1 { font-size: clamp(3.2rem, 16vw, 4.8rem); }
+    h1 { font-size: clamp(3.2rem,16vw,4.8rem); }
     .signal-grid { grid-template-columns: 1fr 1fr; }
-    .signal { padding: 20px 16px; }
-    .signal span { font-size: .64rem; white-space: normal; }
+    .signal { padding: 18px 14px; }
+    .signal span { font-size: .62rem; white-space: normal; }
     .section-intro, .cta-inner { display: grid; align-items: start; }
-    .decision-section { padding-block: 82px; }
-    .decision-tabs { display: flex; overflow-x: auto; padding-bottom: 4px; scroll-snap-type: x mandatory; }
-    .decision-tabs button { flex: 0 0 78%; min-height: 86px; scroll-snap-align: start; }
+    .decision-section { padding-block: 72px; }
+    .decision-tabs { display: flex; overflow-x: auto; padding-bottom: 4px; scroll-snap-type: x mandatory; gap: 8px; }
+    .decision-tabs button { flex: 0 0 72%; min-height: 80px; scroll-snap-align: start; grid-template-columns: 24px 1fr; }
     .tab-copy strong { white-space: normal; }
-    .decision-panels { min-height: 460px; }
-    .decision-panels ul { display: grid; }
-    .decision-panels li { width: max-content; max-width: 100%; white-space: normal; }
-    .operating-section { grid-template-columns: 1fr; padding-bottom: 82px; }
+    .decision-panels { min-height: 0; }
+    .panel-metrics { grid-template-columns: 1fr 1fr; }
+    .panel-metrics .metric-tile:last-child { grid-column: 1 / -1; }
+    .evidence-tags { display: grid; }
+    .operating-section { grid-template-columns: 1fr; padding-bottom: 72px; }
     .cta-actions { display: grid; justify-items: start; }
+    .views-hub { padding-bottom: 72px; }
   }
 </style>
 
