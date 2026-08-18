@@ -1,6 +1,6 @@
 {
   "$schema": "./node_modules/wrangler/config-schema.json",
-  "name": "enterprise-agile-site-prod",
+  "name": "spm",
   "main": "src/worker.js",
   "compatibility_date": "2026-08-05",
   "assets": {
@@ -16,6 +16,9 @@
         "binding": "ASSETS",
         "directory": "./dist",
         "not_found_handling": "404-page"
+      },
+      "vars": {
+        "PUBLIC_SITE_URL": "https://enterprise-agile-site-dev.nagulapalli-kranthi.workers.dev"
       }
     },
     "staging": {
@@ -25,15 +28,21 @@
         "binding": "ASSETS",
         "directory": "./dist",
         "not_found_handling": "404-page"
+      },
+      "vars": {
+        "PUBLIC_SITE_URL": "https://enterprise-agile-site.nagulapalli-kranthi.workers.dev"
       }
     },
     "production": {
-      "name": "enterprise-agile-site-prod",
+      "name": "spm",
       "main": "src/worker.js",
       "assets": {
         "binding": "ASSETS",
         "directory": "./dist",
         "not_found_handling": "404-page"
+      },
+      "vars": {
+        "PUBLIC_SITE_URL": "https://spm.nagulapalli-kranthi.workers.dev"
       }
     }
   }
