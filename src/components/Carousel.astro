@@ -161,9 +161,11 @@ const posId  = `${id}-position`;
       const max = Math.max(0, cards.length - v);
       start = Math.min(start, max);
 
-      // Compute card width from track's actual rendered width so cards always fill the row.
+      // Read width from the viewport (overflow:hidden wrapper) — it always has a
+      // definite parent-constrained size, unlike the track which is sized by children.
+      const viewport  = track.parentElement!;
       const gap       = 16;
-      const trackW    = track.getBoundingClientRect().width;
+      const trackW    = viewport.getBoundingClientRect().width;
       const cardWidth = trackW > 0 ? (trackW - gap * (v - 1)) / v : 0;
       if (cardWidth > 0) {
         cards.forEach((c) => {
