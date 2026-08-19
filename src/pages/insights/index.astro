@@ -3,6 +3,9 @@ import MainLayout from "../../layouts/MainLayout.astro";
 import Header from "../../components/Header.astro";
 import { getCollection } from "astro:content";
 
+// entry.id = "the-day-the-budget-lied.md" in Astro v5+ Content Layer API
+const slugOf = (id: string) => id.replace(/\.mdx?$/, "");
+
 const articles = (await getCollection("insights")).sort(
   (a, b) => a.data.articleNumber - b.data.articleNumber
 );
@@ -30,9 +33,9 @@ const articles = (await getCollection("insights")).sort(
               <span class="insight-category">{article.data.category}</span>
               <span class="insight-read">{article.data.readTime} read</span>
             </div>
-            <h2><a href={`/insights/${article.slug}/`}>{article.data.title}</a></h2>
+            <h2><a href={`/insights/${slugOf(article.id)}/`}>{article.data.title}</a></h2>
             <p>{article.data.excerpt}</p>
-            <a class="insight-link" href={`/insights/${article.slug}/`}>
+            <a class="insight-link" href={`/insights/${slugOf(article.id)}/`}>
               Read article <span aria-hidden="true">→</span>
             </a>
           </article>

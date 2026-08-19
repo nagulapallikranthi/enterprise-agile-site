@@ -1,15 +1,3 @@
-import { defineCollection, z } from "astro:content";
-
-const insights = defineCollection({
-  type: "content",
-  schema: z.object({
-    title: z.string(),
-    category: z.string(),
-    excerpt: z.string(),
-    publishDate: z.string(),
-    readTime: z.string(),
-    articleNumber: z.number(),
-  }),
-});
-
-export const collections = { insights };
+// This file is intentionally empty.
+// Content collection configuration has moved to src/content.config.ts
+// per the Astro v5+ Content Layer API.

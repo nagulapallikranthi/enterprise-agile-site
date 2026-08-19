@@ -1,24 +1,25 @@
 ---
 import MainLayout from "../../layouts/MainLayout.astro";
 import Header from "../../components/Header.astro";
-import { getCollection } from "astro:content";
+import { getCollection, render } from "astro:content";
 
 export async function getStaticPaths() {
   const articles = await getCollection("insights");
   return articles.map((article) => ({
-    params: { slug: article.slug },
+    // id is e.g. "the-day-the-budget-lied.md" — strip extension for URL
+    params: { slug: article.id.replace(/\.mdx?$/, "") },
     props: { article },
   }));
 }
 
 const { article } = Astro.props;
-const { Content } = await article.render();
+const { Content } = await render(article);
 ---
 
 <MainLayout
   title={`${article.data.title} | Enterprise Agile`}
   description={article.data.excerpt}
-  canonicalPath={`/insights/${article.slug}/`}
+  canonicalPath={`/insights/${article.id.replace(/\.mdx?$/, "")}/`}
 >
   <div class="article-page">
     <Header />
