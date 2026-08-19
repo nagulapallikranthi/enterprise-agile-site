@@ -2,6 +2,7 @@
 import MainLayout from "../../layouts/MainLayout.astro";
 import Header from "../../components/Header.astro";
 import { getCollection, render } from "astro:content";
+import "../../styles/model-system.css";
 
 export async function getStaticPaths() {
   const articles = await getCollection("insights");
