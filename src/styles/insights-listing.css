@@ -11,6 +11,8 @@
 }
 
 .insights-hero {
+  width: min(calc(100% - 40px), 1240px);
+  margin-inline: auto;
   padding-block: 72px 56px;
 }
 .insights-hero h1 {
@@ -30,6 +32,8 @@
 }
 
 .insights-grid {
+  width: min(calc(100% - 40px), 1240px);
+  margin-inline: auto;
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(min(100%, 360px), 1fr));
   gap: 20px;
@@ -107,6 +111,8 @@
 .insight-link:hover { gap: 12px; }
 
 .insights-footer {
+  width: min(calc(100% - 40px), 1240px);
+  margin-inline: auto;
   padding-bottom: 60px;
 }
 .insights-footer a {
