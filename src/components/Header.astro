@@ -19,7 +19,7 @@ import BrandMark from "./BrandMark.astro";
     <li><a href="/#top">Home &amp; About</a></li>
     <li><a href="/#success-stories">Success Stories</a></li>
     <li><a href="/#frameworks">Frameworks</a></li>
-    <li><a href="/#articles">Insights</a></li>
+    <li><a href="/insights/">Insights</a></li>
     <li><a href="/models/executive-portfolio/">Leadership Views</a></li>
     <li><a href="/#contact">Contact</a></li>
   </ul>
@@ -73,9 +73,13 @@ import BrandMark from "./BrandMark.astro";
   }));
   document.addEventListener('keydown', (event) => event.key === 'Escape' && closeMenu());
   if (window.location.pathname.startsWith('/models/')) {
-    // Sub-page: lock active state to "Leadership Views" — never update on scroll
+    // Model sub-pages: lock active state to "Leadership Views" — never update on scroll
     const leadershipLink = menu?.querySelector('a[href="/models/executive-portfolio/"]');
     if (leadershipLink) setActiveLink(leadershipLink);
+  } else if (window.location.pathname.startsWith('/insights/')) {
+    // Insights pages: lock active state to "Insights"
+    const insightsLink = menu?.querySelector('a[href="/insights/"]');
+    if (insightsLink) setActiveLink(insightsLink);
   } else {
     // Homepage only: drive active state from scroll position
     updateActiveSection();

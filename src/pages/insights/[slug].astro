@@ -1,0 +1,259 @@
+---
+import MainLayout from "../../layouts/MainLayout.astro";
+import Header from "../../components/Header.astro";
+import { getCollection } from "astro:content";
+
+export async function getStaticPaths() {
+  const articles = await getCollection("insights");
+  return articles.map((article) => ({
+    params: { slug: article.slug },
+    props: { article },
+  }));
+}
+
+const { article } = Astro.props;
+const { Content } = await article.render();
+---
+
+<MainLayout
+  title={`${article.data.title} | Enterprise Agile`}
+  description={article.data.excerpt}
+  canonicalPath={`/insights/${article.slug}/`}
+>
+  <div class="article-page">
+    <Header />
+
+    <main id="main-content">
+      <article class="article-body model-container" aria-labelledby="article-title">
+
+        <header class="article-header">
+          <div class="article-header-meta">
+            <a class="back-link" href="/insights/">← All insights</a>
+            <div class="article-tags">
+              <span class="article-category">{article.data.category}</span>
+              <span class="article-read">{article.data.readTime} read</span>
+            </div>
+          </div>
+          <h1 id="article-title">{article.data.title}</h1>
+          <p class="article-deck">{article.data.excerpt}</p>
+        </header>
+
+        <div class="article-content prose">
+          <Content />
+        </div>
+
+        <footer class="article-footer">
+          <div class="article-footer-brand">
+            <span>Written by</span>
+            <strong>Kranthi Kumar Nagulapally</strong>
+            <small>Senior Program Leader · Enterprise Agile</small>
+          </div>
+          <div class="article-footer-nav">
+            <a href="/insights/">← All insights</a>
+            <a href="/#contact">Work with me →</a>
+          </div>
+        </footer>
+
+      </article>
+    </main>
+  </div>
+</MainLayout>
+
+<style>
+  .article-page {
+    min-height: 100vh;
+    background: radial-gradient(circle at 78% 8%, rgba(37,99,235,.15), transparent 30%),
+      linear-gradient(180deg, #0f172a, #090f1c);
+    color: #f1f5f9;
+  }
+
+  .article-body {
+    max-width: min(calc(100% - 40px), 760px);
+    padding-block: 56px 96px;
+  }
+
+  /* ── Header ── */
+  .article-header { margin-bottom: 52px; }
+  .article-header-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 28px;
+    flex-wrap: wrap;
+  }
+  .back-link {
+    color: #64748b;
+    font-size: .8rem;
+    font-weight: 700;
+    text-decoration: none;
+    transition: color .2s;
+  }
+  .back-link:hover { color: #93c5fd; }
+
+  .article-tags { display: flex; gap: 10px; align-items: center; }
+  .article-category {
+    padding: 3px 10px;
+    border-radius: 99px;
+    background: rgba(96,165,250,.15);
+    color: #93c5fd;
+    font-size: .68rem;
+    font-weight: 800;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+  }
+  .article-read { color: #64748b; font-size: .72rem; font-weight: 700; }
+
+  .article-body h1 {
+    margin-bottom: 20px;
+    font-size: clamp(2.2rem, 5.5vw, 4rem);
+    line-height: .97;
+    letter-spacing: -.055em;
+    color: #f8fafc;
+  }
+  .article-deck {
+    max-width: 640px;
+    color: #94a3b8;
+    font-size: 1.1rem;
+    line-height: 1.65;
+    border-left: 3px solid #3b82f6;
+    padding-left: 18px;
+  }
+
+  /* ── Prose content ── */
+  .prose {
+    border-top: 1px solid rgba(255,255,255,.1);
+    padding-top: 44px;
+  }
+  .prose :global(h1) { display: none; } /* Title is already in header */
+  .prose :global(h2) {
+    margin: 52px 0 18px;
+    font-size: clamp(1.6rem, 3.5vw, 2.4rem);
+    line-height: 1.08;
+    letter-spacing: -.04em;
+    color: #e2e8f0;
+  }
+  .prose :global(h3) {
+    margin: 34px 0 12px;
+    font-size: clamp(1.15rem, 2.5vw, 1.6rem);
+    line-height: 1.15;
+    letter-spacing: -.025em;
+    color: #cbd5e1;
+  }
+  .prose :global(p) {
+    margin-bottom: 22px;
+    color: #94a3b8;
+    font-size: 1.02rem;
+    line-height: 1.75;
+  }
+  .prose :global(p strong) { color: #e2e8f0; }
+  .prose :global(em) { color: #93c5fd; font-style: italic; }
+  .prose :global(hr) {
+    margin: 44px 0;
+    border: none;
+    border-top: 1px solid rgba(255,255,255,.12);
+  }
+  .prose :global(ul), .prose :global(ol) {
+    margin: 0 0 22px 24px;
+  }
+  .prose :global(li) {
+    margin-bottom: 10px;
+    color: #94a3b8;
+    font-size: 1rem;
+    line-height: 1.7;
+  }
+  .prose :global(li strong) { color: #e2e8f0; }
+  .prose :global(blockquote) {
+    margin: 32px 0;
+    padding: 20px 24px;
+    border-left: 3px solid #3b82f6;
+    border-radius: 0 10px 10px 0;
+    background: rgba(59,130,246,.08);
+    color: #cbd5e1;
+    font-size: .98rem;
+    font-style: italic;
+    line-height: 1.7;
+  }
+  .prose :global(table) {
+    width: 100%;
+    margin: 28px 0;
+    border-collapse: collapse;
+    font-size: .88rem;
+  }
+  .prose :global(th) {
+    padding: 10px 14px;
+    border-bottom: 1px solid rgba(96,165,250,.35);
+    color: #93c5fd;
+    font-size: .72rem;
+    font-weight: 800;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    text-align: left;
+    background: rgba(30,58,138,.3);
+  }
+  .prose :global(td) {
+    padding: 12px 14px;
+    border-bottom: 1px solid rgba(255,255,255,.07);
+    color: #cbd5e1;
+    vertical-align: top;
+    line-height: 1.55;
+  }
+  .prose :global(tr:hover td) { background: rgba(255,255,255,.025); }
+  .prose :global(code) {
+    padding: 2px 6px;
+    border-radius: 4px;
+    background: rgba(96,165,250,.12);
+    color: #93c5fd;
+    font-size: .88em;
+    font-family: 'JetBrains Mono', 'Fira Code', monospace;
+  }
+
+  /* ── Footer ── */
+  .article-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 24px;
+    margin-top: 64px;
+    padding-top: 28px;
+    border-top: 1px solid rgba(255,255,255,.1);
+    flex-wrap: wrap;
+  }
+  .article-footer-brand span {
+    display: block;
+    color: #64748b;
+    font-size: .7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: .1em;
+  }
+  .article-footer-brand strong {
+    display: block;
+    margin-top: 4px;
+    color: #e2e8f0;
+    font-size: .95rem;
+  }
+  .article-footer-brand small {
+    display: block;
+    margin-top: 2px;
+    color: #64748b;
+    font-size: .75rem;
+  }
+  .article-footer-nav {
+    display: flex;
+    gap: 24px;
+  }
+  .article-footer-nav a {
+    color: #60a5fa;
+    font-size: .82rem;
+    font-weight: 800;
+    text-decoration: none;
+    transition: color .2s;
+  }
+  .article-footer-nav a:hover { color: #93c5fd; }
+
+  @media (max-width: 700px) {
+    .article-body { padding-block: 40px 72px; }
+    .article-footer { flex-direction: column; align-items: flex-start; }
+  }
+</style>
