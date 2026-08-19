@@ -1075,3 +1075,14 @@ a {
   .insights-hero { padding-block: 52px 40px; }
   .insights-grid { padding-bottom: 56px; }
 }
+
+/* ── Model pages — breathing room ────────────────────────────────────────────
+   .model-container is used as a layout wrapper on all /models/* pages.
+   Adding padding-inline here (global.css → always in the external linked
+   bundle) is the only reliable way to ensure the rule applies.
+   Scoped <style> rules targeting .model-container end up in a separate inline
+   <style> tag with sheet=null and are silently ignored by the browser.
+   ─────────────────────────────────────────────────────────────────────────── */
+.model-container {
+  padding-inline: clamp(20px, 4vw, 48px);
+}
