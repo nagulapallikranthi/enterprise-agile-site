@@ -72,12 +72,14 @@ import BrandMark from "./BrandMark.astro";
     setActiveLink(link);
   }));
   document.addEventListener('keydown', (event) => event.key === 'Escape' && closeMenu());
-  window.addEventListener('scroll', updateActiveSection, { passive: true });
-  window.addEventListener('hashchange', updateActiveSection);
   if (window.location.pathname.startsWith('/models/')) {
+    // Sub-page: lock active state to "Leadership Views" — never update on scroll
     const leadershipLink = menu?.querySelector('a[href="/models/executive-portfolio/"]');
     if (leadershipLink) setActiveLink(leadershipLink);
   } else {
+    // Homepage only: drive active state from scroll position
     updateActiveSection();
+    window.addEventListener('scroll', updateActiveSection, { passive: true });
+    window.addEventListener('hashchange', updateActiveSection);
   }
 </script>
