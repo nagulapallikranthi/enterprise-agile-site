@@ -79,6 +79,10 @@ PROD approval: push to `main` → CI queues → Kranthi approves at
 
 ### Sprint — Active
 
+- [ ] **RELEASE 0.5.1 — Separate hero CTAs** *(2026-08-25)*
+  - Add clear space and independent visual boundaries between both hero actions.
+  - Add hover and keyboard-focus feedback; verify before promotion.
+
 - [x] **RELEASE 0.5.0 — privacy, analytics, alignment, and regression** *(2026-08-25)*
   - Permanently remove the public resume asset.
   - Promote one identical commit through DEV, STG, and PROD.
@@ -152,6 +156,7 @@ PROD approval: push to `main` → CI queues → Kranthi approves at
 | 2026-08-18 | 5 Dependabot PRs merged (astro 7.2.2, wrangler 4.123.0, checkout-7, setup-node-7, wrangler-action-4) | `47e1807`–`3ccf80f` |
 | 2026-08-19 | ARIA, carousel, career timeline, article routing, anchor, and CSP-related audit fixes completed | `129beda`–`b18cf4b` |
 | 2026-08-25 | Release 0.5.0: resume withdrawn, PROD analytics repaired, branches aligned, regression recorded | `b38e724f` |
+| 2026-08-25 | Release 0.5.1 candidate: separate hero CTAs with hover and focus feedback | Pending commit |
 
 ---
 
@@ -170,6 +175,7 @@ PROD approval: push to `main` → CI queues → Kranthi approves at
 | `.github/workflows/quality.yml` | Quality gates |
 | `docs/SESSION_STATE.md` | **This file** |
 | `docs/RELEASE_0.5.0_QA.md` | Release scope, promotion evidence, and responsive regression record |
+| `docs/RELEASE_0.5.1_QA.md` | Hero CTA visual regression and promotion evidence |
 
 ---
 
