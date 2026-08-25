@@ -37,9 +37,9 @@
 
 | Env | Worker Name | Branch | Gate | Last Commit |
 |---|---|---|---|---|
-| DEV | `enterprise-agile-site-dev` | `develop` | Auto | `12f7788` |
-| STG | `enterprise-agile-site` | `staging` | Auto | (behind) |
-| PROD | `spm` | `main` | Manual approval on GitHub Actions | `12f7788` |
+| DEV | `enterprise-agile-site-dev` | `develop` | Auto | 0.5.0 promotion pending |
+| STG | `enterprise-agile-site` | `staging` | Auto | 0.5.0 promotion pending |
+| PROD | `spm` | `main` | Manual approval on GitHub Actions | `4573efa` (0.4.5) |
 
 PROD approval: push to `main` → CI queues → Kranthi approves at  
 `github.com/nagulapallikranthi/enterprise-agile-site/actions`
@@ -56,6 +56,8 @@ PROD approval: push to `main` → CI queues → Kranthi approves at
 | 2026-08 | `Carousel.astro` = single reusable component | Replaced duplicated impact + framework carousel HTML/JS |
 | 2026-08 | Layout-critical CSS goes in `global.css`, not scoped styles | Slotted elements don't receive `data-astro-cid-*` → scoped selectors don't match |
 | 2026-08 | Deploy pipeline is parallel, not sequentially enforced | Branch protection rules not yet configured — only gate is PROD manual approval |
+| 2026-08-25 | Public resume distribution withdrawn | Remove the PDF, not only its links; CI fails if the former asset returns to `dist/` |
+| 2026-08-25 | Release 0.5.0 uses one identical commit across environments | Restores auditable DEV → STG → PROD promotion evidence |
 
 ---
 
@@ -67,12 +69,21 @@ PROD approval: push to `main` → CI queues → Kranthi approves at
 | BUG-02 | Delivery Impact cards | **FIXED** | `justify-content: space-between` + `min-height: 188px` with 3 elements pushes description to card bottom, creating artificial whitespace gap. | `justify-content: flex-start; gap: 12px; min-height: 0` |
 | BUG-03 | privacy.astro + terms.astro | **LOW / BACKLOG** | Email is a `<!-- TODO -->` placeholder. | Replace once professional domain is registered. |
 | BUG-04 | MainLayout.astro L24 | **LOW / BACKLOG** | Stale TODO comment about PUBLIC_SITE_URL (already handled). | Remove comment. |
+| BUG-05 | Resume privacy | **FIXED IN 0.5.0 CANDIDATE** | CTA was removed but the PDF remained publicly accessible and CI required it. | Delete the asset and add a forbidden-artifact build gate. |
+| BUG-06 | PROD analytics | **FIXED IN 0.5.0 CANDIDATE** | `spm` was missing from the Worker origin allowlist. | Add the exact PROD origin and verify with one controlled event after deployment. |
+| BUG-07 | Release topology | **FIXED IN 0.5.0 CANDIDATE** | `main` advanced while `staging` remained 56 commits behind `develop`. | Fast-forward the same validated release commit through all three branches. |
 
 ---
 
 ## Next Tasks
 
 ### Sprint — Active
+
+- [ ] **RELEASE 0.5.0 — privacy, analytics, alignment, and regression** *(2026-08-25)*
+  - Permanently remove the public resume asset.
+  - Promote one identical commit through DEV, STG, and PROD.
+  - Verify analytics, accessibility, security headers, and responsive behavior.
+  - Record evidence in `docs/RELEASE_0.5.0_QA.md`.
 
 - [x] **BUG-01 — Framework section: grid on desktop, carousel on mobile** *(2026-08-18)*
   - `src/pages/index.astro`: on desktop render frameworks as `<div class="framework-grid">` (6 articles). On mobile use `<Carousel>`.
@@ -92,7 +103,7 @@ PROD approval: push to `main` → CI queues → Kranthi approves at
 
 ### Sprint — Next
 
-- [ ] **CLEANUP — Remove stale TODO comments**
+- [x] **CLEANUP — Remove stale TODO comments** *(2026-08-25)*
   - `src/layouts/MainLayout.astro` L24: remove stale PUBLIC_SITE_URL comment.
 
 - [ ] **SEO — Submit sitemap in Google Search Console**
@@ -115,14 +126,14 @@ PROD approval: push to `main` → CI queues → Kranthi approves at
 - [ ] **PERF — Core Web Vitals baseline**
   - PageSpeed Insights on PROD. Record LCP / CLS / INP. Fix anything above threshold.
 
-- [ ] **A11Y — Accessibility audit**
+- [ ] **A11Y — Accessibility audit and 0.5.0 evidence**
   - Run axe on PROD. Fix any critical/serious WCAG AA violations.
 
-- [ ] **RESPONSIVE — Full tablet + mobile QA pass**
+- [ ] **RESPONSIVE — Full desktop + tablet + mobile QA pass and 0.5.0 evidence**
   - Verify at 768px (tablet) and 390px (mobile): nav, hero, carousels, framework grid, cards, contact.
 
-- [ ] **ANALYTICS — Cloudflare Web Analytics**
-  - Free, cookie-free, GDPR-safe. Add snippet to MainLayout.astro if approved.
+- [ ] **ANALYTICS — Verify existing anonymous event pipeline on PROD**
+  - Confirm the `spm` origin is accepted and the event contains no session or persistent identifier.
 
 ---
 
@@ -139,6 +150,8 @@ PROD approval: push to `main` → CI queues → Kranthi approves at
 | 2026-08-18 | OG/Twitter social image restored at /images/hero-portrait.png | `0dea021` |
 | 2026-08-18 | Hash-based CSP via gen-headers.mjs post-build — A+ security grade | `6a2196c` |
 | 2026-08-18 | 5 Dependabot PRs merged (astro 7.2.2, wrangler 4.123.0, checkout-7, setup-node-7, wrangler-action-4) | `47e1807`–`3ccf80f` |
+| 2026-08-19 | ARIA, carousel, career timeline, article routing, anchor, and CSP-related audit fixes completed | `129beda`–`b18cf4b` |
+| 2026-08-25 | Release 0.5.0 candidate: resume withdrawal, PROD analytics origin, release/state reconciliation | Pending commit |
 
 ---
 
@@ -156,6 +169,7 @@ PROD approval: push to `main` → CI queues → Kranthi approves at
 | `.github/workflows/deploy.yml` | CI/CD pipeline |
 | `.github/workflows/quality.yml` | Quality gates |
 | `docs/SESSION_STATE.md` | **This file** |
+| `docs/RELEASE_0.5.0_QA.md` | Release scope, promotion evidence, and responsive regression record |
 
 ---
 
@@ -181,4 +195,4 @@ Scopes: `carousel layout seo security deploy content a11y perf`
 
 ---
 
-*Last updated: 2026-08-18 | Session: BUG-01 framework grid + BUG-02 impact card compact*
+*Last updated: 2026-08-25 | Session: release 0.5.0 governance and regression*

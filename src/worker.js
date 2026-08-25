@@ -68,9 +68,8 @@ function isRateLimited(ip) {
 }
 
 // ── Allowed origins for /api/events ──────────────────────────────────────────
-// TODO: Replace YOUR_DOMAIN.com with your registered custom domain.
 const ALLOWED_ORIGINS = new Set([
-  "https://YOUR_DOMAIN.com",
+  "https://spm.nagulapalli-kranthi.workers.dev",                    // PROD
   "https://enterprise-agile-site.nagulapalli-kranthi.workers.dev",   // STG
   "https://enterprise-agile-site-dev.nagulapalli-kranthi.workers.dev", // DEV
 ]);

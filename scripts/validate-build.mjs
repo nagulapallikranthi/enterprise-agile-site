@@ -103,10 +103,13 @@ for (const file of htmlFiles) {
 const required = [
   "404.html",
   "robots.txt",
-  "downloads/Kranthi_Delivery_Leader.pdf",
   "privacy/index.html",      // NEW — privacy page must be built
   "terms/index.html",        // NEW — terms page must be built
 ];
+
+// The resume was intentionally withdrawn from public distribution in 0.5.0.
+// Fail closed if the former public asset is accidentally reintroduced.
+const forbidden = ["downloads/Kranthi_Delivery_Leader.pdf"];
 
 // Accept either sitemap.xml (legacy) or sitemap-index.xml (@astrojs/sitemap)
 const hasSitemap =
@@ -117,6 +120,15 @@ if (!hasSitemap) failures.push("sitemap: no sitemap.xml or sitemap-index.xml fou
 for (const path of required) {
   try { await access(join(root, path)); }
   catch { failures.push(`${path}: required build artifact missing`); }
+}
+
+for (const path of forbidden) {
+  try {
+    await access(join(root, path));
+    failures.push(`${path}: withdrawn public asset must not be present`);
+  } catch {
+    // Expected: withdrawn assets must not be emitted into dist/.
+  }
 }
 
 // ── Result ────────────────────────────────────────────────────────────────────

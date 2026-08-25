@@ -21,8 +21,6 @@ const {
   noindex = false,
 } = Astro.props;
 
-// TODO: set PUBLIC_SITE_URL in Cloudflare Worker env vars and GitHub Actions
-// per environment (DEV / STG / PROD). Replace the fallback once domain is registered.
 const siteUrl = import.meta.env.PUBLIC_SITE_URL ?? "https://enterprise-agile-site.nagulapalli-kranthi.workers.dev";
 const canonicalUrl  = new URL(canonicalPath, siteUrl);
 const socialImageUrl = new URL("/images/hero-portrait.png", siteUrl);
