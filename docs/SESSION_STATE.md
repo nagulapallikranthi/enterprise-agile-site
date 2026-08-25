@@ -37,9 +37,9 @@
 
 | Env | Worker Name | Branch | Gate | Last Commit |
 |---|---|---|---|---|
-| DEV | `enterprise-agile-site-dev` | `develop` | Auto | 0.5.0 promotion pending |
-| STG | `enterprise-agile-site` | `staging` | Auto | 0.5.0 promotion pending |
-| PROD | `spm` | `main` | Manual approval on GitHub Actions | `4573efa` (0.4.5) |
+| DEV | `enterprise-agile-site-dev` | `develop` | Auto | `b38e724f` (0.5.0) |
+| STG | `enterprise-agile-site` | `staging` | Auto | `b38e724f` (0.5.0) |
+| PROD | `spm` | `main` | Manual approval on GitHub Actions | `b38e724f` (0.5.0) |
 
 PROD approval: push to `main` → CI queues → Kranthi approves at  
 `github.com/nagulapallikranthi/enterprise-agile-site/actions`
@@ -69,9 +69,9 @@ PROD approval: push to `main` → CI queues → Kranthi approves at
 | BUG-02 | Delivery Impact cards | **FIXED** | `justify-content: space-between` + `min-height: 188px` with 3 elements pushes description to card bottom, creating artificial whitespace gap. | `justify-content: flex-start; gap: 12px; min-height: 0` |
 | BUG-03 | privacy.astro + terms.astro | **LOW / BACKLOG** | Email is a `<!-- TODO -->` placeholder. | Replace once professional domain is registered. |
 | BUG-04 | MainLayout.astro L24 | **LOW / BACKLOG** | Stale TODO comment about PUBLIC_SITE_URL (already handled). | Remove comment. |
-| BUG-05 | Resume privacy | **FIXED IN 0.5.0 CANDIDATE** | CTA was removed but the PDF remained publicly accessible and CI required it. | Delete the asset and add a forbidden-artifact build gate. |
-| BUG-06 | PROD analytics | **FIXED IN 0.5.0 CANDIDATE** | `spm` was missing from the Worker origin allowlist. | Add the exact PROD origin and verify with one controlled event after deployment. |
-| BUG-07 | Release topology | **FIXED IN 0.5.0 CANDIDATE** | `main` advanced while `staging` remained 56 commits behind `develop`. | Fast-forward the same validated release commit through all three branches. |
+| BUG-05 | Resume privacy | **FIXED / VERIFIED 0.5.0** | CTA was removed but the PDF remained publicly accessible and CI required it. | Asset deleted; forbidden-artifact gate added; PROD returns 404. |
+| BUG-06 | PROD analytics | **FIXED / VERIFIED 0.5.0** | `spm` was missing from the Worker origin allowlist. | Exact PROD origin added; controlled PROD event accepted. |
+| BUG-07 | Release topology | **FIXED / VERIFIED 0.5.0** | `main` advanced while `staging` remained 56 commits behind `develop`. | All environments promoted from identical commit `b38e724f`. |
 
 ---
 
@@ -79,7 +79,7 @@ PROD approval: push to `main` → CI queues → Kranthi approves at
 
 ### Sprint — Active
 
-- [ ] **RELEASE 0.5.0 — privacy, analytics, alignment, and regression** *(2026-08-25)*
+- [x] **RELEASE 0.5.0 — privacy, analytics, alignment, and regression** *(2026-08-25)*
   - Permanently remove the public resume asset.
   - Promote one identical commit through DEV, STG, and PROD.
   - Verify analytics, accessibility, security headers, and responsive behavior.
@@ -126,13 +126,13 @@ PROD approval: push to `main` → CI queues → Kranthi approves at
 - [ ] **PERF — Core Web Vitals baseline**
   - PageSpeed Insights on PROD. Record LCP / CLS / INP. Fix anything above threshold.
 
-- [ ] **A11Y — Accessibility audit and 0.5.0 evidence**
-  - Run axe on PROD. Fix any critical/serious WCAG AA violations.
+- [ ] **A11Y — Complete manual keyboard and automated WCAG audit**
+  - Structural PROD regression passed; complete keyboard traversal and axe critical/serious review remain.
 
-- [ ] **RESPONSIVE — Full desktop + tablet + mobile QA pass and 0.5.0 evidence**
-  - Verify at 768px (tablet) and 390px (mobile): nav, hero, carousels, framework grid, cards, contact.
+- [ ] **RESPONSIVE — Complete tablet + mobile visual QA**
+  - Desktop passed at 1363 × 936. Verify visually at 768 × 1024 and 390 × 844 when viewport emulation is available.
 
-- [ ] **ANALYTICS — Verify existing anonymous event pipeline on PROD**
+- [x] **ANALYTICS — Verify existing anonymous event pipeline on PROD** *(2026-08-25)*
   - Confirm the `spm` origin is accepted and the event contains no session or persistent identifier.
 
 ---
@@ -151,7 +151,7 @@ PROD approval: push to `main` → CI queues → Kranthi approves at
 | 2026-08-18 | Hash-based CSP via gen-headers.mjs post-build — A+ security grade | `6a2196c` |
 | 2026-08-18 | 5 Dependabot PRs merged (astro 7.2.2, wrangler 4.123.0, checkout-7, setup-node-7, wrangler-action-4) | `47e1807`–`3ccf80f` |
 | 2026-08-19 | ARIA, carousel, career timeline, article routing, anchor, and CSP-related audit fixes completed | `129beda`–`b18cf4b` |
-| 2026-08-25 | Release 0.5.0 candidate: resume withdrawal, PROD analytics origin, release/state reconciliation | Pending commit |
+| 2026-08-25 | Release 0.5.0: resume withdrawn, PROD analytics repaired, branches aligned, regression recorded | `b38e724f` |
 
 ---
 
