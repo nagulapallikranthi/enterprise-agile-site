@@ -14,3 +14,9 @@
 **Sandbox clone:** `/tmp/enterprise-agile-site`
 
 See `docs/SESSION_STATE.md` for full state: bug register, architecture decisions, next tasks, environment map.
+
+# Mistakes to check before finishing
+- Do not change files unrelated to the task.
+- Reuse existing components before creating new ones.
+- Do not add fallback behaviour unless requested.
+- Run the relevant tests after changing.
